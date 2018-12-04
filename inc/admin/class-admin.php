@@ -197,7 +197,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			 * class.
 			 */
 
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/demo-awesome-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/demo-awesome-admin.min.css', array(), $this->version, 'all' );
 		}
 
 		/**
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			 * class.
 			 */
 
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/demo-awesome-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/demo-awesome-admin.min.js', array( 'jquery' ), $this->version, false );
 		}
 	}
 }
