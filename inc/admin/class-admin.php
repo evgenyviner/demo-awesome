@@ -45,55 +45,45 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->plugin_name = $plugin_name;
 			$this->version     = $version;
 
-			// Theme Demos
-			add_action( 'admin_menu', array( $this, 'evolve_demos') );
-			add_action( 'admin_enqueue_scripts', array( $this, 'evolve_demo_scripts') );
-			
-
-		}
-		
-
-		
-		function evolve_demos() {
-			add_theme_page( __( 'evolve Theme Demo Import', 'evolve' ), __( 'Theme Demo Import', 'evolve' ), 'edit_theme_options', 'evolve-theme-demos', array($this, 'evolve_theme_demos') );
-
+			add_action( 'admin_menu', array( $this, 'demo_awesome_page' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'demo_awesome_scripts' ) );
 		}
 
-		function evolve_demo_scripts( $hook ) {
-			if ( 'appearance_page_evolve-theme-demos' != $hook ) {
+		function demo_awesome_page() {
+			add_theme_page( __( 'Demo Awesome Importer', 'demo-awesome' ), __( 'Demo Awesome', 'demo-awesome' ), 'edit_theme_options', 'demo-awesome-importer', array(
+				$this,
+				'demo_awesome_browser'
+			) );
+		}
+
+		function demo_awesome_scripts( $hook ) {
+			if ( 'appearance_page_demo-awesome-importer' != $hook ) {
 				return;
 			}
-			wp_enqueue_style( 'evolve-demos', plugin_dir_url( __FILE__ ) . '/css/style.css' );
-			wp_enqueue_script( 'evolve-demos', plugin_dir_url( __FILE__ ) . '/js/demo-content.min.js' );
+			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/css/demo-awesome-admin.min.css' );
+			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/js/demo-awesome-admin.min.js' );
 
 			// Add Defined Local Variables
 
 			$local_variables = array(
-				'close_button'  => __( 'Close', 'evolve' ),
-				'back_button'   => __( 'Back', 'evolve' ),
-				'next_button'   => __( 'Next', 'evolve' ),
-				'import_button' => __( 'Begin Import', 'evolve' )
+				'close_button'  => __( 'Close', 'demo-awesome' ),
+				'back_button'   => __( 'Back', 'demo-awesome' ),
+				'next_button'   => __( 'Next', 'demo-awesome' ),
+				'import_button' => __( 'Begin Import', 'demo-awesome' )
 			);
 
-			wp_localize_script( 'evolve-demos', 'evolve_js_local_vars', $local_variables );
+			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );
 		}
 
-			
+		function demo_awesome_browser() { ?>
+            <div class="wrap">
+                <h1 class="wp-heading-inline"><?php echo esc_html( __( 'Demo Awesome Importer', 'demo-awesome' ) ); ?></h1>
 
-		function evolve_theme_demos() { ?>
-	        <div class="wrap">
-	            <h1 class="wp-heading-inline"><?php echo esc_html( __( 'evolve Theme Demo Import', 'evolve' ) ); ?></h1>
-
-	            <hr class="wp-header-end">
-				<?php 
-				//evolve_demo_preview();
-				require plugin_dir_path( __FILE__ ) . '/admin-template.php';
-				 ?>
-
-	        </div>
+                <hr class="wp-header-end">
+				<?php require plugin_dir_path( __FILE__ ) . '/demo-browser.php'; ?>
+            </div>
 
 		<?php }
-		
 
 		/**
 		 * Register the stylesheets for the admin area.

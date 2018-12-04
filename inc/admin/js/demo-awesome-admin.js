@@ -1089,10 +1089,10 @@ jQuery(function ($) {
         var stepSelector = config.stepSelector || ".wizard-step";
         var steps = $(this).find(containerSelector + " " + stepSelector);
         var stepCount = steps.size();
-        var exitText = config.exit || evolve_js_local_vars.close_button;
-        var backText = config.back || evolve_js_local_vars.back_button;
-        var nextText = config.next || evolve_js_local_vars.next_button;
-        var finishText = config.finish || evolve_js_local_vars.import_button;
+        var exitText = config.exit || demo_awesome_js_local_vars.close_button;
+        var backText = config.back || demo_awesome_js_local_vars.back_button;
+        var nextText = config.next || demo_awesome_js_local_vars.next_button;
+        var finishText = config.finish || demo_awesome_js_local_vars.import_button;
         var isModal = config.isModal || true;
         var validateNext = config.validateNext || function () {
             return true;
