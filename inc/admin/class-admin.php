@@ -45,138 +45,55 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->plugin_name = $plugin_name;
 			$this->version     = $version;
 
-			// Add links to add post/page section
-			add_action( 'admin_menu', array( $this, 'create_admin_menu_links' ) );
-			add_action( 'edit_form_top', array( $this, 'edit_form_link' ) );
-
-			// Include the front page builder
-			add_action( 'init', array( $this, 'frontend_editor_view' ) );
-
-			// Add the editor link to edit post/page list
-			add_filter( 'page_row_actions', array( &$this, 'list_action_link' ) );
-			add_filter( 'post_row_actions', array( &$this, 'list_action_link' ) );
-
-			// Add custom content to frontend page
-			add_action('wp_head', array($this, 'call_all_action_hook_for_frontend_view'));
-
-			//remove all scripts/styles from wordpress
-			add_action('demo_awesome_changing_before_wp_head', array($this, 'remove_all_default_enqueue_styles_and_scripts_from_wordpress'), 1);
-			add_action('demo_awesome_changing_before_wp_head', array($this, 'call_enqueue_styles_and_scripts_from_wordpress'), 2);
+			// Theme Demos
+			add_action( 'admin_menu', array( $this, 'evolve_demos') );
+			add_action( 'admin_enqueue_scripts', array( $this, 'evolve_demo_scripts') );
 			
 
 		}
 		
-		function remove_all_default_enqueue_styles_and_scripts_from_wordpress(){
-			//wp_dequeue_style('abc');
+
+		
+		function evolve_demos() {
+			add_theme_page( __( 'evolve Theme Demo Import', 'evolve' ), __( 'Theme Demo Import', 'evolve' ), 'edit_theme_options', 'evolve-theme-demos', array($this, 'evolve_theme_demos') );
 
 		}
 
-		function call_enqueue_styles_and_scripts_from_wordpress(){
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version, 'all' );
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'fonts/styles.css', array(), $this->version, 'all' );
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
-		}
-
-
-
-		function call_all_action_hook_for_frontend_view(){
-			if ( is_single() && ( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-view' ) {
-				//add_button to add new item from frontend
-				add_filter( 'the_content', array( $this, 'add_button_to_add_new_demo-awesome-importer' ) );
-				add_shortcode( 'demo-awesome-view-add-item', array($this, 'demo_awesome_add_item_func') );
+		function evolve_demo_scripts( $hook ) {
+			if ( 'appearance_page_evolve-theme-demos' != $hook ) {
+				return;
 			}
+			wp_enqueue_style( 'evolve-demos', plugin_dir_url( __FILE__ ) . '/css/style.css' );
+			wp_enqueue_script( 'evolve-demos', plugin_dir_url( __FILE__ ) . '/js/demo-content.min.js' );
 
-		}
-		function demo_awesome_add_item_func( $atts, $content = "" ) {
-			ob_start();
-			echo '<a href="#">' . __( 'Add Componentz Items', $this->plugin_name ) . '</a>';
-			$content = ob_get_contents();
-			ob_end_clean();
-			return $content;
-		}
-		// returns the content of $GLOBALS['post']
-		// if the page is called 'debug'
-		function add_button_to_add_new_demo_awesome($content) {
-		  	return $content.'[demo-awesome-view-add-item]';
-		}
+			// Add Defined Local Variables
 
-		function list_action_link( $actions = array() ) {
-			global $post;
-
-			$preview_url_keys = array();
-
-			if ( isset( $post->ID ) && is_numeric( $post->ID ) ) {
-				// Set id of the page we are editing
-				$preview_url_keys['post'] = $post->ID;
-
-				// Set 'page' key – indicating that front page editing mode is active
-				$front_editor = add_query_arg( array(
-					'demo_awesome_id'   => $post->ID,
-					'demo_awesome_type' => $post->post_type,
-					'view_page'       => 'demo-awesome-importer.php',
-				), admin_url() );
-
-				$user_can = current_user_can( 'edit_post', $post->ID );
-				if ( 'trash' != $post->post_status && $user_can && wp_check_post_lock( $post->ID ) === false ) {
-					if ( true ) {
-						$actions['demo-awesome-importer'] = '<a href="' . $front_editor . '">' . __( 'Edit with Componentz', $this->plugin_name ) . '</a>';
-					}
-				}
-			}
-
-			return $actions;
-		}
-
-		function frontend_editor_view() {
-			if ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-importer.php' ) {
-				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/frontend-display.php';
-				die();
-			}
-		}
-
-		function create_admin_menu_links() {
-			add_submenu_page( 'edit.php', __( 'Add with Componentz', $this->plugin_name ), __( 'Add with Componentz', $this->plugin_name ), 'manage_options', $this->plugin_name, array(
-				&$this,
-				'admin_panel'
-			) );
-
-			add_submenu_page( 'edit.php?post_type=page', __( 'Add with Componentz', $this->plugin_name ), __( 'Add with Componentz', $this->plugin_name ), 'manage_options', $this->plugin_name, array(
-				&$this,
-				'admin_panel'
-			) );
-
-			$args = array(
-				'public'   => true,
-				'_builtin' => false
+			$local_variables = array(
+				'close_button'  => __( 'Close', 'evolve' ),
+				'back_button'   => __( 'Back', 'evolve' ),
+				'next_button'   => __( 'Next', 'evolve' ),
+				'import_button' => __( 'Begin Import', 'evolve' )
 			);
 
-			$output   = 'names'; // names or objects, note names is the default
-			$operator = 'and'; // 'and' or 'or'
-
-			$post_types = get_post_types( $args, $output, $operator );
-
-			foreach ( $post_types as $post_type ) {
-				add_submenu_page( 'edit.php?post_type=' . $post_type, __( 'Add with Componentz', $this->plugin_name ), __( 'Add with Componentz', $this->plugin_name ), 'manage_options', $this->plugin_name, array(
-					&$this,
-					'admin_panel'
-				) );
-			}
+			wp_localize_script( 'evolve-demos', 'evolve_js_local_vars', $local_variables );
 		}
 
-		function admin_panel() {
-			// Create new post and redirect to frontend editor
-			var_dump( $_REQUEST );
-		}
+			
 
-		function edit_form_link( $post ) {
-			if ( true || 'post' == $post->post_type ) {
-				echo '<a target="_blank" href="' . add_query_arg( array(
-						'demo_awesome_id'   => $post->ID,
-						'demo_awesome_type' => $post->post_type,
-						'view_page'       => 'demo-awesome-importer.php',
-					), admin_url() ) . '" class="page-title-action" style="display: inline-block;float: left;margin: 0;margin-top: 10px;">' . __( "Edit with Componentz", $this->plugin_name ) . '</a>';
-			}
-		}
+		function evolve_theme_demos() { ?>
+	        <div class="wrap">
+	            <h1 class="wp-heading-inline"><?php echo esc_html( __( 'evolve Theme Demo Import', 'evolve' ) ); ?></h1>
+
+	            <hr class="wp-header-end">
+				<?php 
+				//evolve_demo_preview();
+				require plugin_dir_path( __FILE__ ) . '/admin-template.php';
+				 ?>
+
+	        </div>
+
+		<?php }
+		
 
 		/**
 		 * Register the stylesheets for the admin area.
