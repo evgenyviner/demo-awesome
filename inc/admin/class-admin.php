@@ -60,12 +60,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$raw_packages = wp_safe_remote_get( $url );
 
 			if ( ! is_wp_error( $raw_packages ) ) {
-				$packages = json_decode( wp_remote_retrieve_body( $raw_packages ) );
+				$packages = wp_remote_retrieve_body( $raw_packages );
 
 				if ( $packages ) {
 					set_transient( 'demo_awesome_importer_packages_'.$template_name, $packages, WEEK_IN_SECONDS );
 				}
 			}
+
 			return $packages;
 		}
 
