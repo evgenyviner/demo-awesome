@@ -1089,10 +1089,17 @@ jQuery(function ($) {
         var stepSelector = config.stepSelector || ".wizard-step";
         var steps = $(this).find(containerSelector + " " + stepSelector);
         var stepCount = steps.size();
-        var exitText = config.exit || demo_awesome_js_local_vars.close_button;
-        var backText = config.back || demo_awesome_js_local_vars.back_button;
-        var nextText = config.next || demo_awesome_js_local_vars.next_button;
-        var finishText = config.finish || demo_awesome_js_local_vars.import_button;
+        if (typeof demo_awesome_js_local_vars !== 'undefined'){
+            var exitText = config.exit || demo_awesome_js_local_vars.close_button;
+            var backText = config.back || demo_awesome_js_local_vars.back_button;
+            var nextText = config.next || demo_awesome_js_local_vars.next_button;
+            var finishText = config.finish || demo_awesome_js_local_vars.import_button;
+        }else{
+            var exitText = config.exit;
+            var backText = config.back;
+            var nextText = config.next;
+            var finishText = config.finish;
+        }
         var isModal = config.isModal || true;
         var validateNext = config.validateNext || function () {
             return true;
@@ -1191,12 +1198,24 @@ jQuery(function ($) {
     $("#import-modal").wizard();
 
     $('#finish-import-modal').on('shown.bs.modal', function (e) {
-        setTimeout(function () {
+        // setTimeout(function () {
+        //     $(".hide-content").fadeOut(1500);
+        // }, 5000);
+        // setTimeout(function () {
+        //     $(".show-content").fadeIn(1500).css("display", "flex");
+        // }, 4000);
+
+        var data = {
+            'action': 'call_import_function_from_ajax'
+        };
+        jQuery.post(ajaxurl, data, function(response) {
             $(".hide-content").fadeOut(1500);
-        }, 5000);
-        setTimeout(function () {
             $(".show-content").fadeIn(1500).css("display", "flex");
-        }, 4000);
+        });
+    });
+
+    $('.button-go-to-customize').click(function(){
+
     });
 
 });

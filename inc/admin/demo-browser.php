@@ -358,7 +358,7 @@
                 </div>
 
                 <div class="modal-footer hide show-content">
-                    <button type="button" class="button back"><?php _e( 'Customize' ); ?></button>
+                    <a type="button" class="button back button-go-to-customize" href="<?php echo admin_url("customize.php"); ?>"><?php _e( 'Customize' ); ?></a>
                     <button type="button" class="button button-primary" data-dismiss="modal"
                             aria-label="Close"><?php _e( 'Close' ); ?></button>
                 </div>
