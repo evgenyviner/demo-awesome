@@ -54,21 +54,28 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			add_action( 'wp_ajax_call_import_function_from_ajax', array($this, 'call_import_function_from_ajax' ));
 		}
 
+		function get_list_demos(){
+			$get_list_demos = $this->get_demo_packages('https://demo.theme4press.com/demo-import/get-list-demos.json', 'get_list_demos');
+			return $get_list_demos;
+		}
+
 		function get_demo_packages($url, $template_name = '') {
-			$packages = get_transient( 'demo_awesome_importer_packages_'.$template_name );
+			//turn on alway load new
+			if ( true || false === ( $packages = get_transient( 'demo_awesome_importer_packages_'.$template_name ) ) ) {
+			    // It wasn't there, so regenerate the data and save the transient
+			    $raw_packages = wp_safe_remote_get( $url );
 
-			$raw_packages = wp_safe_remote_get( $url );
+				if ( ! is_wp_error( $raw_packages ) ) {
+					$packages = wp_remote_retrieve_body( $raw_packages );
 
-			if ( ! is_wp_error( $raw_packages ) ) {
-				$packages = wp_remote_retrieve_body( $raw_packages );
-
-				if ( $packages ) {
-					set_transient( 'demo_awesome_importer_packages_'.$template_name, $packages, WEEK_IN_SECONDS );
+					if ( $packages ) {
+						set_transient( 'demo_awesome_importer_packages_'.$template_name, $packages, HOUR_IN_SECONDS );
+					}
 				}
 			}
 
 			return $packages;
-		}
+		}		
 
 		function get_import_file_content($template_name){
 			return $this->get_demo_packages("https://demo.theme4press.com/demo-import/".$template_name."/evolve.wordpress.xml", $template_name);
@@ -89,14 +96,15 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			$theme_path = str_replace( ABSPATH, $wp_filesystem->abspath(), EVOLVE_IMPORTER_DIR );
 			$result = $wp_filesystem->put_contents(
-				$theme_path . 'dummy-data.xml',
+				$theme_path . '/demo-content/dummy-data.xml',
 				$file_content,
 				FS_CHMOD_FILE // predefined mode settings for WP files
 			);
-			return $theme_path . 'dummy-data.xml';
+			return $theme_path . '/demo-content/dummy-data.xml';
 		}
 
 		function call_import_function_from_ajax() {
+
 			$import_file = $this->get_import_file_path( 'blog' );
 
 			// Load Importer API.
@@ -161,7 +169,10 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
                 <h1 class="wp-heading-inline"><?php echo esc_html( __( 'Demo Awesome Importer', 'demo-awesome' ) ); ?></h1>
 
                 <hr class="wp-header-end">
-				<?php require plugin_dir_path( __FILE__ ) . '/demo-browser.php'; ?>
+				<?php 
+				$get_list_demos = $this->get_list_demos();
+				require plugin_dir_path( __FILE__ ) . '/demo-browser.php'; 
+				?>
             </div>
 
 		<?php }

@@ -1181,6 +1181,8 @@ jQuery(function ($) {
         });
 
         btnFinish.on("click", function () {
+            $(".hide-content").fadeIn(0);
+            $(".show-content").fadeOut(0)
             if (!validateFinish(step, steps[step - 1])) {
                 return;
             }
@@ -1198,12 +1200,6 @@ jQuery(function ($) {
     $("#import-modal").wizard();
 
     $('#finish-import-modal').on('shown.bs.modal', function (e) {
-        // setTimeout(function () {
-        //     $(".hide-content").fadeOut(1500);
-        // }, 5000);
-        // setTimeout(function () {
-        //     $(".show-content").fadeIn(1500).css("display", "flex");
-        // }, 4000);
 
         var data = {
             'action': 'call_import_function_from_ajax'
@@ -1213,9 +1209,29 @@ jQuery(function ($) {
             $(".show-content").fadeIn(1500).css("display", "flex");
         });
     });
-
-    $('.button-go-to-customize').click(function(){
-
-    });
+    $('.demo-screenshot, .call-import-demo-function').click(function(){
+        var parent_div = $(this).closest('.demo');
+        var data_demo = JSON.parse(parent_div.attr('data-demo-show'));
+        var image_url = parent_div.find('.demo-screenshot img').attr("src");
+        // console.log(data_demo);
+        $('.demo-div-screenshot img').attr('src', image_url);
+        $('.modal-header h5 span').text(data_demo.name);
+        $('.theme-require-ver').text(data_demo.require_ver);
+        if(data_demo.plugins){
+            $('.alert-demo-require-plugins').show();
+            $('.demo-require-description').show();
+            var string_list_require = '';
+            $('.list-require-plugins li').remove();
+            data_demo.plugins.forEach(function(value, index){
+                $('.list-require-plugins').append('<li><strong>'+value+'</strong></li>');
+            });
+            $('.list-require-plugins').show();
+        }
+        else{
+            $('.alert-demo-require-plugins').hide();
+            $('.demo-require-description').hide();
+            $('.list-require-plugins').hide();
+        }
+    })
 
 });
