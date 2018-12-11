@@ -11,8 +11,8 @@
  * @author     Theme4Press
  */
 
-if( !defined( 'EVOLVE_IMPORTER_DIR' ) ){
-	define( 'EVOLVE_IMPORTER_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'DEMO_AWESOME_IMPORTER_DIRECTORY' ) ) {
+	define( 'DEMO_AWESOME_IMPORTER_DIRECTORY', plugin_dir_path( __FILE__ ) );
 }
 
 if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
@@ -51,38 +51,39 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			add_action( 'admin_menu', array( $this, 'demo_awesome_page' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'demo_awesome_scripts' ) );
-			add_action( 'wp_ajax_call_import_function_from_ajax', array($this, 'call_import_function_from_ajax' ));
+			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 		}
 
-		function get_list_demos(){
-			$get_list_demos = $this->get_demo_packages('https://demo.theme4press.com/demo-import/get-list-demos.json', 'get_list_demos');
-			return $get_list_demos;
+		function get_list_demos() {
+			$demo_awesome_get_list_demos = $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/get-list-demos.json', 'get_list_demos' );
+
+			return $demo_awesome_get_list_demos;
 		}
 
-		function get_demo_packages($url, $template_name = '') {
+		function get_demo_packages( $url, $template_name = '' ) {
 			//turn on alway load new
-			if ( true || false === ( $packages = get_transient( 'demo_awesome_importer_packages_'.$template_name ) ) ) {
-			    // It wasn't there, so regenerate the data and save the transient
-			    $raw_packages = wp_safe_remote_get( $url );
+			if ( true || false === ( $packages = get_transient( 'demo_awesome_importer_packages_' . $template_name ) ) ) {
+				// It wasn't there, so regenerate the data and save the transient
+				$raw_packages = wp_safe_remote_get( $url );
 
 				if ( ! is_wp_error( $raw_packages ) ) {
 					$packages = wp_remote_retrieve_body( $raw_packages );
 
 					if ( $packages ) {
-						set_transient( 'demo_awesome_importer_packages_'.$template_name, $packages, HOUR_IN_SECONDS );
+						set_transient( 'demo_awesome_importer_packages_' . $template_name, $packages, HOUR_IN_SECONDS );
 					}
 				}
 			}
 
 			return $packages;
-		}		
-
-		function get_import_file_content($template_name){
-			return $this->get_demo_packages("https://demo.theme4press.com/demo-import/".$template_name."/evolve.wordpress.xml", $template_name);
 		}
 
-		function get_import_file_path($template_name){
-			return $this->write_file_to_local($this->get_import_file_content($template_name));
+		function get_import_file_content( $template_name ) {
+			return $this->get_demo_packages( "https://demo.theme4press.com/demo-import/" . $template_name . "/evolve.wordpress.xml", $template_name );
+		}
+
+		function get_import_file_path( $template_name ) {
+			return $this->write_file_to_local( $this->get_import_file_content( $template_name ) );
 		}
 
 		function write_file_to_local( $file_content ) {
@@ -94,12 +95,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				WP_Filesystem();
 			}
 
-			$theme_path = str_replace( ABSPATH, $wp_filesystem->abspath(), EVOLVE_IMPORTER_DIR );
-			$result = $wp_filesystem->put_contents(
+			$theme_path = str_replace( ABSPATH, $wp_filesystem->abspath(), DEMO_AWESOME_IMPORTER_DIRECTORY );
+			$result     = $wp_filesystem->put_contents(
 				$theme_path . '/demo-content/dummy-data.xml',
 				$file_content,
 				FS_CHMOD_FILE // predefined mode settings for WP files
 			);
+
 			return $theme_path . '/demo-content/dummy-data.xml';
 		}
 
@@ -118,11 +120,11 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				}
 			}
 
-			// Include WXR Importer.
-			require dirname( __FILE__ ) . '/wordpress-importer/class-wxr-importer.php';
+			// Include Class Demo Awesome Importer
+			require dirname( __FILE__ ) . '/importer/class-demo-awesome-importer.php';
 
 			if ( is_file( $import_file ) ) {
-				$wp_import = new DA_WXR_Importer();
+				$wp_import                    = new Demo_Awesome_Importer();
 				$wp_import->fetch_attachments = true;
 
 				ob_start();
@@ -149,7 +151,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			if ( 'appearance_page_demo-awesome-importer' != $hook ) {
 				return;
 			}
-			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/css/demo-awesome-admin.min.css' );
+			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/css/demo-awesome-admin.css' );
 			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/js/demo-awesome-admin.js' );
 
 			// Add Defined Local Variables
@@ -169,9 +171,9 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
                 <h1 class="wp-heading-inline"><?php echo esc_html( __( 'Demo Awesome Importer', 'demo-awesome' ) ); ?></h1>
 
                 <hr class="wp-header-end">
-				<?php 
-				$get_list_demos = $this->get_list_demos();
-				require plugin_dir_path( __FILE__ ) . '/demo-browser.php'; 
+				<?php
+				$demo_awesome_get_list_demos = $this->get_list_demos();
+				require plugin_dir_path( __FILE__ ) . '/demo-browser.php';
 				?>
             </div>
 

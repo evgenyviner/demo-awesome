@@ -1089,12 +1089,12 @@ jQuery(function ($) {
         var stepSelector = config.stepSelector || ".wizard-step";
         var steps = $(this).find(containerSelector + " " + stepSelector);
         var stepCount = steps.size();
-        if (typeof demo_awesome_js_local_vars !== 'undefined'){
+        if (typeof demo_awesome_js_local_vars !== 'undefined') {
             var exitText = config.exit || demo_awesome_js_local_vars.close_button;
             var backText = config.back || demo_awesome_js_local_vars.back_button;
             var nextText = config.next || demo_awesome_js_local_vars.next_button;
             var finishText = config.finish || demo_awesome_js_local_vars.import_button;
-        }else{
+        } else {
             var exitText = config.exit;
             var backText = config.back;
             var nextText = config.next;
@@ -1204,33 +1204,33 @@ jQuery(function ($) {
         var data = {
             'action': 'call_import_function_from_ajax'
         };
-        jQuery.post(ajaxurl, data, function(response) {
+        jQuery.post(ajaxurl, data, function (response) {
             $(".hide-content").fadeOut(1500);
             $(".show-content").fadeIn(1500).css("display", "flex");
         });
     });
-    $('.demo-screenshot, .call-import-demo-function').click(function(){
+    $('.demo-screenshot, .call-import-demo-function').click(function () {
         var parent_div = $(this).closest('.demo');
         var data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
         // console.log(data_demo);
-        $('.demo-div-screenshot img').attr('src', image_url);
+        $('.demo-screenshot-container img').attr('src', image_url);
         $('.modal-header h5 span').text(data_demo.name);
-        $('.theme-require-ver').text(data_demo.require_ver);
-        if(data_demo.plugins){
-            $('.alert-demo-require-plugins').show();
-            $('.demo-require-description').show();
+        $('.theme-required-version').text(data_demo.require_ver);
+        if (data_demo.plugins) {
+            $('.required-plugins-text').show();
+            $('.required-description-text').show();
             var string_list_require = '';
-            $('.list-require-plugins li').remove();
-            data_demo.plugins.forEach(function(value, index){
-                $('.list-require-plugins').append('<li><strong>'+value+'</strong></li>');
+            $('.required-plugins-list li').remove();
+            data_demo.plugins.forEach(function (value, index) {
+                $('.required-plugins-list').append('<li><strong>' + value + '</strong></li>');
             });
-            $('.list-require-plugins').show();
+            $('.required-plugins-list').show();
         }
-        else{
-            $('.alert-demo-require-plugins').hide();
-            $('.demo-require-description').hide();
-            $('.list-require-plugins').hide();
+        else {
+            $('.required-plugins-text').hide();
+            $('.required-description-text').hide();
+            $('.required-plugins-list').hide();
         }
     })
 
