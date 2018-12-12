@@ -35,7 +35,11 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			add_action( 'admin_menu', array( $this, 'importer_page' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
-			add_filter( 'demo_awesome_customizer_demo_import_settings', array( $this, 'update_customizer_data' ), 10, 2 );
+			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
+			add_filter( 'demo_awesome_customizer_demo_import_settings', array(
+				$this,
+				'update_customizer_data'
+			), 10, 2 );
 		}
 
 		/**
@@ -82,13 +86,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function write_xml_file_to_local( $file_content ) {
-			return $this->write_file_to_local($file_content);
+			return $this->write_file_to_local( $file_content );
 		}
 
 		/**
 		 * @since    1.0.0
 		 */
-		function write_file_to_local( $file_content, $file_name = 'dummy-data.xml') {
+		function write_file_to_local( $file_content, $file_name = 'dummy-data.xml' ) {
 
 			global $wp_filesystem;
 			// Initialize the WP filesystem, no more using 'file-put-contents' function
@@ -98,7 +102,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			}
 
 			$theme_path = str_replace( ABSPATH, $wp_filesystem->abspath(), DEMO_AWESOME_IMPORTER_DIRECTORY );
-			$file_path = $theme_path . '/demo-content/'.$file_name;
+			$file_path  = $theme_path . '/demo-content/' . $file_name;
 			$result     = $wp_filesystem->put_contents(
 				$file_path,
 				$file_content,
@@ -128,7 +132,19 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		public function import_content_theme( $template_name = 'blog') {
+		function required_plugins() {
+
+			// Include the required plugins list
+			require dirname( __FILE__ ) . '/required-plugins.php';
+
+			demo_awesome_required_plugins();
+			wp_die(); // this is required to terminate immediately and return a proper response
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public function import_content_theme( $template_name = 'blog' ) {
 			$import_file = $this->get_import_file_path( $template_name );
 
 			// Load Importer API.
@@ -158,16 +174,17 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				$status['errorMessage'] = __( 'The XML file dummy content is missing.', 'demo-awesome' );
 				wp_send_json_error( $status );
 			}
+
 			return true;
 		}
 
 		/**
 		 * @since    1.0.0
 		 */
-		function import_widget_settings( $template_name = 'blog') {
+		function import_widget_settings( $template_name = 'blog' ) {
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-widget-importer.php';
 
-			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/'.$template_name.'/dummy-widgets.wie' ), 'dummy-widgets.wie' );
+			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/' . $template_name . '/dummy-widgets.wie' ), 'dummy-widgets.wie' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Widget_Importer::import( $import_file );
@@ -189,7 +206,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function import_customizer_data( $template_name = 'blog' ) {
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-customizer-importer.php';
 
-			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/'.$template_name.'/evolve-export.dat' ), 'evolve-export.dat' );
+			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/' . $template_name . '/evolve-export.dat' ), 'evolve-export.dat' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Customizer_Importer::import( $import_file );
@@ -224,7 +241,15 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 								// Update existing custom nav menu item URL.
 								if ( isset( $menu_parts['path'] ) && isset( $menu_parts['host'] ) && apply_filters( 'demo_awesome_importer_nav_menu_item_url_hosts', in_array( $menu_parts['host'], array( 'demo.theme4press.com' ) ) ) ) {
-									$menu_item->url = str_replace( array( $menu_parts['scheme'], $menu_parts['host'], $menu_parts['path'] ), array( $site_parts['scheme'], $site_parts['host'], trailingslashit( $site_parts['path'] ) ), $menu_item->url );
+									$menu_item->url = str_replace( array(
+										$menu_parts['scheme'],
+										$menu_parts['host'],
+										$menu_parts['path']
+									), array(
+										$site_parts['scheme'],
+										$site_parts['host'],
+										trailingslashit( $site_parts['path'] )
+									), $menu_item->url );
 									update_post_meta( $menu_item->db_id, '_menu_item_url', esc_url_raw( $menu_item->url ) );
 								}
 							}
@@ -256,7 +281,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 									}
 								}
 							}
-						break;
+							break;
 						case 'categories':
 							foreach ( $data_value as $taxonomy => $taxonomy_data ) {
 								if ( ! taxonomy_exists( $taxonomy ) ) {
@@ -273,7 +298,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 									}
 								}
 							}
-						break;
+							break;
 						case 'nav_menu_locations':
 							$nav_menus = wp_get_nav_menus();
 
@@ -288,7 +313,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 									}
 								}
 							}
-						break;
+							break;
 					}
 				}
 			}
@@ -353,7 +378,9 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'close_button'  => __( 'Close', 'demo-awesome' ),
 				'back_button'   => __( 'Back', 'demo-awesome' ),
 				'next_button'   => __( 'Next', 'demo-awesome' ),
-				'import_button' => __( 'Begin Import', 'demo-awesome' )
+				'import_button' => __( 'Begin Import', 'demo-awesome' ),
+				'plugin_url'    => plugin_dir_url( __FILE__ ),
+				'website_url'   => get_site_url()
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );

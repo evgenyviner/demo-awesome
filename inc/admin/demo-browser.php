@@ -82,18 +82,9 @@ $demo_awesome_my_theme = wp_get_theme();
                                 class="theme-required-version"></span><br/>
                         <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
 
-
-                        <div class="alert required-plugins-text" role="alert">
-							<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
-                        </div>
-
-                        <ol class="required-plugins-list">
-                            <li><strong><?php _e( 'WooCommerce', 'demo-awesome' ); ?></strong></li>
-                            <li><strong><?php _e( 'Theme4Press Shortcodes', 'demo-awesome' ); ?></strong></li>
-                            <li><strong><?php _e( 'Revolution Slider', 'demo-awesome' ); ?></strong></li>
-                        </ol>
-
-                        <p class="required-description-text"><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout.', 'demo-awesome' ); ?></p>
+						<?php
+						require dirname( __FILE__ ) . '/required-plugins.php';
+						demo_awesome_required_plugins(); ?>
 
                         <p><strong><?php _e( 'Step 1 of 2', 'demo-awesome' ); ?></strong></p>
 
@@ -193,11 +184,20 @@ $demo_awesome_my_theme = wp_get_theme();
 								<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
                             </div>
 
-                            <ol class="required-plugins-list">
-                                <li><strong><?php _e( 'WooCommerce', 'demo-awesome' ); ?></strong></li>
-                                <li><strong><?php _e( 'Theme4Press Shortcodes', 'demo-awesome' ); ?></strong></li>
-                                <li><strong><?php _e( 'Revolution Slider', 'demo-awesome' ); ?></strong></li>
-                            </ol>
+                            <ul class="required-plugins-list">
+                                <li>
+                                    <strong><?php
+										_e( 'WooCommerce', 'demo-awesome' ); ?></strong>
+                                </li>
+                                <li>
+                                    <strong><?php echo $demo_awesome_shortcodes_plugin;
+										_e( 'Theme4Press Shortcodes', 'demo-awesome' ); ?></strong>
+                                </li>
+                                <li>
+                                    <strong><?php echo $demo_awesome_revslider_plugin;
+										_e( 'Revolution Slider', 'demo-awesome' ); ?></strong>
+                                </li>
+                            </ul>
 
                             <p class="required-description-text"><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout.', 'demo-awesome' ); ?></p>
 

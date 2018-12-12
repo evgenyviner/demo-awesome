@@ -1235,3 +1235,25 @@ jQuery(function ($) {
     })
 
 });
+
+/*
+    Refresh Required Plugins
+    --------------------------------------- */
+
+jQuery(function ($) {
+    $(".refresh-required").click(function (e) {
+        e.preventDefault();
+        $('.refresh-container').html('<p class="spinner-loader"><img src="' + demo_awesome_js_local_vars.website_url + '/wp-admin/images/spinner.gif"/></p>');
+
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                action: 'required_plugins'
+            },
+            success: function (data) {
+                $('.refresh-container').html(data);
+            }
+        });
+    });
+});
