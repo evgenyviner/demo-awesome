@@ -36,10 +36,12 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			add_action( 'admin_menu', array( $this, 'importer_page' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
-			add_filter( 'demo_awesome_customizer_demo_import_settings', array(
+			add_filter( 'customizer_demo_import_settings', array(
 				$this,
 				'update_customizer_data'
 			), 10, 2 );
+			add_filter( 'widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
+
 		}
 
 		/**
@@ -117,14 +119,18 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function call_import_function_from_ajax() {
 
+			$data_demo = isset( $_REQUEST['data_demo'] ) ? $_REQUEST['data_demo'] : array();
+
+			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
+
 			//import content data
-			$this->import_content_theme();
+			$this->import_content_theme( $data_demo, $template_name );
 			//import widget
-			$this->import_widget_settings();
+			$this->import_widget_settings( $data_demo, $template_name );
 			//import customizer
-			$this->import_customizer_data();
+			$this->import_customizer_data( $data_demo, $template_name );
 			//fix menu
-			$this->update_nav_menu_items();
+			$this->update_nav_menu_items( $data_demo, $template_name );
 
 			wp_die(); // this is required to terminate immediately and return a proper response
 		}
@@ -144,7 +150,8 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		public function import_content_theme( $template_name = 'blog' ) {
+		public function import_content_theme( $data_demo, $template_name = 'blog' ) {
+
 			$import_file = $this->get_import_file_path( $template_name );
 
 			// Load Importer API.
@@ -181,13 +188,14 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function import_widget_settings( $template_name = 'blog' ) {
+		function import_widget_settings( $data_demo, $template_name = 'blog' ) {
+
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-widget-importer.php';
 
 			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/' . $template_name . '/dummy-widgets.wie' ), 'dummy-widgets.wie' );
 
 			if ( is_file( $import_file ) ) {
-				$results = Demo_Awesome_Widget_Importer::import( $import_file );
+				$results = Demo_Awesome_Widget_Importer::import( $import_file, $data_demo );
 
 				if ( is_wp_error( $results ) ) {
 					return false;
@@ -203,13 +211,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function import_customizer_data( $template_name = 'blog' ) {
+		function import_customizer_data( $data_demo, $template_name = 'blog' ) {
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-customizer-importer.php';
 
 			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/' . $template_name . '/evolve-export.dat' ), 'evolve-export.dat' );
 
 			if ( is_file( $import_file ) ) {
-				$results = Demo_Awesome_Customizer_Importer::import( $import_file );
+				$results = Demo_Awesome_Customizer_Importer::import( $import_file, $data_demo );
 
 				if ( is_wp_error( $results ) ) {
 					return false;
@@ -263,6 +271,12 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function update_customizer_data( $data, $demo_data = array() ) {
+			if ( empty( $demo_data['customizer_data_update'] ) ) {
+				$demo_data['customizer_data_update']['nav_menu_locations'] = array(
+					'primary-menu'      => 'Main menu',
+					'sticky_navigation' => 'Main menu',
+				);
+			}
 			if ( ! empty( $demo_data['customizer_data_update'] ) ) {
 				foreach ( $demo_data['customizer_data_update'] as $data_type => $data_value ) {
 					if ( ! in_array( $data_type, array( 'pages', 'categories', 'nav_menu_locations' ) ) ) {
@@ -319,6 +333,63 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			}
 
 			return $data;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function update_widget_data( $widget, $widget_type, $instance_id, $demo_data ) {
+			if ( 'nav_menu' == $widget_type ) {
+				$nav_menu = wp_get_nav_menu_object( $widget['title'] );
+
+				if ( is_object( $nav_menu ) && $nav_menu->term_id ) {
+					$widget['nav_menu'] = $nav_menu->term_id;
+				}
+			} elseif ( ! empty( $demo_data['widgets_data_update'] ) ) {
+				foreach ( $demo_data['widgets_data_update'] as $dropdown_type => $dropdown_data ) {
+					if ( ! in_array( $dropdown_type, array( 'dropdown_pages', 'dropdown_categories' ) ) ) {
+						continue;
+					}
+
+					// Format the value based on dropdown type.
+					switch ( $dropdown_type ) {
+						case 'dropdown_pages':
+							foreach ( $dropdown_data as $widget_id => $widget_data ) {
+								if ( ! empty( $widget_data[ $instance_id ] ) && $widget_id == $widget_type ) {
+									foreach ( $widget_data[ $instance_id ] as $widget_key => $widget_value ) {
+										$page = get_page_by_title( $widget_value );
+
+										if ( is_object( $page ) && $page->ID ) {
+											$widget[ $widget_key ] = $page->ID;
+										}
+									}
+								}
+							}
+							break;
+						case 'dropdown_categories':
+							foreach ( $dropdown_data as $taxonomy => $taxonomy_data ) {
+								if ( ! taxonomy_exists( $taxonomy ) ) {
+									continue;
+								}
+
+								foreach ( $taxonomy_data as $widget_id => $widget_data ) {
+									if ( ! empty( $widget_data[ $instance_id ] ) && $widget_id == $widget_type ) {
+										foreach ( $widget_data[ $instance_id ] as $widget_key => $widget_value ) {
+											$term = get_term_by( 'name', $widget_value, $taxonomy );
+
+											if ( is_object( $term ) && $term->term_id ) {
+												$widget[ $widget_key ] = $term->term_id;
+											}
+										}
+									}
+								}
+							}
+							break;
+					}
+				}
+			}
+
+			return $widget;
 		}
 
 		/**

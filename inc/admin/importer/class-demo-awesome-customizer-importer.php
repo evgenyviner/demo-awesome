@@ -24,7 +24,7 @@ class Demo_Awesome_Customizer_Importer {
 	 * @param  string $import_file Path to the import file.
 	 * @return void|WP_Error
 	 */
-	public static function import( $import_file ) {
+	public static function import( $import_file, $data_demo ) {
 		global $wp_customize;
 
 		$data = maybe_unserialize( file_get_contents( $import_file ) );
@@ -40,7 +40,7 @@ class Demo_Awesome_Customizer_Importer {
 		}
 
 		// Modify settings array.
-		$data = apply_filters( 'demo_awesome_customizer_demo_import_settings', $data );
+		$data = apply_filters( 'demo_awesome_customizer_demo_import_settings', $data, $data_demo );
 
 		// Import custom options.
 		if ( isset( $data['options'] ) ) {
