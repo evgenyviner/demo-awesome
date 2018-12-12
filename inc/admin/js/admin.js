@@ -1078,7 +1078,7 @@ jQuery(function ($) {
 /*
     Modal Steps
     --------------------------------------- */
-
+data_demo = [];
 jQuery(function ($) {
     $.fn.wizard = function (config) {
         if (!config) {
@@ -1202,7 +1202,8 @@ jQuery(function ($) {
     $('#finish-import-modal').on('shown.bs.modal', function (e) {
 
         var data = {
-            'action': 'call_import_function_from_ajax'
+            'action': 'call_import_function_from_ajax',
+            'data_demo' : data_demo
         };
         jQuery.post(ajaxurl, data, function (response) {
             $(".hide-content").fadeOut(1500);
@@ -1211,9 +1212,9 @@ jQuery(function ($) {
     });
     $('.demo-screenshot, .call-import-demo-function').click(function () {
         var parent_div = $(this).closest('.demo');
-        var data_demo = JSON.parse(parent_div.attr('data-demo-show'));
+        data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
-        // console.log(data_demo);
+        console.log(data_demo);
         $('.demo-screenshot-container img').attr('src', image_url);
         $('.modal-header h5 span').text(data_demo.name);
         $('.theme-required-version').text(data_demo.require_ver);

@@ -35,7 +35,7 @@ $demo_awesome_my_theme = wp_get_theme();
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
-                            <img src="<?php echo "https://demo.theme4press.com/demo-import/" . $demo_awesome_item_key . "/" . ( $demo_awesome_item_key_2 + 1 ) . "/screenshot.png"; ?>"
+                            <img src="<?php echo "https://demo.theme4press.com/demo-import/" . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
                                  alt=""/>
                             <span class="more-details" id="demo-action"></span>
                         </div>
