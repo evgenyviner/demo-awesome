@@ -238,6 +238,12 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function update_customizer_data( $data, $demo_data = array() ) {
+			if (  empty( $demo_data['customizer_data_update'] ) ) {
+				$demo_data['customizer_data_update']['nav_menu_locations'] = array(
+					'primary-menu' => 'Main menu',
+					'sticky_navigation' => 'Main menu',
+				);
+			}
 			if ( ! empty( $demo_data['customizer_data_update'] ) ) {
 				foreach ( $demo_data['customizer_data_update'] as $data_type => $data_value ) {
 					if ( ! in_array( $data_type, array( 'pages', 'categories', 'nav_menu_locations' ) ) ) {
