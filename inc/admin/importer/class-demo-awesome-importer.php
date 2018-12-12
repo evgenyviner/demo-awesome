@@ -9,9 +9,6 @@
  * @author     Theme4Press
  */
 
-if ( ! defined( 'WP_LOAD_IMPORTERS' ) ) {
-	return;
-}
 
 if ( ! class_exists( 'WP_Importer' ) ) {
 	return;
