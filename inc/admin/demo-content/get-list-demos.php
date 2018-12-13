@@ -33,10 +33,8 @@ $list_demos = array(
 				'folder_path' => 'blog/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						array(
-							'primary-menu' => 'Main menu',
-							'sticky_navigation' => 'Main menu',
-						)
+						'primary-menu' => 'Main menu',
+						'sticky_navigation' => 'Main menu',
 					)
 				)
 			),
