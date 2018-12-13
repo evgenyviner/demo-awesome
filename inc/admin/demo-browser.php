@@ -224,11 +224,11 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                     <div class="demo-info-row demo-awesome-container">
 
                         <div class="demo-info-col demo-preview-container">
-                            <iframe src="https://demo.theme4press.com/evolve-default" width='1400' height='800'
-                                    frameborder='0' allowfullscreen></iframe>
+                            <iframe src="http://localhost/wordpress/" frameborder="0" marginwidth="0" marginheight="0"
+                                    scrolling="auto" allowfullscreen></iframe>
                         </div>
 
-                        <div class="demo-info-col">
+                        <div class="demo-info-col demo-required-plugins">
 							<?php _e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
                                     class="theme-required-version"></span><br/>
                             <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>

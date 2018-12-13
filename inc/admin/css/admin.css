@@ -367,6 +367,10 @@ button.close {
     width: 100%;
 }
 
+.demo-awesome-container {
+    height: 100%;
+}
+
 /*
     Pop Ups
     ======================================= */
@@ -384,12 +388,22 @@ button.close {
 }
 
 .modal-preview {
-    z-index: 1050;
+    top: 32px;
 }
 
 .modal-preview .modal-lg {
-    margin: 32px 0 0 160px;
+    margin: 0 0 0 160px;
     max-width: 100%;
+}
+
+.modal-preview iframe {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
 }
 
 .modal-open .modal {
@@ -420,6 +434,15 @@ button.close {
     pointer-events: none;
     position: relative;
     width: auto;
+}
+
+.modal-preview .modal-dialog {
+    height: 100%;
+}
+
+.modal-preview .modal-content {
+    border-radius: 0;
+    height: 100% !important;
 }
 
 .modal-content {
@@ -457,6 +480,14 @@ button.close {
     padding: 1rem;
     position: relative;
     -ms-flex: 1 1 auto;
+}
+
+.modal-preview .modal-body {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 63px;
 }
 
 .modal-footer {
@@ -540,6 +571,22 @@ button.close {
     text-align: center;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
 /*
     Responsive Dynamic Definitions
     ======================================= */
@@ -601,7 +648,10 @@ button.close {
 	--------------------------------------- */
 
 @media (max-width: 850px) {
-
+    .modal-preview iframe,
+    .demo-preview-container {
+        height: 500px;
+    }
 }
 
 /*
@@ -623,6 +673,10 @@ button.close {
 
     .modal-preview .modal-lg {
         margin-left: 0;
+    }
+
+    .modal-preview {
+        top: 46px;
     }
 }
 
@@ -694,5 +748,19 @@ button.close {
         max-width: 100%;
         -ms-flex-preferred-size: 0;
         -ms-flex-positive: 1;
+    }
+
+    .demo-required-plugins {
+        max-width: 300px;
+    }
+}
+
+/*
+	IE Fixes
+	--------------------------------------- */
+
+@media all and (-ms-high-contrast: none) {
+    .demo-info-row .demo-screenshot-container img {
+        width: 100%;
     }
 }
