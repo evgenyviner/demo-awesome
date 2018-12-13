@@ -37,13 +37,18 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->version     = $version;
 
 			add_action( 'admin_menu', array( $this, 'importer_page' ) );
+			add_action( 'init', array( $this, 'live_preview' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
-			add_filter( 'demo_awesome_customizer_demo_import_settings', array(
+			add_filter( 'customizer_demo_import_settings', array(
 				$this,
 				'update_customizer_data'
 			), 10, 2 );
-			add_filter( 'demo_awesome_widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
+			add_filter( 'widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
+
+			// Remove all scripts from WordPress and enqueue plugin scripts on live preview
+			add_action( 'demo_awesome_wp_head', array( $this, 'enqueue_styles' ), 2 );
+			add_action( 'demo_awesome_wp_head', array( $this, 'enqueue_scripts' ), 2 );
 
 		}
 
@@ -51,7 +56,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function get_list_demos() {
-			$demo_awesome_get_list_demos = $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL.'get-list-demos.json', 'get_list_demos' );
+			$demo_awesome_get_list_demos = $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . 'get-list-demos.json', 'get_list_demos' );
 
 			return $demo_awesome_get_list_demos;
 		}
@@ -146,15 +151,15 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			// Include the required plugins list
 			require dirname( __FILE__ ) . '/required-plugins.php';
 			$data_demo = isset( $_REQUEST['data_demo'] ) ? $_REQUEST['data_demo'] : array();
-			demo_awesome_required_plugins($data_demo);
+			demo_awesome_required_plugins( $data_demo );
 			wp_die(); // this is required to terminate immediately and return a proper response
 		}
 
 		/**
 		 * @since    1.0.0
 		 */
-		function get_import_file_path_from_live_demo($template_name, $file_name){
-			return $this->write_file_to_local( $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . '/'.$file_name ), $file_name );
+		function get_import_file_path_from_live_demo( $template_name, $file_name ) {
+			return $this->write_file_to_local( $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . '/' . $file_name ), $file_name );
 		}
 
 		/**
@@ -202,7 +207,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-widget-importer.php';
 
-			$import_file = $this->get_import_file_path_from_live_demo( $template_name , 'dummy-widgets.wie' );
+			$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'dummy-widgets.wie' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Widget_Importer::import( $import_file, $data_demo );
@@ -224,7 +229,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function import_customizer_data( $data_demo, $template_name = 'blog' ) {
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-customizer-importer.php';
 
-			$import_file = $this->get_import_file_path_from_live_demo( $template_name , 'evolve-export.dat' );
+			$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'evolve-export.dat' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Customizer_Importer::import( $import_file, $data_demo );
@@ -418,6 +423,16 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		function live_preview() {
+			if ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-preview.php' ) {
+				require_once plugin_dir_path( __FILE__ ) . '/demo-preview.php';
+				die();
+			}
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		function demo_browser() { ?>
             <div class="wrap">
                 <h1 class="wp-heading-inline"><?php echo esc_html( __( 'Demo Awesome - The Data Importer', 'demo-awesome' ) ); ?></h1>
@@ -436,11 +451,11 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		public function enqueue_styles( $hook ) {
 
-			if ( 'appearance_page_demo-awesome-importer' != $hook ) {
+			if ( 'appearance_page_demo-awesome-importer' != $hook && ! ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-preview.php' ) ) {
 				return;
 			}
 
-			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/css/admin.css' );
+			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'css/admin.css' );
 
 		}
 
@@ -449,11 +464,11 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		public function enqueue_scripts( $hook ) {
 
-			if ( 'appearance_page_demo-awesome-importer' != $hook ) {
+			if ( 'appearance_page_demo-awesome-importer' != $hook && ! ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-preview.php' ) ) {
 				return;
 			}
 
-			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . '/js/admin.js' );
+			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'js/admin.js' );
 
 			$local_variables = array(
 				'close_button'  => __( 'Close', 'demo-awesome' ),
@@ -462,7 +477,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'import_button' => __( 'Begin Import', 'demo-awesome' ),
 				'plugin_url'    => plugin_dir_url( __FILE__ ),
 				'website_url'   => get_site_url(),
-				'admin_url'   => admin_url(),
+				'admin_url'     => admin_url(),
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );

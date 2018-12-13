@@ -4,6 +4,9 @@ if ( $demo_awesome_get_list_demos ) {
 }
 
 $demo_awesome_my_theme = wp_get_theme();
+
+require dirname( __FILE__ ) . '/required-plugins.php';
+
 ?>
 <ul class="nav" role="tablist">
     <li class="nav-item"><a class="demo-filter nav-link active" data-toggle="pill" role="tab"
@@ -33,6 +36,7 @@ $demo_awesome_my_theme = wp_get_theme();
                          tabindex="0"
                          aria-describedby="demo-action demo-name"
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
+                        <div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/" . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
@@ -51,7 +55,7 @@ $demo_awesome_my_theme = wp_get_theme();
                                    aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a>
 								<?php if ( current_user_can( 'edit_theme_options' ) && current_user_can( 'customize' ) ) { ?>
                                     <a class="button button-primary load-preview"
-                                       href=""><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
+                                       href="<?php admin_url(); ?>?demo-preview_id=1&demo-preview_type=page&view_page=demo-awesome-preview.php"><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
 								<?php } ?>
                             </div>
                         </div>
@@ -82,9 +86,7 @@ $demo_awesome_my_theme = wp_get_theme();
                                 class="theme-required-version"></span><br/>
                         <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
 
-						<?php
-						require dirname( __FILE__ ) . '/required-plugins.php';
-						demo_awesome_required_plugins(); ?>
+						<?php demo_awesome_required_plugins(); ?>
 
                         <p><strong><?php _e( 'Step 1 of 2', 'demo-awesome' ); ?></strong></p>
 
@@ -170,6 +172,7 @@ $demo_awesome_my_theme = wp_get_theme();
                     <div class="demo-info-row demo-awesome-container">
 
                         <div class="demo-info-col demo-screenshot-container">
+                            <div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/business/1/screenshot.png"; ?>"
                                  alt=""/>
                         </div>
@@ -179,27 +182,7 @@ $demo_awesome_my_theme = wp_get_theme();
                                     class="theme-required-version"></span><br/>
                             <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
 
-
-                            <div class="alert required-plugins-text" role="alert">
-								<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
-                            </div>
-
-                            <ul class="required-plugins-list">
-                                <li>
-                                    <strong><?php
-										_e( 'WooCommerce', 'demo-awesome' ); ?></strong>
-                                </li>
-                                <li>
-                                    <strong><?php echo $demo_awesome_shortcodes_plugin;
-										_e( 'Theme4Press Shortcodes', 'demo-awesome' ); ?></strong>
-                                </li>
-                                <li>
-                                    <strong><?php echo $demo_awesome_revslider_plugin;
-										_e( 'Revolution Slider', 'demo-awesome' ); ?></strong>
-                                </li>
-                            </ul>
-
-                            <p class="required-description-text"><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout.', 'demo-awesome' ); ?></p>
+							<?php demo_awesome_required_plugins(); ?>
 
                             <div class="demo-actions"><a href="#" role="button" data-toggle="modal"
                                                          data-backdrop="static"
@@ -210,7 +193,7 @@ $demo_awesome_my_theme = wp_get_theme();
                                        data-target="#import-modal" href=""
                                        aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></a>
                                 <a class="button button-primary load-preview"
-                                   href=""><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
+                                   href="<?php admin_url(); ?>?demo-preview_id=1&demo-preview_type=page&view_page=demo-awesome-preview.php"><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
                             </div>
                         </div>
                     </div>

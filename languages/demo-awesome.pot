@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-12 12:28+0000\n"
+"POT-Creation-Date: 2018-12-13 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,182 +14,204 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: inc/admin/class-demo-awesome-admin.php:133
-msgid "The XML file dummy content is missing"
+#: inc/admin/class-demo-awesome-admin.php:192
+msgid "The XML file dummy content is missing."
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:147
-#: inc/admin/class-demo-awesome-admin.php:158
+#: inc/admin/class-demo-awesome-admin.php:215
+msgid "The WIE file widget content is missing."
+msgstr ""
+
+#: inc/admin/class-demo-awesome-admin.php:237
+msgid "The DAT file customizer data is missing."
+msgstr ""
+
+#: inc/admin/class-demo-awesome-admin.php:413
+#: inc/admin/class-demo-awesome-admin.php:434
 msgid "Demo Awesome - The Data Importer"
 msgstr ""
 
 #. Name of the plugin
-#: inc/admin/class-demo-awesome-admin.php:147
+#: inc/admin/class-demo-awesome-admin.php:413
 msgid "Demo Awesome"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:194 inc/admin/demo-browser.php:158
+#: inc/admin/class-demo-awesome-admin.php:470 inc/admin/demo-browser.php:151
 msgid "Close"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:195
+#: inc/admin/class-demo-awesome-admin.php:471
 msgid "Back"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:196
+#: inc/admin/class-demo-awesome-admin.php:472
 msgid "Next"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:197
+#: inc/admin/class-demo-awesome-admin.php:473
 msgid "Begin Import"
 msgstr ""
 
-#: inc/admin/demo-browser.php:11
+#: inc/admin/demo-browser.php:14
 msgid "All"
 msgstr ""
 
-#: inc/admin/demo-browser.php:51
+#: inc/admin/demo-browser.php:39 inc/admin/demo-browser.php:175
+msgid "PREMIUM"
+msgstr ""
+
+#: inc/admin/demo-browser.php:55
 msgid "Import Demo"
 msgstr ""
 
-#: inc/admin/demo-browser.php:51 inc/admin/demo-browser.php:211
+#: inc/admin/demo-browser.php:55 inc/admin/demo-browser.php:194
 msgid "Import"
 msgstr ""
 
-#: inc/admin/demo-browser.php:54 inc/admin/demo-browser.php:213
+#: inc/admin/demo-browser.php:58 inc/admin/demo-browser.php:196
 msgid "Live Preview"
 msgstr ""
 
-#: inc/admin/demo-browser.php:72
+#: inc/admin/demo-browser.php:76
 msgid "Import Demo - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:81 inc/admin/demo-browser.php:187
+#: inc/admin/demo-browser.php:85 inc/admin/demo-browser.php:181
 msgid "Minimum recommended theme version for this demo: "
 msgstr ""
 
-#: inc/admin/demo-browser.php:87 inc/admin/demo-browser.php:193
-msgid "This demo import requires additional plugins"
-msgstr ""
-
-#: inc/admin/demo-browser.php:91 inc/admin/demo-browser.php:197
-msgid "WooCommerce"
-msgstr ""
-
-#: inc/admin/demo-browser.php:92 inc/admin/demo-browser.php:198
-msgid "Theme4Press Shortcodes"
-msgstr ""
-
-#: inc/admin/demo-browser.php:93 inc/admin/demo-browser.php:199
-msgid "Revolution Slider"
-msgstr ""
-
-#: inc/admin/demo-browser.php:96 inc/admin/demo-browser.php:202
-msgid ""
-"You can install the required plugins before import or import the demo "
-"content now. Importing content without enabled required plugins may result "
-"in broken page layout."
-msgstr ""
-
-#: inc/admin/demo-browser.php:98
+#: inc/admin/demo-browser.php:91
 msgid "Step 1 of 2"
 msgstr ""
 
-#: inc/admin/demo-browser.php:104
+#: inc/admin/demo-browser.php:97
 msgid ""
 "The demo import will overwrite many website options - theme settings, menus, "
 "widgets, posts/pages"
 msgstr ""
 
-#: inc/admin/demo-browser.php:107
+#: inc/admin/demo-browser.php:100
 msgid ""
 "Please proceed with a caution. The demo import is recommended for new "
 "websites and it will replicate the demo website which you can see in the "
 "preview mode."
 msgstr ""
 
-#: inc/admin/demo-browser.php:109
+#: inc/admin/demo-browser.php:102
 msgid "Step 2 of 2"
 msgstr ""
 
-#: inc/admin/demo-browser.php:127
+#: inc/admin/demo-browser.php:120
 msgid "Importing Demo - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:136
+#: inc/admin/demo-browser.php:129
 msgid "Please don't leave/refresh the page while importing"
 msgstr ""
 
-#: inc/admin/demo-browser.php:140
+#: inc/admin/demo-browser.php:133
 msgid "Importing the demo..."
 msgstr ""
 
-#: inc/admin/demo-browser.php:145
+#: inc/admin/demo-browser.php:138
 msgid "Import finished"
 msgstr ""
 
-#: inc/admin/demo-browser.php:149
+#: inc/admin/demo-browser.php:142
 msgid "The demo has been imported successfully"
 msgstr ""
 
-#: inc/admin/demo-browser.php:156
+#: inc/admin/demo-browser.php:149
 msgid "Customize"
 msgstr ""
 
-#: inc/admin/demo-browser.php:171
+#: inc/admin/demo-browser.php:164
 msgid "Demo Details - "
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:117
-#: inc/admin/importer/class-demo-awesome-importer.php:126
-#: inc/admin/importer/class-demo-awesome-importer.php:176
-#: inc/admin/importer/class-demo-awesome-importer.php:181
-#: inc/admin/importer/class-demo-awesome-importer.php:191
+#: inc/admin/required-plugins.php:7
+msgid "This demo import requires additional plugins"
+msgstr ""
+
+#: inc/admin/required-plugins.php:10
+msgid "Refresh"
+msgstr ""
+
+#: inc/admin/required-plugins.php:20
+msgid "Installed"
+msgstr ""
+
+#: inc/admin/required-plugins.php:22
+msgid "Not installed"
+msgstr ""
+
+#: inc/admin/required-plugins.php:26
+msgid "Install"
+msgstr ""
+
+#: inc/admin/required-plugins.php:40
+msgid ""
+"You can install the required plugins before import or import the demo "
+"content now. Importing content without enabled required plugins may result "
+"in broken page layout"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-customizer-importer.php:34
+msgid ""
+"The customizer import file is not in a correct format. Please make sure to "
+"use the correct customizer import file."
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-importer.php:124
+#: inc/admin/importer/class-demo-awesome-importer.php:133
+#: inc/admin/importer/class-demo-awesome-importer.php:183
+#: inc/admin/importer/class-demo-awesome-importer.php:188
+#: inc/admin/importer/class-demo-awesome-importer.php:198
 msgid "Sorry, there has been an error."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:118
+#: inc/admin/importer/class-demo-awesome-importer.php:125
 msgid "The file does not exist, please try again."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:160
+#: inc/admin/importer/class-demo-awesome-importer.php:167
 msgid "All done."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:160
+#: inc/admin/importer/class-demo-awesome-importer.php:167
 msgid "Have fun!"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:161
+#: inc/admin/importer/class-demo-awesome-importer.php:168
 msgid "Remember to update the passwords and roles of imported users."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:182
+#: inc/admin/importer/class-demo-awesome-importer.php:189
 #, php-format
 msgid ""
 "The export file could not be found at <code>%s</code>. It is likely that "
 "this was caused by a permissions problem."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:200
+#: inc/admin/importer/class-demo-awesome-importer.php:207
 #, php-format
 msgid ""
 "This WXR file (version %s) may not be supported by this version of the "
 "importer. Please consider updating."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:225
+#: inc/admin/importer/class-demo-awesome-importer.php:232
 #, php-format
 msgid ""
 "Failed to import author %s. Their posts will be attributed to the current "
 "user."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:252
+#: inc/admin/importer/class-demo-awesome-importer.php:259
 msgid "Assign Authors"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:253
+#: inc/admin/importer/class-demo-awesome-importer.php:260
 msgid ""
 "To make it easier for you to edit and save the imported content, you may "
 "want to reassign the author of the imported item to an existing user of this "
@@ -197,7 +219,7 @@ msgid ""
 "admin</code>s entries."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:255
+#: inc/admin/importer/class-demo-awesome-importer.php:262
 #, php-format
 msgid ""
 "If a new user is created by WordPress, a new password will be randomly "
@@ -205,159 +227,187 @@ msgid ""
 "the new user&#8217;s details will be necessary."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:265
+#: inc/admin/importer/class-demo-awesome-importer.php:272
 msgid "Import Attachments"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:268
+#: inc/admin/importer/class-demo-awesome-importer.php:275
 msgid "Download and import file attachments"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:273
+#: inc/admin/importer/class-demo-awesome-importer.php:280
 msgid "Submit"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:286
+#: inc/admin/importer/class-demo-awesome-importer.php:293
 msgid "Import author:"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:300
+#: inc/admin/importer/class-demo-awesome-importer.php:307
 msgid "or create new user with login name:"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:303
+#: inc/admin/importer/class-demo-awesome-importer.php:310
 msgid "as a new user:"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:311
+#: inc/admin/importer/class-demo-awesome-importer.php:318
 msgid "assign posts to an existing user:"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:313
+#: inc/admin/importer/class-demo-awesome-importer.php:320
 msgid "or assign posts to an existing user:"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:318
+#: inc/admin/importer/class-demo-awesome-importer.php:325
 msgid "- Select -"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:373
+#: inc/admin/importer/class-demo-awesome-importer.php:380
 #, php-format
 msgid ""
 "Failed to create new user for %s. Their posts will be attributed to the "
 "current user."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:432
+#: inc/admin/importer/class-demo-awesome-importer.php:439
 #, php-format
 msgid "Failed to import category %s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:481
+#: inc/admin/importer/class-demo-awesome-importer.php:488
 #, php-format
 msgid "Failed to import post tag %s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:542
-#: inc/admin/importer/class-demo-awesome-importer.php:781
+#: inc/admin/importer/class-demo-awesome-importer.php:549
+#: inc/admin/importer/class-demo-awesome-importer.php:788
 #, php-format
 msgid "Failed to import %s %s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:632
+#: inc/admin/importer/class-demo-awesome-importer.php:639
 #, php-format
 msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:671
+#: inc/admin/importer/class-demo-awesome-importer.php:678
 #, php-format
 msgid "%s &#8220;%s&#8221; already exists."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:744
+#: inc/admin/importer/class-demo-awesome-importer.php:751
 #, php-format
 msgid "Failed to import %s &#8220;%s&#8221;"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:922
+#: inc/admin/importer/class-demo-awesome-importer.php:929
 msgid "Menu item skipped due to missing menu slug"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:930
+#: inc/admin/importer/class-demo-awesome-importer.php:937
 #, php-format
 msgid "Menu item skipped due to invalid menu slug: %s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1003
+#: inc/admin/importer/class-demo-awesome-importer.php:1010
 msgid "Fetching attachments is not enabled"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1019
+#: inc/admin/importer/class-demo-awesome-importer.php:1026
 msgid "Invalid file type"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1073
+#: inc/admin/importer/class-demo-awesome-importer.php:1080
 msgid "Remote server did not respond"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1082
+#: inc/admin/importer/class-demo-awesome-importer.php:1089
 #, php-format
 msgid "Remote server returned error response %1$d %2$s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1090
+#: inc/admin/importer/class-demo-awesome-importer.php:1097
 msgid "Remote file is incorrect size"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1096
+#: inc/admin/importer/class-demo-awesome-importer.php:1103
 msgid "Zero size file downloaded"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1103
+#: inc/admin/importer/class-demo-awesome-importer.php:1110
 #, php-format
 msgid "Remote file is too large, limit is %s"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1213
+#: inc/admin/importer/class-demo-awesome-importer.php:1220
 msgid "Import WordPress"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1220
+#: inc/admin/importer/class-demo-awesome-importer.php:1227
 #, php-format
 msgid ""
 "A new version of this importer is available. Please update to version %s to "
 "ensure compatibility with newer export files."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1235
+#: inc/admin/importer/class-demo-awesome-importer.php:1242
 msgid ""
 "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import "
 "the posts, pages, comments, custom fields, categories, and tags into this "
 "site."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-importer.php:1236
+#: inc/admin/importer/class-demo-awesome-importer.php:1243
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-parsers.php:36
-#: inc/admin/importer/class-demo-awesome-parsers.php:67
-#: inc/admin/importer/class-demo-awesome-parsers.php:75
+#: inc/admin/importer/class-demo-awesome-parsers.php:49
+#: inc/admin/importer/class-demo-awesome-parsers.php:82
+#: inc/admin/importer/class-demo-awesome-parsers.php:90
 msgid "There was an error when reading this WXR file"
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-parsers.php:37
+#: inc/admin/importer/class-demo-awesome-parsers.php:50
 msgid ""
 "Details are shown above. The importer will now try again with a different "
 "parser..."
 msgstr ""
 
-#: inc/admin/importer/class-demo-awesome-parsers.php:80
-#: inc/admin/importer/class-demo-awesome-parsers.php:86
-#: inc/admin/importer/class-demo-awesome-parsers.php:347
-#: inc/admin/importer/class-demo-awesome-parsers.php:570
+#: inc/admin/importer/class-demo-awesome-parsers.php:95
+#: inc/admin/importer/class-demo-awesome-parsers.php:101
+#: inc/admin/importer/class-demo-awesome-parsers.php:364
+#: inc/admin/importer/class-demo-awesome-parsers.php:589
 msgid ""
 "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:32
+msgid "Widget import data could not be read. Please try a different file."
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:69
+msgid "Sidebar does not exist in theme (moving widget to Inactive)"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:91
+msgid "Site does not support widget"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:126
+msgid "Widget already exists"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:185
+msgid "Imported"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:188
+msgid "Imported to Inactive"
+msgstr ""
+
+#: inc/admin/importer/class-demo-awesome-widget-importer.php:194
+msgid "No Title"
 msgstr ""
 
 #. Description of the plugin

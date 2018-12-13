@@ -106,7 +106,7 @@ class Demo_Awesome_Widget_Importer {
 				 *
 				 * Do before identical check because changes may make it identical to end result (such as URL replacements).
 				 */
-				$widget = apply_filters( 'demo_awesome_widget_demo_import_settings', $widget, $id_base, $instance_id_number, $data_demo );
+				$widget = apply_filters( 'widget_demo_import_settings', $widget, $id_base, $instance_id_number, $data_demo );
 
 				// Does widget with identical settings already exist in same sidebar?
 				if ( ! $fail && isset( $widget_instances[ $id_base ] ) ) {

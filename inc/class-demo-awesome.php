@@ -41,7 +41,6 @@ if ( ! class_exists( 'Demo_Awesome' ) ) {
 			$this->load_dependencies();
 			$this->set_locale();
 			$this->define_admin_hooks();
-			$this->define_public_hooks();
 
 		}
 
@@ -53,7 +52,6 @@ if ( ! class_exists( 'Demo_Awesome' ) ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/class-demo-awesome-loader.php';
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/class-demo-awesome-i18n.php';
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/admin/class-demo-awesome-admin.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/public/class-demo-awesome-public.php';
 
 			$this->loader = new Demo_Awesome_Loader();
 
@@ -79,18 +77,6 @@ if ( ! class_exists( 'Demo_Awesome' ) ) {
 
 			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		}
-
-		/**
-		 * @since    1.0.0
-		 */
-		private function define_public_hooks() {
-
-			$plugin_public = new Demo_Awesome_Public( $this->get_plugin_name(), $this->get_version() );
-
-			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		}
 

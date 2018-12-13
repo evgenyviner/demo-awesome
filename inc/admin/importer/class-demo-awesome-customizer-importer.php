@@ -40,7 +40,7 @@ class Demo_Awesome_Customizer_Importer {
 		}
 
 		// Modify settings array.
-		$data = apply_filters( 'demo_awesome_customizer_demo_import_settings', $data, $data_demo );
+		$data = apply_filters( 'customizer_demo_import_settings', $data, $data_demo );
 
 		// Import custom options.
 		if ( isset( $data['options'] ) ) {

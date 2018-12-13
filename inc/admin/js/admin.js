@@ -1225,13 +1225,10 @@ jQuery(function ($) {
             $('.required-plugins-text').show();
             $('.required-description-text').show();
             var string_list_require = '';
-            $('.required-plugins-list li').remove();
-            $('.required-plugins-list').show();
         }
         else {
             $('.required-plugins-text').hide();
             $('.required-description-text').hide();
-            $('.required-plugins-list').hide();
         }
     })
 
