@@ -29,7 +29,7 @@ $demo_awesome_my_theme = wp_get_theme();
 				foreach ( $demo_awesome_item['items'] as $demo_awesome_item_key_2 => $demo_awesome_item_2 ) {
 					$demo_awesome_index_temp_demo ++;
 					?>
-                    <div class="demo filter-all <?php echo esc_attr( $demo_awesome_item_key ); ?>"
+                    <div class="demo demo-awesome-container filter-all <?php echo esc_attr( $demo_awesome_item_key ); ?>"
                          tabindex="0"
                          aria-describedby="demo-action demo-name"
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
@@ -167,7 +167,7 @@ $demo_awesome_my_theme = wp_get_theme();
                 </div>
                 <div class="modal-body">
 
-                    <div class="demo-info-row">
+                    <div class="demo-info-row demo-awesome-container">
 
                         <div class="demo-info-col demo-screenshot-container">
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/business/1/screenshot.png"; ?>"

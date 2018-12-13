@@ -1,6 +1,6 @@
 <?php
 
-function demo_awesome_required_plugins() {
+function demo_awesome_required_plugins($data_demo = array()) {
 
 	$demo_awesome_woocommerce_plugin  = $demo_awesome_shortcodes_plugin = $demo_awesome_revslider_plugin = '';
 	$demo_awesome_woocommerce_install = $demo_awesome_shortcodes_install = $demo_awesome_revslider_install = '';
@@ -23,46 +23,47 @@ function demo_awesome_required_plugins() {
 		$demo_awesome_revslider_install = sprintf( '<div class="badge">%s</div>', __( 'Premium plugin - please visit your Theme4Press account to download it', 'demo-awesome' ) );
 	}
 	?>
+    <div class="refresh-container-box">
+        <div class="alert required-plugins-text" role="alert">
+    		<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
+            <button class="button button-primary refresh-required"><span
+                        class="dashicons dashicons-update mr-1"
+                        name="refresh-required"></span><?php _e( 'Refresh', 'demo-awesome' ); ?></button>
+        </div>
 
-    <div class="alert required-plugins-text" role="alert">
-		<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
-        <button class="button button-primary refresh-required"><span
-                    class="dashicons dashicons-update mr-1"
-                    name="refresh-required"></span><?php _e( 'Refresh', 'demo-awesome' ); ?></button>
-    </div>
+        <div class="refresh-container">
 
-    <div class="refresh-container">
+            <ul class="required-plugins">
+                <li>
+                    <strong><?php echo $demo_awesome_woocommerce_plugin;
+    					_e( 'WooCommerce', 'demo-awesome' ); ?></strong><?php echo $demo_awesome_woocommerce_install; ?>
+                </li>
 
-        <ul class="required-plugins">
-            <li>
-                <strong><?php echo $demo_awesome_woocommerce_plugin;
-					_e( 'WooCommerce', 'demo-awesome' ); ?></strong><?php echo $demo_awesome_woocommerce_install; ?>
-            </li>
+                <li><strong><?php echo $demo_awesome_revslider_plugin;
+    					_e( 'Revolution Slider', 'demo-awesome' ); ?></strong><?php echo $demo_awesome_revslider_install; ?>
+                </li>
+            </ul>
 
-            <li><strong><?php echo $demo_awesome_revslider_plugin;
-					_e( 'Revolution Slider', 'demo-awesome' ); ?></strong><?php echo $demo_awesome_revslider_install; ?>
-            </li>
-        </ul>
+            <ul class="required-plugins-list">
+                <li>
+                    <strong><?php echo $demo_awesome_woocommerce_plugin;
+    					_e( 'WooCommerce', 'demo-awesome' ); ?></strong>
+                </li>
+                <li>
+                    <strong><?php echo $demo_awesome_shortcodes_plugin;
+    					_e( 'Theme4Press Shortcodes', 'demo-awesome' ); ?></strong>
+                </li>
+                <li>
+                    <strong><?php echo $demo_awesome_revslider_plugin;
+    					_e( 'Revolution Slider', 'demo-awesome' ); ?></strong>
+                </li>
+            </ul>
 
-        <ul class="required-plugins-list">
-            <li>
-                <strong><?php echo $demo_awesome_woocommerce_plugin;
-					_e( 'WooCommerce', 'demo-awesome' ); ?></strong>
-            </li>
-            <li>
-                <strong><?php echo $demo_awesome_shortcodes_plugin;
-					_e( 'Theme4Press Shortcodes', 'demo-awesome' ); ?></strong>
-            </li>
-            <li>
-                <strong><?php echo $demo_awesome_revslider_plugin;
-					_e( 'Revolution Slider', 'demo-awesome' ); ?></strong>
-            </li>
-        </ul>
+            <p class="alert alert-info required-description-text"><span
+                        class="dashicons dashicons-info mr-1"></span><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout.', 'demo-awesome' ); ?>
+            </p>
 
-        <p class="alert alert-info required-description-text"><span
-                    class="dashicons dashicons-info mr-1"></span><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout.', 'demo-awesome' ); ?>
-        </p>
-
+        </div>
     </div>
 
 	<?php

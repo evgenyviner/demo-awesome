@@ -1211,10 +1211,13 @@ jQuery(function ($) {
         });
     });
     $('.demo-screenshot, .call-import-demo-function').click(function () {
-        var parent_div = $(this).closest('.demo');
+        var parent_div = $(this).closest('.demo-awesome-container');
+        var data_demo_show = parent_div.attr('data-demo-show');
+        $('.demo-awesome-container').attr('data-demo-show', data_demo_show);
         data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
         console.log(data_demo);
+        $('.refresh-required').trigger('click');
         $('.demo-screenshot-container img').attr('src', image_url);
         $('.modal-header h5 span').text(data_demo.name);
         $('.theme-required-version').text(data_demo.require_ver);
@@ -1223,9 +1226,6 @@ jQuery(function ($) {
             $('.required-description-text').show();
             var string_list_require = '';
             $('.required-plugins-list li').remove();
-            data_demo.plugins.forEach(function (value, index) {
-                $('.required-plugins-list').append('<li><strong>' + value + '</strong></li>');
-            });
             $('.required-plugins-list').show();
         }
         else {
@@ -1242,18 +1242,19 @@ jQuery(function ($) {
     --------------------------------------- */
 
 jQuery(function ($) {
-    $(".refresh-required").click(function (e) {
+    $(document).on('click', ".refresh-required", function (e) {
         e.preventDefault();
-        $('.refresh-container').html('<p class="spinner-loader"><img src="' + demo_awesome_js_local_vars.website_url + '/wp-admin/images/spinner.gif"/></p>');
+        $('.refresh-container').html('<p class="spinner-loader"><img src="' + demo_awesome_js_local_vars.admin_url + '/images/spinner.gif"/></p>');
 
         $.ajax({
             type: 'POST',
             url: ajaxurl,
             data: {
-                action: 'required_plugins'
+                action: 'required_plugins',
+                data_demo: data_demo
             },
             success: function (data) {
-                $('.refresh-container').html(data);
+                $('.refresh-container-box').html(data);
             }
         });
     });
