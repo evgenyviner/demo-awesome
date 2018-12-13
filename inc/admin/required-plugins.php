@@ -28,8 +28,9 @@ function demo_awesome_required_plugins( $data_demo = array() ) {
 						}
 						?>
                         <li>
-                            <strong><?php echo $demo_awesome_woocommerce_plugin;
-								_e( $plugin['name'], 'demo-awesome' ); ?></strong><?php echo $demo_awesome_woocommerce_install; ?>
+                            <strong><?php
+								_e( $plugin['name'], 'demo-awesome' );
+								echo '<br />' . $demo_awesome_woocommerce_plugin; ?></strong><?php echo $demo_awesome_woocommerce_install; ?>
                         </li>
 						<?php
 					}

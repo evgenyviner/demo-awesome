@@ -37,7 +37,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->version     = $version;
 
 			add_action( 'admin_menu', array( $this, 'importer_page' ) );
-			add_action( 'init', array( $this, 'live_preview' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
 			add_filter( 'customizer_demo_import_settings', array(
@@ -45,11 +44,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'update_customizer_data'
 			), 10, 2 );
 			add_filter( 'widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
-
-			// Remove all scripts from WordPress and enqueue plugin scripts on live preview
-			add_action( 'demo_awesome_wp_head', array( $this, 'enqueue_styles' ), 2 );
-			add_action( 'demo_awesome_wp_head', array( $this, 'enqueue_scripts' ), 2 );
-
 		}
 
 		/**
@@ -428,16 +422,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function live_preview() {
-			if ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-preview.php' ) {
-				require_once plugin_dir_path( __FILE__ ) . '/demo-preview.php';
-				die();
-			}
-		}
-
-		/**
-		 * @since    1.0.0
-		 */
 		function demo_browser() { ?>
             <div class="wrap">
                 <h1 class="wp-heading-inline"><?php echo esc_html( __( 'Demo Awesome - The Data Importer', 'demo-awesome' ) ); ?></h1>
@@ -456,7 +440,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		public function enqueue_styles( $hook ) {
 
-			if ( 'appearance_page_demo-awesome-importer' != $hook && ! ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-preview.php' ) ) {
+			if ( 'appearance_page_demo-awesome-importer' != $hook ) {
 				return;
 			}
 
@@ -469,7 +453,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		public function enqueue_scripts( $hook ) {
 
-			if ( 'appearance_page_demo-awesome-importer' != $hook && ! ( isset( $_REQUEST ) && isset( $_REQUEST['view_page'] ) && $_REQUEST['view_page'] == 'demo-awesome-preview.php' ) ) {
+			if ( 'appearance_page_demo-awesome-importer' != $hook ) {
 				return;
 			}
 
