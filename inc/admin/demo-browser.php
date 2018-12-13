@@ -138,7 +138,7 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                                 class="dashicons dashicons-yes"></span> <?php _e( 'Import finished', 'demo-awesome' ); ?>
                     </h3>
 
-                    <div class="alert alert-success hide show-content" role="alert">
+                    <div class="alert alert-success alert-message-from-importer hide show-content" role="alert">
 						<?php _e( 'The demo has been imported successfully', 'demo-awesome' ); ?>
                     </div>
 
