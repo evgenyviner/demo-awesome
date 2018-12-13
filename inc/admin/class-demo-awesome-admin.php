@@ -36,11 +36,11 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			add_action( 'admin_menu', array( $this, 'importer_page' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
-			add_filter( 'customizer_demo_import_settings', array(
+			add_filter( 'demo_awesome_customizer_demo_import_settings', array(
 				$this,
 				'update_customizer_data'
 			), 10, 2 );
-			add_filter( 'widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
+			add_filter( 'demo_awesome_widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
 
 		}
 
@@ -142,8 +142,8 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			// Include the required plugins list
 			require dirname( __FILE__ ) . '/required-plugins.php';
-
-			demo_awesome_required_plugins();
+			$data_demo = isset( $_REQUEST['data_demo'] ) ? $_REQUEST['data_demo'] : array();
+			demo_awesome_required_plugins($data_demo);
 			wp_die(); // this is required to terminate immediately and return a proper response
 		}
 
@@ -451,7 +451,8 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'next_button'   => __( 'Next', 'demo-awesome' ),
 				'import_button' => __( 'Begin Import', 'demo-awesome' ),
 				'plugin_url'    => plugin_dir_url( __FILE__ ),
-				'website_url'   => get_site_url()
+				'website_url'   => get_site_url(),
+				'admin_url'   => admin_url(),
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );
