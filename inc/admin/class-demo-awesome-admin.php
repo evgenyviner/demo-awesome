@@ -134,6 +134,8 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->import_customizer_data( $data_demo, $template_name );
 			//fix menu
 			$this->update_nav_menu_items( $data_demo, $template_name );
+			
+			wp_send_json_success(array('success' => true, 'message' => __( 'The demo has been imported successfully', 'demo-awesome' )));
 
 			wp_die(); // this is required to terminate immediately and return a proper response
 		}

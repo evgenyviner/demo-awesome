@@ -1207,7 +1207,14 @@ jQuery(function ($) {
         };
         jQuery.post(ajaxurl, data, function (response) {
             $(".hide-content").fadeOut(1500);
+            if(response && response.success){
+                $('#finish-import-modal .alert-message-from-importer').removeClass('alert-danger').addClass('alert-success').text('').wrapInner(response.message);
+            }
+            else{
+                $('#finish-import-modal .alert-message-from-importer').removeClass('alert-success').addClass('alert-danger').text('').wrapInner(response);
+            }
             $(".show-content").fadeIn(1500).css("display", "flex");
+            
         });
     });
     $('.demo-screenshot, .call-import-demo-function').click(function () {
