@@ -1213,7 +1213,7 @@ jQuery(function ($) {
     $('.demo-screenshot, .call-import-demo-function').click(function () {
         var parent_div = $(this).closest('.demo-awesome-container');
         var data_demo_show = parent_div.attr('data-demo-show');
-        $('.demo-awesome-container').attr('data-demo-show', data_demo_show);
+        $('.demo-awesome-container.demo-info-row').attr('data-demo-show', data_demo_show);
         data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
         console.log(data_demo);

@@ -11,6 +11,9 @@
 if ( ! defined( 'DEMO_AWESOME_IMPORTER_DIRECTORY' ) ) {
 	define( 'DEMO_AWESOME_IMPORTER_DIRECTORY', plugin_dir_path( __FILE__ ) );
 }
+if ( ! defined( 'DEMO_AWESOME_IMPORTER_SOURCE_URL' ) ) {
+	define( 'DEMO_AWESOME_IMPORTER_SOURCE_URL', 'https://demo.theme4press.com/demo-import/' );
+}
 
 if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 	class Demo_Awesome_Admin {
@@ -48,7 +51,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function get_list_demos() {
-			$demo_awesome_get_list_demos = $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/get-list-demos.json', 'get_list_demos' );
+			$demo_awesome_get_list_demos = $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL.'get-list-demos.json', 'get_list_demos' );
 
 			return $demo_awesome_get_list_demos;
 		}
@@ -74,7 +77,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function get_import_file_content( $template_name ) {
-			return $this->get_demo_packages( "https://demo.theme4press.com/demo-import/" . $template_name . "/evolve.wordpress.xml", $template_name );
+			return $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . "/evolve.wordpress.xml", $template_name );
 		}
 
 		/**
@@ -150,6 +153,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		function get_import_file_path_from_live_demo($template_name, $file_name){
+			return $this->write_file_to_local( $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . '/'.$file_name ), $file_name );
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		public function import_content_theme( $data_demo, $template_name = 'blog' ) {
 
 			$import_file = $this->get_import_file_path( $template_name );
@@ -192,7 +202,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-widget-importer.php';
 
-			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/' . $template_name . '/dummy-widgets.wie' ), 'dummy-widgets.wie' );
+			$import_file = $this->get_import_file_path_from_live_demo( $template_name , 'dummy-widgets.wie' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Widget_Importer::import( $import_file, $data_demo );
@@ -214,7 +224,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function import_customizer_data( $data_demo, $template_name = 'blog' ) {
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-customizer-importer.php';
 
-			$import_file = $this->write_file_to_local( $this->get_demo_packages( 'https://demo.theme4press.com/demo-import/' . $template_name . '/evolve-export.dat' ), 'evolve-export.dat' );
+			$import_file = $this->get_import_file_path_from_live_demo( $template_name , 'evolve-export.dat' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Customizer_Importer::import( $import_file, $data_demo );
