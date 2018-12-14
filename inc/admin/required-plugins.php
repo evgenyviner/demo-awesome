@@ -1,6 +1,7 @@
 <?php
 
 function demo_awesome_required_plugins( $data_demo = array() ) {
+    $show_required_description = false;
 	$has_required = false;
 	if ( isset( $data_demo['plugins'] ) && $data_demo['plugins'] ) {
 		$has_required = true;
@@ -28,6 +29,7 @@ function demo_awesome_required_plugins( $data_demo = array() ) {
 							if ( class_exists( $plugin_keyword ) ) {
 								$demo_awesome_woocommerce_plugin = sprintf( '<span class="badge badge-success mr-1"><span class="dashicons dashicons-yes mr-1"></span>%s</span>', __( 'Installed', 'demo-awesome' ) );
 							} else {
+                                $show_required_description = true;
 								$demo_awesome_woocommerce_plugin = sprintf( '<span class="badge badge-error mr-1"><span class="dashicons dashicons-no-alt mr-1"></span>%s</span>', __( 'Not installed', 'demo-awesome' ) );
 								if ( isset( $plugin['follow_download'] ) && $plugin['follow_download'] ) {
 									$demo_awesome_woocommerce_install = sprintf( '<div class="badge badge-premium">%s</div>', __( $plugin['disable_description'], 'demo-awesome' ) );
@@ -45,7 +47,7 @@ function demo_awesome_required_plugins( $data_demo = array() ) {
 						}
 					} ?>
                 </ul>
-				<?php if ( ! class_exists( 'Woocommerce' ) || ! class_exists( 'RevSlider' ) || ! function_exists( 'layerslider' ) ) { ?>
+				<?php if ( $show_required_description ) { ?>
                     <p class="alert alert-info required-description-text"><span
                                 class="dashicons dashicons-info mr-1"></span><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout', 'demo-awesome' ); ?>
                     </p>
