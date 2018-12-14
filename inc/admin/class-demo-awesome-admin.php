@@ -125,6 +125,14 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
 
+			if($this->is_premium_theme() == false && $data_demo['premium_demo']){
+				wp_send_json_success( array(
+					'success' => true,
+					'message' => __( 'The premium demo need premium theme version!', 'demo-awesome' )
+				) );
+				wp_die();
+			}
+
 			//import content data
 			$this->import_content_theme( $data_demo, $template_name );
 			//import widget
@@ -409,6 +417,17 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		function is_premium_theme(){
+			$demo_awesome_my_theme = wp_get_theme();
+			if($demo_awesome_my_theme->get('Name') == 'evolve'){
+				return false;
+			}
+			return true;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		function importer_page() {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
@@ -467,6 +486,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'plugin_url'    => plugin_dir_url( __FILE__ ),
 				'website_url'   => get_site_url(),
 				'admin_url'     => admin_url(),
+				'is_premium_version'     => $this->is_premium_theme(),
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );

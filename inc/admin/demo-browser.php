@@ -31,12 +31,13 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 			if ( isset( $demo_awesome_item['items'] ) && $demo_awesome_item['items'] ) {
 				foreach ( $demo_awesome_item['items'] as $demo_awesome_item_key_2 => $demo_awesome_item_2 ) {
 					$demo_awesome_index_temp_demo ++;
+                    $premium_demo = (isset($demo_awesome_item_2['premium_demo']) && $demo_awesome_item_2['premium_demo']) ? true : false;
 					?>
                     <div class="demo demo-awesome-container filter-all <?php echo esc_attr( $demo_awesome_item_key ); ?>"
                          tabindex="0"
                          aria-describedby="demo-action demo-name"
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
-                        <div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
+                        <?php if($premium_demo){ ?><div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div><?php } ?>
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/" . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
@@ -49,10 +50,10 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 
                             <div class="demo-actions"
                                  data-index="<?php echo esc_attr( $demo_awesome_index_temp_demo ); ?>">
-                                <a href="#" role="button" class="button import call-import-demo-function"
+                                <?php if(!$premium_demo || $this->is_premium_theme()){ ?><a href="#" role="button" class="button import call-import-demo-function"
                                    data-toggle="modal" data-backdrop="static"
                                    data-target="#import-modal"
-                                   aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a>
+                                   aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
 								<?php if ( current_user_can( 'edit_theme_options' ) && current_user_can( 'customize' ) ) { ?>
                                     <a href="#" role="button" class="button button-primary load-preview"
                                        data-toggle="modal" data-backdrop="static"
@@ -174,7 +175,7 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                     <div class="demo-info-row demo-awesome-container">
 
                         <div class="demo-info-col demo-screenshot-container">
-                            <div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
+                            <div class="badge badge-demo demo-awesome-premium-badge"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/business/1/screenshot.png"; ?>"
                                  alt=""/>
                         </div>

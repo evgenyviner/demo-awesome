@@ -1208,7 +1208,7 @@ jQuery(function ($) {
         jQuery.post(ajaxurl, data, function (response) {
             $(".hide-content").fadeOut(1500);
             if (response && response.success) {
-                $('#finish-import-modal .alert-message-from-importer').removeClass('alert-danger').addClass('alert-success').text('').wrapInner(response.message);
+                    $('#finish-import-modal .alert-message-from-importer').removeClass('alert-danger').addClass('alert-success').text(response.data.message);
             }
             else {
                 $('#finish-import-modal .alert-message-from-importer').removeClass('alert-success').addClass('alert-danger').text('').wrapInner(response);
@@ -1217,17 +1217,40 @@ jQuery(function ($) {
 
         });
     });
-    $('.demo-screenshot, .call-import-demo-function').click(function () {
+    $('.demo-screenshot, .call-import-demo-function, .button-primary.load-preview').click(function () {
         var parent_div = $(this).closest('.demo-awesome-container');
         var data_demo_show = parent_div.attr('data-demo-show');
         $('.demo-awesome-container.demo-info-row').attr('data-demo-show', data_demo_show);
         data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
-        console.log(data_demo);
-        $('.refresh-required').trigger('click');
+        $('.demo-preview-container iframe').attr('src', data_demo.preview_url);
+        // console.log(data_demo);
+        if(data_demo.required_plugins){
+            $('.refresh-container-box').show();
+            $('#import-modal .refresh-required').trigger('click');
+        }else{
+            $('.refresh-container-box').hide();
+        }
         $('.demo-screenshot-container img').attr('src', image_url);
         $('.modal-header h5 span').text(data_demo.name);
-        $('.theme-required-version').text(data_demo.require_ver);
+        if(data_demo.premium_demo){
+            $('.modal .demo-awesome-premium-badge').show();
+        }else{
+            $('.modal .demo-awesome-premium-badge').hide();
+        }
+        if(demo_awesome_js_local_vars.is_premium_version){
+            $('.modal .call-import-demo-function').show();
+            $('.theme-required-version').text(data_demo.require_ver_free);
+        }
+        else{      
+            $('.theme-required-version').text(data_demo.require_ver_premium);
+            if(data_demo.premium_demo){
+                $('.modal .call-import-demo-function').hide();
+            }
+            else{
+                $('.modal .call-import-demo-function').show();
+            }
+        }
         if (data_demo.plugins) {
             $('.required-plugins-text').show();
             $('.required-description-text').show();

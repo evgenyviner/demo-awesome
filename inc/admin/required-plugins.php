@@ -1,9 +1,14 @@
 <?php
 
 function demo_awesome_required_plugins( $data_demo = array() ) {
+    $has_required = false;
+    if ( isset( $data_demo['plugins'] ) && $data_demo['plugins'] ) {
+        $has_required = true;
+    }
 	?>
     <div class="refresh-container-box">
-        <div class="alert required-plugins-text" role="alert">
+        
+        <div <?php if(!$has_required){ echo ('style="display: none;"'); }?> class="alert required-plugins-text" role="alert">
 			<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
             <button class="button button-primary refresh-required"><span
                         class="dashicons dashicons-update mr-1"
@@ -11,10 +16,12 @@ function demo_awesome_required_plugins( $data_demo = array() ) {
         </div>
 
         <div class="refresh-container">
-
+            <?php
+                if ( $has_required ) {
+            ?>
             <ul class="required-plugins">
 				<?php
-				if ( isset( $data_demo['plugins'] ) && $data_demo['plugins'] ) {
+				if ( $has_required ) {
 					foreach ( $data_demo['plugins'] as $plugin_keyword => $plugin ) {
 						if ( class_exists( $plugin_keyword ) ) {
 							$demo_awesome_woocommerce_plugin = sprintf( '<span class="badge badge-success mr-1"><span class="dashicons dashicons-yes mr-1"></span>%s</span>', __( 'Installed', 'demo-awesome' ) );
@@ -40,7 +47,15 @@ function demo_awesome_required_plugins( $data_demo = array() ) {
             <p class="alert alert-info required-description-text"><span
                         class="dashicons dashicons-info mr-1"></span><?php _e( 'You can install the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout', 'demo-awesome' ); ?>
             </p>
-
+            <?php
+            } else{
+                ?>
+            <p class="alert alert-info required-description-text"><span
+                        class="dashicons dashicons-info mr-1"></span><?php _e( 'Have not the required plugins', 'demo-awesome' ); ?>
+            </p>
+                <?php
+            }
+            ?>
         </div>
     </div>
 
