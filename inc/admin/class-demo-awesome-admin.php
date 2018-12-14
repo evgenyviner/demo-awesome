@@ -125,7 +125,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
 
-			if($this->is_premium_theme() == false && $data_demo['premium_demo']){
+			if ( $this->is_premium_theme() == false && $data_demo['premium_demo'] ) {
 				wp_send_json_success( array(
 					'success' => true,
 					'message' => __( 'The premium demo need premium theme version!', 'demo-awesome' )
@@ -417,11 +417,12 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function is_premium_theme(){
+		function is_premium_theme() {
 			$demo_awesome_my_theme = wp_get_theme();
-			if($demo_awesome_my_theme->get('Name') == 'evolve'){
+			if ( $demo_awesome_my_theme->get( 'Name' ) == 'evolve' ) {
 				return false;
 			}
+
 			return true;
 		}
 
@@ -479,14 +480,16 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'js/admin.js' );
 
 			$local_variables = array(
-				'close_button'  => __( 'Close', 'demo-awesome' ),
-				'back_button'   => __( 'Back', 'demo-awesome' ),
-				'next_button'   => __( 'Next', 'demo-awesome' ),
-				'import_button' => __( 'Begin Import', 'demo-awesome' ),
-				'plugin_url'    => plugin_dir_url( __FILE__ ),
-				'website_url'   => get_site_url(),
-				'admin_url'     => admin_url(),
-				'is_premium_version'     => $this->is_premium_theme(),
+				'close_button'       => __( 'Close', 'demo-awesome' ),
+				'back_button'        => __( 'Back', 'demo-awesome' ),
+				'next_button'        => __( 'Next', 'demo-awesome' ),
+				'import_button'      => __( 'Begin Import', 'demo-awesome' ),
+				'show_panel'         => __( 'Show Panel', 'demo-awesome' ),
+				'hide_panel'         => __( 'Hide Panel', 'demo-awesome' ),
+				'plugin_url'         => plugin_dir_url( __FILE__ ),
+				'website_url'        => get_site_url(),
+				'admin_url'          => admin_url(),
+				'is_premium_version' => $this->is_premium_theme(),
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );

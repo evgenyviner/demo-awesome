@@ -32,6 +32,10 @@
     margin-right: 0.5rem;
 }
 
+.ml-2 {
+    margin-left: 1rem !important;
+}
+
 .close:not(:disabled):not(.disabled) {
     cursor: pointer;
 }
@@ -371,6 +375,28 @@ button.close {
     height: 100%;
 }
 
+.demo-preview-row {
+    overflow-x: hidden;
+}
+
+.demo-preview-container {
+    transition: width 0.3s ease;
+    -moz-transition: width 0.3s ease;
+    -o-transition: width 0.3s ease;
+    -webkit-transition: width 0.3s ease;
+}
+
+.demo-required-plugins {
+    transition: margin 0.3s ease;
+    -moz-transition: margin 0.3s ease;
+    -o-transition: margin 0.3s ease;
+    -webkit-transition: margin 0.3s ease;
+}
+
+.collapsed {
+    display: none;
+}
+
 /*
     Pop Ups
     ======================================= */
@@ -634,6 +660,17 @@ button.close {
 }
 
 /*
+	Min-Width 992px
+	--------------------------------------- */
+
+@media (min-width: 992px) {
+    .collapsed {
+        display: block;
+        margin-right: -27%;
+    }
+}
+
+/*
 	Max-Width 960px
 	--------------------------------------- */
 
@@ -751,7 +788,7 @@ button.close {
     }
 
     .demo-required-plugins {
-        max-width: 300px;
+        max-width: 25%;
     }
 }
 

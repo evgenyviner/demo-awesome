@@ -31,13 +31,14 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 			if ( isset( $demo_awesome_item['items'] ) && $demo_awesome_item['items'] ) {
 				foreach ( $demo_awesome_item['items'] as $demo_awesome_item_key_2 => $demo_awesome_item_2 ) {
 					$demo_awesome_index_temp_demo ++;
-                    $premium_demo = (isset($demo_awesome_item_2['premium_demo']) && $demo_awesome_item_2['premium_demo']) ? true : false;
+					$premium_demo = ( isset( $demo_awesome_item_2['premium_demo'] ) && $demo_awesome_item_2['premium_demo'] ) ? true : false;
 					?>
                     <div class="demo demo-awesome-container filter-all <?php echo esc_attr( $demo_awesome_item_key ); ?>"
                          tabindex="0"
                          aria-describedby="demo-action demo-name"
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
-                        <?php if($premium_demo){ ?><div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div><?php } ?>
+						<?php if ( $premium_demo ) { ?>
+                            <div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div><?php } ?>
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/" . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
@@ -50,10 +51,12 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 
                             <div class="demo-actions"
                                  data-index="<?php echo esc_attr( $demo_awesome_index_temp_demo ); ?>">
-                                <?php if(!$premium_demo || $this->is_premium_theme()){ ?><a href="#" role="button" class="button import call-import-demo-function"
-                                   data-toggle="modal" data-backdrop="static"
-                                   data-target="#import-modal"
-                                   aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
+								<?php if ( ! $premium_demo || $this->is_premium_theme() ) { ?><a href="#" role="button"
+                                                                                                 class="button import call-import-demo-function"
+                                                                                                 data-toggle="modal"
+                                                                                                 data-backdrop="static"
+                                                                                                 data-target="#import-modal"
+                                                                                                 aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
 								<?php if ( current_user_can( 'edit_theme_options' ) && current_user_can( 'customize' ) ) { ?>
                                     <a href="#" role="button" class="button button-primary load-preview"
                                        data-toggle="modal" data-backdrop="static"
@@ -216,20 +219,28 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                 <div class="modal-header">
                     <h5 class="modal-title" id="details-modal-label"><?php _e( 'Live Preview - ', 'demo-awesome' ); ?>
                         <span></span></h5>
+                    <div class="btn-group" role="group" aria-label="Controls">
+                        <button type="button"
+                                class="button button-primary toggle-sidebar ml-2"><span
+                                    class="text"><?php _e( 'Hide Panel', 'demo-awesome' ); ?></span>
+                            <i class="dashicons dashicons-arrow-right-alt2"></i>
+                        </button>
+                    </div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
-                    <div class="demo-info-row demo-awesome-container">
+                    <div class="demo-info-row demo-preview-row demo-awesome-container">
 
                         <div class="demo-info-col demo-preview-container">
-                            <iframe src="http://localhost/wordpress/" frameborder="0" marginwidth="0" marginheight="0"
+                            <iframe src="https://demo.themegrill.com/accelerate/" frameborder="0" marginwidth="0"
+                                    marginheight="0"
                                     scrolling="auto" allowfullscreen></iframe>
                         </div>
 
-                        <div class="demo-info-col demo-required-plugins">
+                        <div class="demo-info-col demo-required-plugins demo-required-plugins-preview">
 							<?php _e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
                                     class="theme-required-version"></span><br/>
                             <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
