@@ -121,6 +121,12 @@ button.close {
     color: #0c5460;
 }
 
+.alert img {
+    margin-right: 0.5rem;
+    position: relative;
+    top: 5px;
+}
+
 .badge {
     border-radius: 10rem;
     color: #999;

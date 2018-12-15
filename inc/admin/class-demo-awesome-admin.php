@@ -44,6 +44,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'update_customizer_data'
 			), 10, 2 );
 			add_filter( 'widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
+
+			if ( isset( $_GET['hide-notice'] ) && $_GET['hide-notice'] == 'demo_awesome_notice' ) {
+				update_option( 'demo_awesome_notice', 0 );
+			}
+			if ( get_option( 'demo_awesome_notice', 1 ) ) {
+				add_action( 'admin_notices', array( $this, 'no_theme4press_theme_notice' ) );
+			}
 		}
 
 		/**
@@ -429,10 +436,28 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		public function no_theme4press_theme_notice() {
+			if ( Demo_Awesome_Admin::is_theme4press_theme() ) {
+				return;
+			}
+
+			wp_enqueue_style( 'demo-awesome-notice', plugin_dir_url( __FILE__ ) . 'css/notice.css' ); ?>
+
+            <div class="notice demo-awesome-notice is-dismissible">
+                <p><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?><a
+                            href="<?php echo esc_url( add_query_arg( 'hide-notice', 'demo_awesome_notice' ) ); ?>"><?php _e( 'Dismiss', 'demo-awesome' ); ?></a>
+                </p>
+            </div>
+			<?php
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		public static function is_theme4press_theme_message() {
 			$message = '';
 			if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) {
-				$message = "<span>" . Demo_Awesome_Admin::get_svg( 'logo' ) . sprintf( __( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes. Please install one', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . __( 'Install', 'demo-awesome' ) . "</a>";
+				$message = "<span><img src='" . plugin_dir_url( __FILE__ ) . "images/logo.png' />" . sprintf( __( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes. Please install one', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . __( 'Install', 'demo-awesome' ) . "</a>";
 			}
 
 			return $message;

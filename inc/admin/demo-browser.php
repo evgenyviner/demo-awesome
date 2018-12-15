@@ -1,13 +1,21 @@
 <?php
+/**
+ * Displays the list of the available demos
+ *
+ * @link       https://theme4press.com/demo-awesome-the-data-importer/
+ * @since      1.0.0
+ * @package    Demo Awesome
+ * @author     Theme4Press
+ */
+
 if ( $demo_awesome_get_list_demos ) {
 	$demo_awesome_get_list_demos = json_decode( $demo_awesome_get_list_demos, true );
 }
 
 $demo_awesome_my_theme = wp_get_theme();
 
-require dirname( __FILE__ ) . '/required-plugins.php';
+require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
-?>
 <ul class="nav" role="tablist">
     <li class="nav-item"><a class="demo-filter nav-link active" data-toggle="pill" role="tab"
                             data-filter="filter-all" href="#"
@@ -51,18 +59,19 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 
                             <div class="demo-actions"
                                  data-index="<?php echo esc_attr( $demo_awesome_index_temp_demo ); ?>">
-								<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?><a href="#"
-                                                                                               role="button"
-                                                                                               class="button import call-import-demo-function"
-                                                                                               data-toggle="modal"
-                                                                                               data-backdrop="static"
-                                                                                               data-target="#import-modal"
-                                                                                               aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
+								<?php if ( Demo_Awesome_Admin::is_premium_theme() || ! $premium_demo && Demo_Awesome_Admin::is_free_theme() ) { ?>
+                                    <a href="#"
+                                       role="button"
+                                       class="button import call-import-demo-function"
+                                       data-toggle="modal"
+                                       data-backdrop="static"
+                                       data-target="#import-modal"
+                                       aria-label="<?php _e( 'Import', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
 								<?php if ( current_user_can( 'edit_theme_options' ) && current_user_can( 'customize' ) ) { ?>
                                     <a href="#" role="button" class="button button-primary load-preview"
                                        data-toggle="modal" data-backdrop="static"
                                        data-target="#preview-modal"
-                                    ><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
+                                       aria-label="<?php _e( 'Live Preview', 'demo-awesome' ); ?>"><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
 								<?php } ?>
                             </div>
                         </div>
@@ -82,7 +91,8 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                 <div class="modal-header">
                     <h5 class="modal-title" id="import-modal-label"><?php _e( 'Import Demo - ', 'demo-awesome' ); ?>
                         <span></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -128,7 +138,8 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                     <h5 class="modal-title"
                         id="finish-import-modal-label"><?php _e( 'Importing Demo - ', 'demo-awesome' ); ?><span></span>
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -155,7 +166,7 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                     <a type="button" class="button back"
                        href="<?php echo admin_url( "customize.php" ); ?>"><?php _e( 'Customize', 'demo-awesome' ); ?></a>
                     <button type="button" class="button button-primary" data-dismiss="modal"
-                            aria-label="Close"><?php _e( 'Close', 'demo-awesome' ); ?></button>
+                            aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>"><?php _e( 'Close', 'demo-awesome' ); ?></button>
                 </div>
             </div>
         </div>
@@ -170,7 +181,8 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                 <div class="modal-header">
                     <h5 class="modal-title" id="details-modal-label"><?php _e( 'Demo Details - ', 'demo-awesome' ); ?>
                         <span></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -211,21 +223,26 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                                 </p>
 							<?php } ?>
 
-                            <div class="demo-actions"><a href="#" role="button" class="button proceed close-premium"
-                                                         data-dismiss="modal"
-                                                         aria-label="Close"><?php _e( 'Close', 'demo-awesome' ); ?></a>
-                                </a><?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?><a href="#"
-                                                                                                   role="button"
-                                                                                                   class="button import call-import-demo-function"
-                                                                                                   data-dismiss="modal"
-                                                                                                   data-toggle="modal"
-                                                                                                   data-backdrop="static"
-                                                                                                   data-target="#import-modal"
-                                                                                                   aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
+                            <div class="demo-actions">
+                                <a href="#" role="button" class="button proceed close-premium"
+                                   data-dismiss="modal"
+                                   aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>"><?php _e( 'Close', 'demo-awesome' ); ?></a>
+                                </a>
+								<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
+                                    <a href="#"
+                                       role="button"
+                                       class="button import call-import-demo-function"
+                                       data-dismiss="modal"
+                                       data-toggle="modal"
+                                       data-backdrop="static"
+                                       data-target="#import-modal"
+                                       aria-label="<?php _e( 'Import', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a>
+								<?php } ?>
                                 <a href="#" role="button" class="button button-primary load-preview"
                                    data-dismiss="modal"
                                    data-toggle="modal" data-backdrop="static"
-                                   data-target="#preview-modal"><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
+                                   data-target="#preview-modal"
+                                   aria-label="<?php _e( 'Live Preview', 'demo-awesome' ); ?>"><?php _e( 'Live Preview', 'demo-awesome' ); ?></a>
                             </div>
                         </div>
                     </div>
@@ -299,9 +316,10 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                                             data-toggle="modal"
                                             data-backdrop="static"
                                             data-target="#import-modal"
-                                            aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></button><?php } ?>
+                                            aria-label="<?php _e( 'Import', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></button>
+								<?php } ?>
                                 <button type="button" class="button button-primary" data-dismiss="modal"
-                                        aria-label="Close"><?php _e( 'Close', 'demo-awesome' ); ?></button>
+                                        aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>"><?php _e( 'Close', 'demo-awesome' ); ?></button>
                             </div>
                         </div>
                     </div>

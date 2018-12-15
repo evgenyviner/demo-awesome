@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"
-     viewBox="0 0 18 456">
+     viewBox="0 0 18 72">
 
     <symbol id="demo-awesome-icon-check" viewBox="0 0 512 512">
         <path d="m174 439l-167-166c-10-10-10-26 0-36l37-36c10-10 26-10 36 0l112 112 240-240c10-10 26-10 36 0l37 36c10 10 10 26 0 36l-295 294c-10 10-26 10-36 0z"/>
@@ -27,10 +27,6 @@
 
     <symbol id="demo-awesome-icon-angle-left" viewBox="0 0 512 512">
         <path d="m160 239l136-136c9-9 24-9 34 0l22 23c10 9 10 24 0 34l-96 96 96 96c10 10 10 25 0 34l-22 23c-10 9-25 9-34 0l-136-136c-10-9-10-25 0-34z"/>
-    </symbol>
-
-    <symbol id="demo-awesome-icon-logo" viewBox="0 0 512 512">
-        <path d="m332 21l0 277 59 0 0 90-59 0 0 92c94-33 160-120 160-223l0 0c0-1 0-1 0-1l0 1 0 0 0-236z m-155 14c-92 33-157 120-157 222l0 0c0 15 2 29 4 43l0-1z m52 64l-6 13-108 186 114 0z m-169 289c38 56 99 95 168 103l1 0 0-103z"/>
     </symbol>
 
     <symbol id="demo-awesome-icon-refresh" viewBox="0 0 512 512">
