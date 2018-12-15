@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-13 17:04+0000\n"
+"POT-Creation-Date: 2018-12-15 20:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,46 +14,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: inc/admin/class-demo-awesome-admin.php:139 inc/admin/demo-browser.php:144
+#: inc/admin/class-demo-awesome-admin.php:131
+msgid "The premium demo need premium theme version"
+msgstr ""
+
+#: inc/admin/class-demo-awesome-admin.php:147 inc/admin/demo-browser.php:147
+msgid "Import finished"
+msgstr ""
+
+#: inc/admin/class-demo-awesome-admin.php:147 inc/admin/demo-browser.php:149
 msgid "The demo has been imported successfully"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:195
+#: inc/admin/class-demo-awesome-admin.php:203
 msgid "The XML file dummy content is missing."
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:218
+#: inc/admin/class-demo-awesome-admin.php:226
 msgid "The WIE file widget content is missing."
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:240
+#: inc/admin/class-demo-awesome-admin.php:248
 msgid "The DAT file customizer data is missing."
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:416
-#: inc/admin/class-demo-awesome-admin.php:427
+#: inc/admin/class-demo-awesome-admin.php:435
+msgid ""
+"The <strong>Demo Awesome</strong> plugin is designed only for Theme4Press "
+"themes. Please install one"
+msgstr ""
+
+#: inc/admin/class-demo-awesome-admin.php:435 inc/admin/required-plugins.php:48
+msgid "Install"
+msgstr ""
+
+#: inc/admin/class-demo-awesome-admin.php:498
+#: inc/admin/class-demo-awesome-admin.php:509
 msgid "Demo Awesome - The Data Importer"
 msgstr ""
 
 #. Name of the plugin
-#: inc/admin/class-demo-awesome-admin.php:416
+#: inc/admin/class-demo-awesome-admin.php:498
 msgid "Demo Awesome"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:463 inc/admin/demo-browser.php:153
-#: inc/admin/demo-browser.php:245
+#: inc/admin/class-demo-awesome-admin.php:545 inc/admin/demo-browser.php:158
+#: inc/admin/demo-browser.php:216 inc/admin/demo-browser.php:300
 msgid "Close"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:464
+#: inc/admin/class-demo-awesome-admin.php:546
 msgid "Back"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:465
+#: inc/admin/class-demo-awesome-admin.php:547
 msgid "Next"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:466
+#: inc/admin/class-demo-awesome-admin.php:548
 msgid "Begin Import"
 msgstr ""
 
@@ -61,102 +79,107 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: inc/admin/demo-browser.php:39 inc/admin/demo-browser.php:177
+#: inc/admin/demo-browser.php:41 inc/admin/demo-browser.php:183
 msgid "PREMIUM"
 msgstr ""
 
-#: inc/admin/demo-browser.php:55
+#: inc/admin/demo-browser.php:60
 msgid "Import Demo"
 msgstr ""
 
-#: inc/admin/demo-browser.php:55 inc/admin/demo-browser.php:196
-#: inc/admin/demo-browser.php:243
+#: inc/admin/demo-browser.php:60 inc/admin/demo-browser.php:222
+#: inc/admin/demo-browser.php:298
 msgid "Import"
 msgstr ""
 
-#: inc/admin/demo-browser.php:60 inc/admin/demo-browser.php:199
+#: inc/admin/demo-browser.php:65 inc/admin/demo-browser.php:226
 msgid "Live Preview"
 msgstr ""
 
-#: inc/admin/demo-browser.php:78
+#: inc/admin/demo-browser.php:83
 msgid "Import Demo - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:87 inc/admin/demo-browser.php:183
-#: inc/admin/demo-browser.php:230
+#: inc/admin/demo-browser.php:92 inc/admin/demo-browser.php:191
+#: inc/admin/demo-browser.php:269
 msgid "Minimum recommended theme version for this demo: "
 msgstr ""
 
-#: inc/admin/demo-browser.php:93
+#: inc/admin/demo-browser.php:100
 msgid "Step 1 of 2"
 msgstr ""
 
-#: inc/admin/demo-browser.php:99
+#: inc/admin/demo-browser.php:106
 msgid ""
 "The demo import will overwrite many website options - theme settings, menus, "
 "widgets, posts/pages"
 msgstr ""
 
-#: inc/admin/demo-browser.php:102
+#: inc/admin/demo-browser.php:109
 msgid ""
 "Please proceed with a caution. The demo import is recommended for new "
 "websites and it will replicate the demo website which you can see in the "
 "preview mode."
 msgstr ""
 
-#: inc/admin/demo-browser.php:104
+#: inc/admin/demo-browser.php:111
 msgid "Step 2 of 2"
 msgstr ""
 
-#: inc/admin/demo-browser.php:122
+#: inc/admin/demo-browser.php:129
 msgid "Importing Demo - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:131
+#: inc/admin/demo-browser.php:138
 msgid "Please don't leave/refresh the page while importing"
 msgstr ""
 
-#: inc/admin/demo-browser.php:135
+#: inc/admin/demo-browser.php:142
 msgid "Importing the demo..."
 msgstr ""
 
-#: inc/admin/demo-browser.php:140
-msgid "Import finished"
-msgstr ""
-
-#: inc/admin/demo-browser.php:151
+#: inc/admin/demo-browser.php:156
 msgid "Customize"
 msgstr ""
 
-#: inc/admin/demo-browser.php:166
+#: inc/admin/demo-browser.php:171
 msgid "Demo Details - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:215
+#: inc/admin/demo-browser.php:201 inc/admin/demo-browser.php:279
+#, php-format
+msgid "This demo requires the %1$sPremium%2$s version of the theme"
+msgstr ""
+
+#: inc/admin/demo-browser.php:204 inc/admin/demo-browser.php:282
+msgid "More"
+msgstr ""
+
+#: inc/admin/demo-browser.php:242
 msgid "Live Preview - "
 msgstr ""
 
-#: inc/admin/required-plugins.php:7
+#: inc/admin/demo-browser.php:247
+msgid "Collapse Panel"
+msgstr ""
+
+#: inc/admin/required-plugins.php:25
 msgid "This demo import requires additional plugins"
 msgstr ""
 
-#: inc/admin/required-plugins.php:10
+#: inc/admin/required-plugins.php:28
 msgid "Refresh"
 msgstr ""
 
-#: inc/admin/required-plugins.php:20
+#: inc/admin/required-plugins.php:41
 msgid "Installed"
 msgstr ""
 
-#: inc/admin/required-plugins.php:22
+#: inc/admin/required-plugins.php:44
 msgid "Not installed"
 msgstr ""
 
-#: inc/admin/required-plugins.php:26
-msgid "Install"
-msgstr ""
-
-#: inc/admin/required-plugins.php:41
+#: inc/admin/required-plugins.php:63
 msgid ""
 "You can install the required plugins before import or import the demo "
 "content now. Importing content without enabled required plugins may result "

@@ -37,7 +37,7 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                          tabindex="0"
                          aria-describedby="demo-action demo-name"
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
-						<?php if ( $premium_demo ) { ?>
+						<?php if ( $premium_demo && Demo_Awesome_Admin::is_free_theme() ) { ?>
                             <div class="badge badge-demo"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div><?php } ?>
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
@@ -51,12 +51,13 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 
                             <div class="demo-actions"
                                  data-index="<?php echo esc_attr( $demo_awesome_index_temp_demo ); ?>">
-								<?php if ( ! $premium_demo || $this->is_premium_theme() ) { ?><a href="#" role="button"
-                                                                                                 class="button import call-import-demo-function"
-                                                                                                 data-toggle="modal"
-                                                                                                 data-backdrop="static"
-                                                                                                 data-target="#import-modal"
-                                                                                                 aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
+								<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?><a href="#"
+                                                                                               role="button"
+                                                                                               class="button import call-import-demo-function"
+                                                                                               data-toggle="modal"
+                                                                                               data-backdrop="static"
+                                                                                               data-target="#import-modal"
+                                                                                               aria-label="<?php _e( 'Import Demo', 'demo-awesome' ); ?>"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
 								<?php if ( current_user_can( 'edit_theme_options' ) && current_user_can( 'customize' ) ) { ?>
                                     <a href="#" role="button" class="button button-primary load-preview"
                                        data-toggle="modal" data-backdrop="static"
@@ -92,7 +93,9 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                                 class="theme-required-version"></span><br/>
                         <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
 
-						<?php demo_awesome_required_plugins(); ?>
+						<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) {
+							demo_awesome_required_plugins();
+						} ?>
 
                         <p><strong><?php _e( 'Step 1 of 2', 'demo-awesome' ); ?></strong></p>
 
@@ -135,16 +138,14 @@ require dirname( __FILE__ ) . '/required-plugins.php';
 						<?php _e( 'Please don\'t leave/refresh the page while importing', 'demo-awesome' ); ?>
                     </div>
 
-                    <h3 class="hide-content"><img
-                                src="<?php echo get_site_url() . '/wp-admin/images/spinner.gif'; ?>"/> <?php _e( 'Importing the demo...', 'demo-awesome' ); ?>
-                    </h3>
-
-
-                    <h3 class=" hide show-content"><span
-                                class="dashicons dashicons-yes"></span> <?php _e( 'Import finished', 'demo-awesome' ); ?>
+                    <h3 class="hide-content"><?php echo '<span class="svg-spin mr-1">' . Demo_Awesome_Admin::get_svg( 'loader' ) . '</span>';
+						_e( 'Importing the demo...', 'demo-awesome' ); ?>
                     </h3>
 
                     <div class="alert alert-success alert-message-from-importer hide show-content" role="alert">
+                        <h3><?php echo '<span class="mr-1">' . Demo_Awesome_Admin::get_svg( 'check' ) . '</span>';
+							_e( 'Import finished', 'demo-awesome' ); ?>
+                        </h3>
 						<?php _e( 'The demo has been imported successfully', 'demo-awesome' ); ?>
                     </div>
 
@@ -178,26 +179,49 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                     <div class="demo-info-row demo-awesome-container">
 
                         <div class="demo-info-col demo-screenshot-container">
-                            <div class="badge badge-demo demo-awesome-premium-badge"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
+							<?php if ( Demo_Awesome_Admin::is_free_theme() ) { ?>
+                                <div class="badge badge-demo demo-awesome-premium-badge"><?php _e( 'PREMIUM', 'demo-awesome' ); ?></div>
+							<?php } ?>
                             <img src="<?php echo "https://demo.theme4press.com/demo-import/business/1/screenshot.png"; ?>"
                                  alt=""/>
                         </div>
 
                         <div class="demo-info-col">
-							<?php _e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
-                                    class="theme-required-version"></span><br/>
-                            <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                            <div class="required-theme-version">
+								<?php _e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
+                                        class="theme-required-version"></span><br/>
+                                <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                            </div>
 
-							<?php demo_awesome_required_plugins(); ?>
+							<?php if ( Demo_Awesome_Admin::is_premium_theme() || Demo_Awesome_Admin::is_free_theme() ) {
+								demo_awesome_required_plugins();
+							}
+							if ( Demo_Awesome_Admin::is_free_theme() ) { ?>
+                                <p class="alert alert-info required-premium-text"><span
+                                            class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><span><?php echo sprintf( __( 'This demo requires the %1$sPremium%2$s version of the theme', 'demo-awesome' ), '<strong>', '</strong>' ); ?></span>
+                                    <a class="button button-primary"
+                                       target="_blank"
+                                       href="<?php echo Demo_Awesome_Admin::premium_url() ?>"><?php _e( 'More', 'demo-awesome' ); ?>
+                                    </a>
+                                </p>
+							<?php }
+							if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
+                                <p class="alert alert-info required-premium-text"><span
+                                            class="mr-1"><?php Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?>
+                                </p>
+							<?php } ?>
 
-                            <div class="demo-actions"><a href="#" role="button" data-toggle="modal"
-                                                         data-backdrop="static"
-                                                         data-target="#details-modal">
-                                </a><a class="button import call-import-demo-function" data-dismiss="modal"
-                                       data-toggle="modal"
-                                       data-backdrop="static"
-                                       data-target="#import-modal" href=""
-                                       aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></a>
+                            <div class="demo-actions"><a href="#" role="button" class="button proceed close-premium"
+                                                         data-dismiss="modal"
+                                                         aria-label="Close"><?php _e( 'Close', 'demo-awesome' ); ?></a>
+                                </a><?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?><a href="#"
+                                                                                                   role="button"
+                                                                                                   class="button import call-import-demo-function"
+                                                                                                   data-dismiss="modal"
+                                                                                                   data-toggle="modal"
+                                                                                                   data-backdrop="static"
+                                                                                                   data-target="#import-modal"
+                                                                                                   aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></a><?php } ?>
                                 <a href="#" role="button" class="button button-primary load-preview"
                                    data-dismiss="modal"
                                    data-toggle="modal" data-backdrop="static"
@@ -219,14 +243,15 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                 <div class="modal-header">
                     <h5 class="modal-title" id="details-modal-label"><?php _e( 'Live Preview - ', 'demo-awesome' ); ?>
                         <span></span></h5>
-                    <div class="btn-group" role="group" aria-label="Controls">
+                    <div class="btn-group" role="group" aria-label="<?php _e( 'Collapse Panel', 'demo-awesome' ); ?>">
                         <button type="button"
                                 class="button button-primary toggle-sidebar ml-2"><span
-                                    class="text"><?php _e( 'Hide Panel', 'demo-awesome' ); ?></span>
-                            <i class="dashicons dashicons-arrow-right-alt2"></i>
+                                    class="text"><?php _e( 'Collapse Panel', 'demo-awesome' ); ?></span>
+                            <i class="demo-awesome-icon-right"></i>
                         </button>
                     </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="<?php _e( 'Close', 'demo-awesome' ); ?>">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -235,26 +260,46 @@ require dirname( __FILE__ ) . '/required-plugins.php';
                     <div class="demo-info-row demo-preview-row demo-awesome-container">
 
                         <div class="demo-info-col demo-preview-container">
-                            <iframe src="https://demo.themegrill.com/accelerate/" frameborder="0" marginwidth="0"
+                            <div class="loader"></div>
+                            <iframe src="" frameborder="0" marginwidth="0"
                                     marginheight="0"
-                                    scrolling="auto" allowfullscreen></iframe>
+                                    scrolling="yes" allowfullscreen>
+                            </iframe>
                         </div>
 
                         <div class="demo-info-col demo-required-plugins demo-required-plugins-preview">
-							<?php _e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
-                                    class="theme-required-version"></span><br/>
-                            <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                            <div class="required-theme-version">
+								<?php _e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
+                                        class="theme-required-version"></span><br/>
+                                <h3><?php _e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                            </div>
 
-							<?php demo_awesome_required_plugins(); ?>
+							<?php if ( Demo_Awesome_Admin::is_premium_theme() || Demo_Awesome_Admin::is_free_theme() ) {
+								demo_awesome_required_plugins();
+							}
+							if ( Demo_Awesome_Admin::is_free_theme() ) { ?>
+                                <p class="alert alert-info required-premium-text"><span
+                                            class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><span><?php echo sprintf( __( 'This demo requires the %1$sPremium%2$s version of the theme', 'demo-awesome' ), '<strong>', '</strong>' ); ?></span>
+                                    <a class="button button-primary"
+                                       target="_blank"
+                                       href="<?php echo Demo_Awesome_Admin::premium_url() ?>"><?php _e( 'More', 'demo-awesome' ); ?>
+                                    </a>
+                                </p>
+							<?php }
+							if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
+                                <p class="alert alert-info required-premium-text"><span
+                                            class="mr-1"><?php Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?>
+                                </p>
+							<?php } ?>
 
-                            <div class="demo-actions"><a href="#" role="button" data-toggle="modal"
-                                                         data-backdrop="static"
-                                                         data-target="#details-modal">
-                                </a><a class="button import call-import-demo-function" data-dismiss="modal"
-                                       data-toggle="modal"
-                                       data-backdrop="static"
-                                       data-target="#import-modal" href=""
-                                       aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></a>
+                            <div class="demo-actions">
+								<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
+                                    <button type="button"
+                                            class="button import call-import-demo-function" data-dismiss="modal"
+                                            data-toggle="modal"
+                                            data-backdrop="static"
+                                            data-target="#import-modal"
+                                            aria-label="Import Demo"><?php _e( 'Import', 'demo-awesome' ); ?></button><?php } ?>
                                 <button type="button" class="button button-primary" data-dismiss="modal"
                                         aria-label="Close"><?php _e( 'Close', 'demo-awesome' ); ?></button>
                             </div>

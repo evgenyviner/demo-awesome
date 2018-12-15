@@ -125,10 +125,10 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
 
-			if ( $this->is_premium_theme() == false && $data_demo['premium_demo'] ) {
+			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
 				wp_send_json_success( array(
 					'success' => true,
-					'message' => __( 'The premium demo need premium theme version!', 'demo-awesome' )
+					'message' => __( 'The premium demo need premium theme version', 'demo-awesome' )
 				) );
 				wp_die();
 			}
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			wp_send_json_success( array(
 				'success' => true,
-				'message' => __( 'The demo has been imported successfully', 'demo-awesome' )
+				'message' => printf( __( '%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s' ), '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), __( 'Import finished', 'demo-awesome' ), '</h3>', __( 'The demo has been imported successfully', 'demo-awesome' ) )
 			) );
 
 			wp_die(); // this is required to terminate immediately and return a proper response
@@ -417,13 +417,75 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function is_premium_theme() {
+		public static function is_theme4press_theme() {
 			$demo_awesome_my_theme = wp_get_theme();
-			if ( $demo_awesome_my_theme->get( 'Name' ) == 'evolve' ) {
-				return false;
+			if ( $demo_awesome_my_theme->get( 'Name' ) == 'evolve' || $demo_awesome_my_theme->get( 'Name' ) == 'evolve Child' || $demo_awesome_my_theme->get( 'Name' ) == 'evolve Plus' || $demo_awesome_my_theme->get( 'Name' ) == 'evolve Plus Child' ) {
+				return true;
 			}
 
-			return true;
+			return false;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function is_theme4press_theme_message() {
+			$message = '';
+			if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) {
+				$message = "<span>" . Demo_Awesome_Admin::get_svg( 'logo' ) . sprintf( __( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes. Please install one', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . __( 'Install', 'demo-awesome' ) . "</a>";
+			}
+
+			return $message;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function is_free_theme() {
+			$demo_awesome_my_theme = wp_get_theme();
+			if ( $demo_awesome_my_theme->get( 'Name' ) == 'evolve' || $demo_awesome_my_theme->get( 'Name' ) == 'evolve Child' ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function is_premium_theme() {
+			$demo_awesome_my_theme = wp_get_theme();
+			if ( $demo_awesome_my_theme->get( 'Name' ) == 'evolve Plus' || $demo_awesome_my_theme->get( 'Name' ) == 'evolve Plus Child' ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function get_svg( $icon = null ) {
+
+			if ( empty( $icon ) ) {
+				return;
+			}
+
+			$svg = '<svg class="demo-awesome-icon-' . esc_attr( $icon ) . '" aria-hidden="true" role="img">';
+			$svg .= ' <use xlink:href="' . plugin_dir_url( __FILE__ ) . ( '/images/icons.svg#demo-awesome-icon-' ) . esc_html( $icon ) . '"></use> ';
+			$svg .= '</svg>';
+
+			return $svg;
+		}
+
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function premium_url() {
+			$premium_url = esc_url( "https://theme4press.com/evolve-multipurpose-wordpress-theme/" );
+
+			return $premium_url;
 		}
 
 		/**
@@ -480,16 +542,16 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'js/admin.js' );
 
 			$local_variables = array(
-				'close_button'       => __( 'Close', 'demo-awesome' ),
-				'back_button'        => __( 'Back', 'demo-awesome' ),
-				'next_button'        => __( 'Next', 'demo-awesome' ),
-				'import_button'      => __( 'Begin Import', 'demo-awesome' ),
-				'show_panel'         => __( 'Show Panel', 'demo-awesome' ),
-				'hide_panel'         => __( 'Hide Panel', 'demo-awesome' ),
-				'plugin_url'         => plugin_dir_url( __FILE__ ),
-				'website_url'        => get_site_url(),
-				'admin_url'          => admin_url(),
-				'is_premium_version' => $this->is_premium_theme(),
+				'close_button'         => __( 'Close', 'demo-awesome' ),
+				'back_button'          => __( 'Back', 'demo-awesome' ),
+				'next_button'          => __( 'Next', 'demo-awesome' ),
+				'import_button'        => __( 'Begin Import', 'demo-awesome' ),
+				'plugin_url'           => plugin_dir_url( __FILE__ ),
+				'website_url'          => get_site_url(),
+				'admin_url'            => admin_url(),
+				'is_premium_version'   => Demo_Awesome_Admin::is_premium_theme(),
+				'is_free_version'      => Demo_Awesome_Admin::is_free_theme(),
+				'is_theme4press_theme' => Demo_Awesome_Admin::is_theme4press_theme(),
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );

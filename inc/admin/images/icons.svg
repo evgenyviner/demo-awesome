@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"
+     viewBox="0 0 18 456">
+
+    <symbol id="demo-awesome-icon-check" viewBox="0 0 512 512">
+        <path d="m174 439l-167-166c-10-10-10-26 0-36l37-36c10-10 26-10 36 0l112 112 240-240c10-10 26-10 36 0l37 36c10 10 10 26 0 36l-295 294c-10 10-26 10-36 0z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-error" viewBox="0 0 512 512">
+        <path d="m323 256l100-100c12-12 12-32 0-45l-22-22c-13-12-33-12-45 0l-100 100-100-100c-12-12-32-12-45 0l-22 22c-12 13-12 33 0 45l100 100-100 100c-12 12-12 32 0 45l22 22c13 12 33 12 45 0l100-100 100 100c12 12 32 12 45 0l22-22c12-13 12-33 0-45z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-zoom" viewBox="0 0 512 512">
+        <path d="m505 443l-100-100c-4-4-10-7-17-7l-16 0c28-35 44-80 44-128 0-115-93-208-208-208-115 0-208 93-208 208 0 115 93 208 208 208 48 0 93-16 128-44l0 16c0 7 3 13 7 17l100 100c9 9 24 9 34 0l28-28c9-10 9-25 1-34z m-297-107c-71 0-128-57-128-128 0-71 57-128 128-128 71 0 128 57 128 128 0 71-57 128-128 128z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-info" viewBox="0 0 512 512">
+        <path d="m256 8c-137 0-248 111-248 248 0 137 111 248 248 248 137 0 248-111 248-248 0-137-111-248-248-248z m0 110c23 0 42 19 42 42 0 23-19 42-42 42-23 0-42-19-42-42 0-23 19-42 42-42z m56 254c0 7-5 12-12 12l-88 0c-7 0-12-5-12-12l0-24c0-7 5-12 12-12l12 0 0-64-12 0c-7 0-12-5-12-12l0-24c0-7 5-12 12-12l64 0c7 0 12 5 12 12l0 100 12 0c7 0 12 5 12 12z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-loader" viewBox="0 0 512 512">
+        <path d="m288 39l0 17c0 11 7 20 18 23 77 21 134 93 134 177 0 102-82 184-184 184-102 0-184-82-184-184 0-84 57-156 134-177 11-3 18-12 18-23l0-17c0-16-15-27-30-23-107 27-187 125-186 241 1 137 111 247 249 247 136 0 247-111 247-248 0-116-79-213-186-240-15-4-30 7-30 23z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-angle-right" viewBox="0 0 512 512">
+        <path d="m352 273l-136 136c-9 9-24 9-34 0l-22-23c-10-9-10-24 0-33l96-97-96-96c-10-10-10-25 0-34l22-23c10-9 25-9 34 0l136 136c10 9 10 25 1 34z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-angle-left" viewBox="0 0 512 512">
+        <path d="m160 239l136-136c9-9 24-9 34 0l22 23c10 9 10 24 0 34l-96 96 96 96c10 10 10 25 0 34l-22 23c-10 9-25 9-34 0l-136-136c-10-9-10-25 0-34z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-logo" viewBox="0 0 512 512">
+        <path d="m332 21l0 277 59 0 0 90-59 0 0 92c94-33 160-120 160-223l0 0c0-1 0-1 0-1l0 1 0 0 0-236z m-155 14c-92 33-157 120-157 222l0 0c0 15 2 29 4 43l0-1z m52 64l-6 13-108 186 114 0z m-169 289c38 56 99 95 168 103l1 0 0-103z"/>
+    </symbol>
+
+    <symbol id="demo-awesome-icon-refresh" viewBox="0 0 512 512">
+        <path d="m371 133c-32-29-72-45-115-45-78 0-144 53-163 127-1 5-6 9-12 9l-57 0c-7 0-13-7-12-14 22-115 123-202 244-202 66 0 127 26 171 69l36-36c15-15 41-4 41 17l0 134c0 13-11 24-24 24l-134 0c-21 0-32-26-17-41z m-339 163l134 0c21 0 32 26 17 41l-42 42c32 29 72 45 115 45 78 0 144-53 163-127 1-5 6-9 12-9l57 0c7 0 13 7 12 14-22 115-123 202-244 202-66 0-127-26-171-69l-36 36c-15 15-41 4-41-17l0-134c0-13 11-24 24-24z"/>
+    </symbol>
+
+    <view id="icon-zoom-view" viewBox="0 0 18 18"/>
+    <view id="icon-angle-right-view" viewBox="0 18 18 18"/>
+    <view id="icon-angle-left-view" viewBox="0 36 18 18"/>
+    <view id="icon-loader-view" viewBox="0 54 18 18"/>
+
+    <use style="fill:#fff;" xlink:href="#demo-awesome-icon-zoom" width="18" height="18" x="0" y="0"></use>
+    <use style="fill:#fff;" xlink:href="#demo-awesome-icon-angle-right" width="18" height="18" x="0" y="18"></use>
+    <use style="fill:#fff;" xlink:href="#demo-awesome-icon-angle-left" width="18" height="18" x="0" y="36"></use>
+    <use style="fill:#777;" xlink:href="#demo-awesome-icon-loader" width="18" height="18" x="0" y="54"></use>
+
+</svg>
