@@ -119,7 +119,7 @@
         }
 
         function setTransitionEndSupport() {
-            $$$1.fn.emulateTransitionEnd = transitionEndEmulator;
+            $$$1.fn.demo_awesome_emulateTransitionEnd = transitionEndEmulator;
             $$$1.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
         }
 
@@ -369,7 +369,7 @@
                     var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
                     var scrollSize = "scroll" + capitalizedDimension;
                     var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-                    $$$1(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+                    $$$1(this._element).one(Util.TRANSITION_END, complete).demo_awesome_emulateTransitionEnd(transitionDuration);
                     this._element.style[dimension] = this._element[scrollSize] + "px";
                 };
 
@@ -419,7 +419,7 @@
 
                     this._element.style[dimension] = '';
                     var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-                    $$$1(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+                    $$$1(this._element).one(Util.TRANSITION_END, complete).demo_awesome_emulateTransitionEnd(transitionDuration);
                 };
 
                 _proto.setTransitioning = function setTransitioning(isTransitioning) {
@@ -746,7 +746,7 @@
                         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
                         $$$1(this._element).one(Util.TRANSITION_END, function (event) {
                             return _this2._hideModal(event);
-                        }).emulateTransitionEnd(transitionDuration);
+                        }).demo_awesome_emulateTransitionEnd(transitionDuration);
                     } else {
                         this._hideModal();
                     }
@@ -817,7 +817,7 @@
 
                     if (transition) {
                         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-                        $$$1(this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
+                        $$$1(this._dialog).one(Util.TRANSITION_END, transitionComplete).demo_awesome_emulateTransitionEnd(transitionDuration);
                     } else {
                         transitionComplete();
                     }
@@ -936,7 +936,7 @@
                         }
 
                         var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-                        $$$1(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
+                        $$$1(this._backdrop).one(Util.TRANSITION_END, callback).demo_awesome_emulateTransitionEnd(backdropTransitionDuration);
                     } else if (!this._isShown && this._backdrop) {
                         $$$1(this._backdrop).removeClass(ClassName.SHOW);
 
@@ -951,7 +951,7 @@
                         if ($$$1(this._element).hasClass(ClassName.FADE)) {
                             var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
 
-                            $$$1(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
+                            $$$1(this._backdrop).one(Util.TRANSITION_END, callbackRemove).demo_awesome_emulateTransitionEnd(_backdropTransitionDuration);
                         } else {
                             callbackRemove();
                         }
@@ -1285,7 +1285,7 @@
 
                     if (active && isTransitioning) {
                         var transitionDuration = Util.getTransitionDurationFromElement(active);
-                        $$$1(active).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+                        $$$1(active).one(Util.TRANSITION_END, complete).demo_awesome_emulateTransitionEnd(transitionDuration);
                     } else {
                         complete();
                     }

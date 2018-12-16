@@ -280,7 +280,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                             <div class="loader"></div>
                             <iframe src="" frameborder="0" marginwidth="0"
                                     marginheight="0"
-                                    scrolling="yes" allowfullscreen>
+                                    scrolling="auto" allowfullscreen>
                             </iframe>
                         </div>
 

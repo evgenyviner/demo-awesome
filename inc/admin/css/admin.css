@@ -471,7 +471,7 @@ button.close {
     max-width: 100%;
 }
 
-body.sticky-menu .modal-preview .modal-lg {
+body.folded .modal-preview .modal-lg {
     margin-left: 35px;
 }
 

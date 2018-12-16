@@ -457,7 +457,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		public static function is_theme4press_theme_message() {
 			$message = '';
 			if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) {
-				$message = "<span><img src='" . plugin_dir_url( __FILE__ ) . "images/logo.png' />" . sprintf( __( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes. Please install one', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . __( 'Install', 'demo-awesome' ) . "</a>";
+				$message = "<span><img src='" . plugin_dir_url( __FILE__ ) . "images/logo.png' />" . sprintf( __( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . __( 'Install theme', 'demo-awesome' ) . "</a>";
 			}
 
 			return $message;
