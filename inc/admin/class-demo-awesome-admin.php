@@ -83,7 +83,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function get_import_file_content( $template_name ) {
-			return $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . "/evolve.wordpress.xml", $template_name );
+			return $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . "/content.xml", $template_name );
 		}
 
 		/**
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
 				wp_send_json_success( array(
 					'success' => true,
-					'message' => sprintf('<span>%s</span>',__( 'The premium demo need premium theme version', 'demo-awesome' ))
+					'message' => sprintf( '<span>%s</span>', __( 'The premium demo need premium theme version', 'demo-awesome' ) )
 				) );
 				wp_die();
 			}
@@ -221,7 +221,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-widget-importer.php';
 
-			$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'dummy-widgets.wie' );
+			$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'widgets.wie' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Widget_Importer::import( $import_file, $data_demo );
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function import_customizer_data( $data_demo, $template_name = 'blog' ) {
 			require dirname( __FILE__ ) . '/importer/class-demo-awesome-customizer-importer.php';
 
-			$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'evolve-export.dat' );
+			$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'customizer.dat' );
 
 			if ( is_file( $import_file ) ) {
 				$results = Demo_Awesome_Customizer_Importer::import( $import_file, $data_demo );

@@ -113,10 +113,10 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
                     <div class="wizard-step">
                         <div class="alert" role="alert">
-							<?php _e( 'The demo import will overwrite many website options - theme settings, menus, widgets, posts/pages', 'demo-awesome' ); ?>
+							<?php _e( 'The demo import will overwrite many website options - theme settings, menus, widgets, posts/pages. Some demos can take few minutes to complete the import, depending on the complexity of the demo content.', 'demo-awesome' ); ?>
                         </div>
 
-                        <p><?php _e( 'Please proceed with a caution. The demo import is recommended for new websites and it will replicate the demo website which you can see in the preview mode.', 'demo-awesome' ); ?></p>
+                        <p><?php echo sprintf( __( 'Please proceed with a caution. The demo import is recommended for new websites and it will replicate the demo website which you can see in the preview mode. %1$sThe import process that has been launched multiple times will result in duplicate content on the website.%2$s', 'demo-awesome' ), '<strong>', '</strong>' ); ?></p>
 
                         <p><strong><?php _e( 'Step 2 of 2', 'demo-awesome' ); ?></strong></p>
 
@@ -146,7 +146,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                 <div class="modal-body">
 
                     <div class="alert hide-content" role="alert">
-						<?php _e( 'Please don\'t leave/refresh the page while importing', 'demo-awesome' ); ?>
+						<?php _e( 'Please don\'t leave/refresh the page while importing. Some demos can take few minutes to complete the import, depending on the complexity of the demo content', 'demo-awesome' ); ?>
                     </div>
 
                     <h3 class="hide-content"><?php echo '<span class="svg-spin mr-1">' . Demo_Awesome_Admin::get_svg( 'loader' ) . '</span>';
