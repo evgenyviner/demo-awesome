@@ -151,7 +151,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			wp_send_json_success( array(
 				'success' => true,
-				'message' => printf( __( '%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s' ), '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), __( 'Import finished', 'demo-awesome' ), '</h3>', __( 'The demo has been imported successfully', 'demo-awesome' ) )
+				'message' => sprintf( __( '%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s' ), '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), __( 'Import finished', 'demo-awesome' ), '</h3>', __( 'The demo has been imported successfully', 'demo-awesome' ) )
 			) );
 
 			wp_die(); // this is required to terminate immediately and return a proper response
