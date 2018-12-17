@@ -135,7 +135,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
 				wp_send_json_success( array(
 					'success' => true,
-					'message' => __( 'The premium demo need premium theme version', 'demo-awesome' )
+					'message' => sprintf('<span>%s</span>',__( 'The premium demo need premium theme version', 'demo-awesome' ))
 				) );
 				wp_die();
 			}
