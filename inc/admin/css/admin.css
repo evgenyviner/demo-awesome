@@ -3,7 +3,7 @@
     ======================================= */
 
 .wrap h1.wp-heading-inline {
-    display: inline-block;
+    font-weight: bold;
     margin-bottom: 15px;
 }
 
