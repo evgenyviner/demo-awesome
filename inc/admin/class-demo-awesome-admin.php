@@ -112,8 +112,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				WP_Filesystem();
 			}
 
-			$theme_path = str_replace( ABSPATH, $wp_filesystem->abspath(), DEMO_AWESOME_IMPORTER_DIRECTORY );
-			$file_path  = $theme_path . '/demo-content/' . $file_name;
+			$file_path  = wp_upload_dir()['basedir'] . '/demo-content/' . $file_name;
 			$result     = $wp_filesystem->put_contents(
 				$file_path,
 				$file_content,
