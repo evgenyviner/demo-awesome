@@ -112,7 +112,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				WP_Filesystem();
 			}
 
-			$file_path  = wp_upload_dir()['basedir'] . '/demo-content/' . $file_name;
+			$file_path  = wp_upload_dir()['basedir'] . '/demo-awesome-import/' . $file_name;
 			$result     = $wp_filesystem->put_contents(
 				$file_path,
 				$file_content,
