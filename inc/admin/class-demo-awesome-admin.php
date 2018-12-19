@@ -132,6 +132,19 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
 
+			//update theme_mode to remove old data
+			delete_option('theme_mods_evolve-plus');
+			delete_option('theme_mods_evolve');
+
+			if ( Demo_Awesome_Admin::is_premium_theme() == true && !$data_demo['premium_demo'] ) {
+				//fix to update repeater fields
+				update_option('check_updated_to_new_bootstrap_slider_data_', false);
+				update_option('check_updated_to_new_parallax_slider_data_', false);
+				update_option('check_updated_to_new_content_boxes_data_', false);
+				update_option('check_updated_to_new_testimonials_data_', false);
+				update_option('check_updated_to_new_counter_circle_data_', false);
+			}
+
 			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
 				wp_send_json_success( array(
 					'success' => true,
@@ -139,7 +152,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				) );
 				wp_die();
 			}
-
 			//import content data
 			$this->import_content_theme( $data_demo, $template_name );
 			//import widget
@@ -148,6 +160,9 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->import_customizer_data( $data_demo, $template_name );
 			//fix menu
 			$this->update_nav_menu_items( $data_demo, $template_name );
+
+			//fix option
+			$this->update_option_data( $data_demo, $template_name );
 
 			wp_send_json_success( array(
 				'success' => true,
@@ -174,6 +189,27 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function get_import_file_path_from_live_demo( $template_name, $file_name ) {
 			return $this->write_file_to_local( $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . $template_name . '/' . $file_name ), $file_name );
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function update_option_data( $data_demo, $template_name = 'blog' ) {
+			if ( ! empty( $data_demo['option_update'] ) ) {
+				foreach ( $data_demo['option_update'] as $data_type => $data_value ) {
+					if ( $data_type == 'update_pages' && $data_value && is_array($data_value) && count($data_value) ) {
+						foreach($data_value as $option_name => $option_value){
+							$page = get_page_by_title( $option_value );
+							if ( is_object( $page ) && $page->ID ) {
+								update_option($option_name, $page->ID);
+							}
+						}
+					}
+					else{
+						update_option($data_type, $data_value);
+					}
+				}
+			}
 		}
 
 		/**
