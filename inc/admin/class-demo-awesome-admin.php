@@ -112,8 +112,8 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				WP_Filesystem();
 			}
 
-			$file_path  = wp_upload_dir()['basedir'] . '/demo-awesome-import/' . $file_name;
-			$result     = $wp_filesystem->put_contents(
+			$file_path = wp_upload_dir()['basedir'] . '/demo-awesome-import/' . $file_name;
+			$result    = $wp_filesystem->put_contents(
 				$file_path,
 				$file_content,
 				FS_CHMOD_FILE // predefined mode settings for WP files
@@ -131,17 +131,15 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
 
-			//update theme_mode to remove old data
-			delete_option('theme_mods_evolve-plus');
-			delete_option('theme_mods_evolve');
+			delete_option( 'theme_mods_evolve-plus' );
+			delete_option( 'theme_mods_evolve' );
 
-			if ( Demo_Awesome_Admin::is_premium_theme() == true && !$data_demo['premium_demo'] ) {
-				//fix to update repeater fields
-				update_option('check_updated_to_new_bootstrap_slider_data_', false);
-				update_option('check_updated_to_new_parallax_slider_data_', false);
-				update_option('check_updated_to_new_content_boxes_data_', false);
-				update_option('check_updated_to_new_testimonials_data_', false);
-				update_option('check_updated_to_new_counter_circle_data_', false);
+			if ( Demo_Awesome_Admin::is_premium_theme() == true && ! $data_demo['premium_demo'] ) {
+				update_option( 'check_updated_to_new_bootstrap_slider_data_', false );
+				update_option( 'check_updated_to_new_parallax_slider_data_', false );
+				update_option( 'check_updated_to_new_content_boxes_data_', false );
+				update_option( 'check_updated_to_new_testimonials_data_', false );
+				update_option( 'check_updated_to_new_counter_circle_data_', false );
 			}
 
 			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
@@ -159,7 +157,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->import_customizer_data( $data_demo, $template_name );
 			//fix menu
 			$this->update_nav_menu_items( $data_demo, $template_name );
-
 			//fix option
 			$this->update_option_data( $data_demo, $template_name );
 
@@ -196,16 +193,15 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function update_option_data( $data_demo, $template_name = 'blog' ) {
 			if ( ! empty( $data_demo['option_update'] ) ) {
 				foreach ( $data_demo['option_update'] as $data_type => $data_value ) {
-					if ( $data_type == 'update_pages' && $data_value && is_array($data_value) && count($data_value) ) {
-						foreach($data_value as $option_name => $option_value){
+					if ( $data_type == 'update_pages' && $data_value && is_array( $data_value ) && count( $data_value ) ) {
+						foreach ( $data_value as $option_name => $option_value ) {
 							$page = get_page_by_title( $option_value );
 							if ( is_object( $page ) && $page->ID ) {
-								update_option($option_name, $page->ID);
+								update_option( $option_name, $page->ID );
 							}
 						}
-					}
-					else{
-						update_option($data_type, $data_value);
+					} else {
+						update_option( $data_type, $data_value );
 					}
 				}
 			}
