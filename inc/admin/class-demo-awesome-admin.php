@@ -111,8 +111,11 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				require_once wp_normalize_path( ABSPATH . '/wp-admin/includes/file.php' );
 				WP_Filesystem();
 			}
-
-			$file_path = wp_upload_dir()['basedir'] . '/demo-awesome-import/' . $file_name;
+			$upload_dir = wp_upload_dir()['basedir'] . '/demo-awesome-import/';
+			if ( ! is_dir( $upload_dir ) ) {
+				mkdir( $upload_dir, 0755 );
+			}
+			$file_path = $upload_dir . $file_name;
 			$result    = $wp_filesystem->put_contents(
 				$file_path,
 				$file_content,
