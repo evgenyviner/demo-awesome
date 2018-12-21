@@ -941,7 +941,6 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			} else {
 				$menu_id = is_array( $menu_id ) ? $menu_id['term_id'] : $menu_id;
 			}
-
 			foreach ( $item['postmeta'] as $meta ) {
 				if ( version_compare( PHP_VERSION, '7.0.0' ) >= 0 ) {
 					${$meta['key']} = $meta['value'];
@@ -992,6 +991,10 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 
 			$id = wp_update_nav_menu_item( $menu_id, 0, $args );
 			if ( $id && ! is_wp_error( $id ) ) {
+				//fix to update mega menu data
+				foreach ( $item['postmeta'] as $meta ) {
+					update_post_meta($id, $meta['key'], $meta['value']);
+				}
 				$this->processed_menu_items[ intval( $item['post_id'] ) ] = (int) $id;
 			}
 		}

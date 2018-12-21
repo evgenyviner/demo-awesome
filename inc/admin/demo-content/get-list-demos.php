@@ -25,8 +25,8 @@ $list_demos = array(
 					'folder_path'            => 'app/1',
 					'customizer_data_update' => array(
 						'nav_menu_locations' => array(
-							'primary-menu'      => 'Main menu',
-							'sticky_navigation' => 'Main menu',
+							'primary-menu'      => 'Main Menu',
+							'sticky_navigation' => 'Main Menu',
 						)
 					),
 					'option_update'          => array(
