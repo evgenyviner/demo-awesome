@@ -89,7 +89,10 @@ $list_demos = array(
 						array(
 							'title' =>  'Our Team',
 							'items' => array(
-								'[gallery size="medium" columns="2" link="none" ids="11,10"]' => 'testimonial-1-13,testimonial-2-13',
+								array(
+									'ids' => '11,10',
+									'names' => 'testimonial-2,testimonial-1'
+								)
 							)
 						)
 					),
