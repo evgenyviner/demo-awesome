@@ -162,6 +162,9 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->update_nav_menu_items( $data_demo, $template_name );
 			//fix option
 			$this->update_option_data( $data_demo, $template_name );
+			//fix galleries data
+			$this->update_galleries_data( $data_demo, $template_name );
+
 
 			wp_send_json_success( array(
 				'success' => true,
@@ -205,6 +208,47 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 						}
 					} else {
 						update_option( $data_type, $data_value );
+					}
+				}
+			}
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function update_galleries_data( $data_demo, $template_name = 'blog' ) {
+			if ( ! empty( $data_demo['update_galleries'] ) && ! empty( $data_demo['update_galleries']['pages'] )) {
+				foreach ( $data_demo['update_galleries']['pages'] as $data_value ) {
+					if(! empty($data_value['title'])){
+						$page = get_page_by_title( $data_value['title'] );
+						if ( is_object( $page ) && $page->ID ) {
+							// update_option( $option_name, $page->ID );
+							foreach ( $data_value['items'] as $shortcode_name => $shortcode_values ) {
+								$shortcode_values_new = explode(',', $shortcode_values);
+								$ids_array = explode('ids="', $shortcode_name);
+								$ids_old = str_replace('"]', '', $ids_array[1]);
+								$ids = explode(',', $ids_old);
+								$new_ids = array();
+								foreach($ids as $id_key => $id){
+									$attach = get_page_by_title( $shortcode_values_new[$id_key], OBJECT, 'attachment' );
+									if ( is_object( $attach ) && $attach->ID ) {
+										$new_ids[] = $attach->ID;
+									}
+								}	
+								if($new_ids){
+									$new_ids_string = implode(',', $new_ids);
+									$ids_array[1] = str_replace('"', '', $ids_array[1]);
+									$post_content_new = str_replace($ids_array[1], $new_ids_string, $page->post_content);
+								 	$my_post = array(
+								      'ID'           => $page->ID,
+								      'post_content'   => $post_content_new,
+								  	);								  
+									// Update the post into the database
+								  	wp_update_post( $my_post );
+								}							
+							}
+						}
+						
 					}
 				}
 			}

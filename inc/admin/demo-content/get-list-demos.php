@@ -28,6 +28,12 @@ $list_demos = array(
 							'primary-menu'      => 'Main menu',
 							'sticky_navigation' => 'Main menu',
 						)
+					),
+					'option_update'          => array(
+						'show_on_front' => 'page',
+						'update_pages'  => array(
+							'page_on_front' => 'Home',
+						)
 					)
 				),
 			),
@@ -75,8 +81,18 @@ $list_demos = array(
 						'sticky_navigation' => 'Main menu',
 					)
 				),
-				'option_update' => array(
+				'option_update'          => array(
 					'posts_per_page' => 3
+				),
+				'update_galleries' => array(
+					'pages' => array(
+						array(
+							'title' =>  'Our Team',
+							'items' => array(
+								'[gallery size="medium" columns="2" link="none" ids="11,10"]' => 'testimonial-1-13,testimonial-2-13',
+							)
+						)
+					),
 				)
 			),
 			array(
@@ -174,7 +190,7 @@ $list_demos = array(
 						'sticky_navigation' => 'Main menu',
 					)
 				)
-			),			
+			),
 		),
 	),
 	'eshop'       => array(
@@ -197,22 +213,22 @@ $list_demos = array(
 				'folder_path'            => 'eshop/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						'primary-menu'      => 'Main Menu',
-						'sticky_navigation' => 'Main Menu',
+						'primary-menu'      => 'Main menu',
+						'sticky_navigation' => 'Main menu',
 					)
 				),
-				'option_update' => array(
-					'show_on_front'=> 'page',
-					'update_pages' => array(
-						'page_on_front' 			=> 'Shop',
-						'woocommerce_shop_page_id' 	=> 'Shop'
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front'            => 'Shop',
+						'woocommerce_shop_page_id' => 'Shop'
 					)
 				)
 			),
 			array(
 				'name'                   => 'eShop 2',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-my-store/',
-				'require_ver_free'    => '4.0.2',
+				'require_ver_free'       => '4.0.2',
 				'require_ver_premium'    => '2.9.1',
 				'required_plugins'       => true,
 				'plugins'                => array(
@@ -230,7 +246,7 @@ $list_demos = array(
 						'sticky_navigation' => 'Main menu',
 					)
 				)
-			),			
+			),
 		),
 	),
 	'magazine'    => array(
@@ -275,6 +291,12 @@ $list_demos = array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
+				),
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front' => 'Home',
+					)
 				)
 			),
 		),
@@ -318,8 +340,13 @@ $list_demos = array(
 				'folder_path'            => 'portfolio/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						'primary-menu'      => 'Main menu',
-						'sticky_navigation' => 'Main menu',
+						'primary-menu' => 'Main menu'
+					)
+				),
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front' => 'Home',
 					)
 				)
 			),
