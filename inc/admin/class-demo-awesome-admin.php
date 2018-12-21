@@ -37,19 +37,51 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$this->version     = $version;
 
 			add_action( 'admin_menu', array( $this, 'importer_page' ) );
+			add_action( 'load-plugins.php', array( $this, 'admin_notice' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
+			add_action( 'wp_loaded', array( $this, 'hide_notice' ) );
 			add_filter( 'customizer_demo_import_settings', array(
 				$this,
 				'update_customizer_data'
 			), 10, 2 );
 			add_filter( 'widget_demo_import_settings', array( $this, 'update_widget_data' ), 10, 4 );
 
-			if ( isset( $_GET['hide-notice'] ) && $_GET['hide-notice'] == 'demo_awesome_notice' ) {
-				update_option( 'demo_awesome_notice', 0 );
+			if ( isset( $_GET['hide-notice'] ) && $_GET['hide-notice'] == 'demo_awesome_no_theme4press_theme_notice' ) {
+				update_option( 'demo_awesome_no_theme4press_theme_notice', 0 );
 			}
-			if ( get_option( 'demo_awesome_notice', 1 ) ) {
+			if ( get_option( 'demo_awesome_no_theme4press_theme_notice', 1 ) ) {
 				add_action( 'admin_notices', array( $this, 'no_theme4press_theme_notice' ) );
+			}
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public function admin_notice() {
+			if ( ! get_option( 'demo_awesome_activation_notice' ) ) {
+				add_action( 'admin_notices', array( $this, 'activation_notice' ) );
+				update_option( 'demo_awesome_activation_notice', 0 );
+			} elseif ( get_option( 'demo_awesome_activation_notice' ) == '1' ) {
+				// Don't show any notice
+			}
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function hide_notice() {
+			if ( isset( $_GET['demo-awesome-hide-notice'] ) && $_GET['demo-awesome-hide-notice'] == 'activation_notice' ) {
+				if ( ! wp_verify_nonce( $_GET['_demo_awesome_notice'], 'demo_awesome_hide_notice' ) ) {
+					wp_die( __( 'Action failed. Please refresh the page and retry.', 'evolve' ) );
+				}
+
+				if ( ! current_user_can( 'manage_options' ) ) {
+					wp_die( __( 'Cheatin&#8217; huh?', 'evolve' ) );
+				}
+
+				$hide_notice = sanitize_text_field( $_GET['demo-awesome-hide-notice'] );
+				update_option( 'demo_awesome_' . $hide_notice, 1 );
 			}
 		}
 
@@ -103,7 +135,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function write_file_to_local( $file_content, $file_name = 'dummy-data.xml' ) {
+		function write_file_to_local( $file_content, $file_name = 'content.xml' ) {
 
 			global $wp_filesystem;
 			// Initialize the WP filesystem, no more using 'file-put-contents' function
@@ -148,7 +180,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
 				wp_send_json_success( array(
 					'success' => true,
-					'message' => sprintf( '<span>%s</span>', __( 'The premium demo need premium theme version', 'demo-awesome' ) )
+					'message' => sprintf( '<span>%s</span>', esc_html__( 'The premium demo requires the premium theme version', 'demo-awesome' ) )
 				) );
 				wp_die();
 			}
@@ -168,7 +200,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			wp_send_json_success( array(
 				'success' => true,
-				'message' => sprintf( __( '<div>%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s</div>' ), '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), __( 'Import finished', 'demo-awesome' ), '</h3>', __( 'The demo has been imported successfully', 'demo-awesome' ) )
+				'message' => sprintf( '<div>%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s</div>', '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), esc_html__( 'Import finished', 'demo-awesome' ), '</h3>', esc_html__( 'The demo has been imported successfully', 'demo-awesome' ) )
 			) );
 
 			wp_die(); // this is required to terminate immediately and return a proper response
@@ -217,38 +249,38 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function update_galleries_data( $data_demo, $template_name = 'blog' ) {
-			if ( ! empty( $data_demo['update_galleries'] ) && ! empty( $data_demo['update_galleries']['pages'] )) {
+			if ( ! empty( $data_demo['update_galleries'] ) && ! empty( $data_demo['update_galleries']['pages'] ) ) {
 				foreach ( $data_demo['update_galleries']['pages'] as $data_value ) {
-					if(! empty($data_value['title'])){
+					if ( ! empty( $data_value['title'] ) ) {
 						$page = get_page_by_title( $data_value['title'] );
 						if ( is_object( $page ) && $page->ID ) {
 							// update_option( $option_name, $page->ID );
 							foreach ( $data_value['items'] as $shortcode_name => $shortcode_values ) {
-								$shortcode_values_new = explode(',', $shortcode_values);
-								$ids_array = explode('ids="', $shortcode_name);
-								$ids_old = str_replace('"]', '', $ids_array[1]);
-								$ids = explode(',', $ids_old);
-								$new_ids = array();
-								foreach($ids as $id_key => $id){
-									$attach = get_page_by_title( $shortcode_values_new[$id_key], OBJECT, 'attachment' );
+								$shortcode_values_new = explode( ',', $shortcode_values );
+								$ids_array            = explode( 'ids="', $shortcode_name );
+								$ids_old              = str_replace( '"]', '', $ids_array[1] );
+								$ids                  = explode( ',', $ids_old );
+								$new_ids              = array();
+								foreach ( $ids as $id_key => $id ) {
+									$attach = get_page_by_title( $shortcode_values_new[ $id_key ], OBJECT, 'attachment' );
 									if ( is_object( $attach ) && $attach->ID ) {
 										$new_ids[] = $attach->ID;
 									}
-								}	
-								if($new_ids){
-									$new_ids_string = implode(',', $new_ids);
-									$ids_array[1] = str_replace('"', '', $ids_array[1]);
-									$post_content_new = str_replace($ids_array[1], $new_ids_string, $page->post_content);
-								 	$my_post = array(
-								      'ID'           => $page->ID,
-								      'post_content'   => $post_content_new,
-								  	);								  
+								}
+								if ( $new_ids ) {
+									$new_ids_string   = implode( ',', $new_ids );
+									$ids_array[1]     = str_replace( '"', '', $ids_array[1] );
+									$post_content_new = str_replace( $ids_array[1], $new_ids_string, $page->post_content );
+									$my_post          = array(
+										'ID'           => $page->ID,
+										'post_content' => $post_content_new,
+									);
 									// Update the post into the database
-								  	wp_update_post( $my_post );
-								}							
+									wp_update_post( $my_post );
+								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -285,7 +317,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 				flush_rewrite_rules();
 			} else {
-				$status['errorMessage'] = __( 'The XML file dummy content is missing.', 'demo-awesome' );
+				$status['errorMessage'] = esc_html__( 'The content data file (XML) is missing.', 'demo-awesome' );
 				wp_send_json_error( $status );
 			}
 
@@ -308,7 +340,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 					return false;
 				}
 			} else {
-				$status['errorMessage'] = __( 'The WIE file widget content is missing.', 'demo-awesome' );
+				$status['errorMessage'] = esc_html__( 'The widget data file (WIE) is missing.', 'demo-awesome' );
 				wp_send_json_error( $status );
 			}
 
@@ -330,7 +362,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 					return false;
 				}
 			} else {
-				$status['errorMessage'] = __( 'The DAT file customizer data is missing.', 'demo-awesome' );
+				$status['errorMessage'] = esc_html__( 'The customizer data file (DAT) is missing.', 'demo-awesome' );
 				wp_send_json_error( $status );
 			}
 
@@ -514,6 +546,27 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		public function activation_notice() {
+			if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) {
+				return;
+			}
+
+			wp_enqueue_style( 'demo-awesome-notice', plugin_dir_url( __FILE__ ) . 'css/notice.css' ); ?>
+
+            <div class="notice demo-awesome-notice is-dismissible">
+                <p>
+                    <img src="<?php echo plugin_dir_url( __FILE__ ) ?>images/logo.png"/><?php echo sprintf( esc_html__( 'Thank you for installing %1$sDemo Awesome%2$s plugin by Theme4Press. To start importing a demo content please visit the importer page', 'evolve' ), '<strong>', '</strong>' ); ?>
+                    <a class="button"
+                       href="<?php echo esc_url( admin_url( 'themes.php?page=demo-awesome-importer' ) ); ?>"><?php esc_html_e( 'Let\'s Get Started', 'demo-awesome' ); ?></a>
+                    <a href="<?php echo esc_url( wp_nonce_url( remove_query_arg( array( 'activated' ), add_query_arg( 'demo-awesome-hide-notice', 'activation_notice' ) ), 'demo_awesome_hide_notice', '_demo_awesome_notice' ) ); ?>"><?php esc_html_e( 'Dismiss', 'demo-awesome' ); ?></a>
+                </p>
+            </div>
+			<?php
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		public function no_theme4press_theme_notice() {
 			if ( Demo_Awesome_Admin::is_theme4press_theme() ) {
 				return;
@@ -523,7 +576,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
             <div class="notice demo-awesome-notice is-dismissible">
                 <p><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?><a
-                            href="<?php echo esc_url( add_query_arg( 'hide-notice', 'demo_awesome_notice' ) ); ?>"><?php _e( 'Dismiss', 'demo-awesome' ); ?></a>
+                            href="<?php echo esc_url( add_query_arg( 'hide-notice', 'demo_awesome_no_theme4press_theme_notice' ) ); ?>"><?php _e( 'Dismiss', 'demo-awesome' ); ?></a>
                 </p>
             </div>
 			<?php
@@ -535,7 +588,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		public static function is_theme4press_theme_message() {
 			$message = '';
 			if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) {
-				$message = "<span><img src='" . plugin_dir_url( __FILE__ ) . "images/logo.png' />" . sprintf( __( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . __( 'Install theme', 'demo-awesome' ) . "</a>";
+				$message = "<span><img src='" . plugin_dir_url( __FILE__ ) . "images/logo.png' />" . sprintf( esc_html__( 'The %1$sDemo Awesome%2$s plugin is designed only for %3$sTheme4Press%4$s themes', 'demo-awesome' ), '<strong>', '</strong>', '<strong>', '</strong>' ) . "</span><a class='button button-primary' target='_blank' href='" . get_admin_url() . "theme-install.php?search=theme4press" . "'>" . esc_html__( 'Install theme', 'demo-awesome' ) . "</a>";
 			}
 
 			return $message;
@@ -585,8 +638,12 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		public static function premium_url() {
-			$premium_url = esc_url( "https://theme4press.com/evolve-multipurpose-wordpress-theme/" );
+		public static function premium_url( $type ) {
+			if ( $type == 1 ) {
+				$premium_url = esc_url( "https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-detail-modal&utm_medium=detail-link&utm_campaign=modal-popup" );
+			} elseif ( $type == 2 ) {
+				$premium_url = esc_url( "https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-live-preview-modal&utm_medium=live-preview-link&utm_campaign=modal-popup" );
+			}
 
 			return $premium_url;
 		}
@@ -598,7 +655,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
-			add_theme_page( __( 'Demo Awesome - The Data Importer', 'demo-awesome' ), __( 'Demo Awesome', 'demo-awesome' ), 'edit_theme_options', 'demo-awesome-importer', array(
+			add_theme_page( esc_html__( 'Demo Awesome - The Data Importer', 'demo-awesome' ), esc_html__( 'Demo Awesome', 'demo-awesome' ), 'edit_theme_options', 'demo-awesome-importer', array(
 				$this,
 				'demo_browser'
 			) );
@@ -609,7 +666,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function demo_browser() { ?>
             <div class="wrap">
-                <h1 class="wp-heading-inline"><?php echo esc_html( __( 'Demo Awesome - The Data Importer', 'demo-awesome' ) ); ?></h1>
+                <h1 class="wp-heading-inline"><?php echo esc_html__( 'Demo Awesome - The Data Importer', 'demo-awesome' ); ?></h1>
 
                 <hr class="wp-header-end">
 				<?php
@@ -645,10 +702,10 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'js/admin.js' );
 
 			$local_variables = array(
-				'close_button'         => __( 'Close', 'demo-awesome' ),
-				'back_button'          => __( 'Back', 'demo-awesome' ),
-				'next_button'          => __( 'Next', 'demo-awesome' ),
-				'import_button'        => __( 'Begin Import', 'demo-awesome' ),
+				'close_button'         => esc_html__( 'Close', 'demo-awesome' ),
+				'back_button'          => esc_html__( 'Back', 'demo-awesome' ),
+				'next_button'          => esc_html__( 'Next', 'demo-awesome' ),
+				'import_button'        => esc_html__( 'I Understand, Begin Import', 'demo-awesome' ),
 				'plugin_url'           => plugin_dir_url( __FILE__ ),
 				'website_url'          => get_site_url(),
 				'admin_url'            => admin_url(),

@@ -39,14 +39,14 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
 							foreach ( $data_demo['plugins'] as $plugin_keyword => $plugin ) {
 								$premium_plugin = '';
 								if ( class_exists( $plugin_keyword ) ) {
-									$required_plugin = sprintf( '<span class="badge badge-success mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'check' ), __( 'Installed', 'demo-awesome' ) );
+									$required_plugin = sprintf( '<span class="badge badge-success mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'check' ), esc_html__( 'Installed', 'demo-awesome' ) );
 								} else {
 									$show_required_description = true;
-									$required_plugin           = sprintf( '<span class="badge badge-error mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'error' ), __( 'Not installed', 'demo-awesome' ) );
+									$required_plugin           = sprintf( '<span class="badge badge-error mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'error' ), esc_html__( 'Not installed', 'demo-awesome' ) );
 									if ( isset( $plugin['follow_download'] ) && $plugin['follow_download'] ) {
-										$premium_plugin = sprintf( '<div class="badge badge-premium">%s</div>', __( $plugin['disable_description'], 'demo-awesome' ) );
+										$premium_plugin = sprintf( '<div class="badge badge-premium">%s</div>', esc_html__( $plugin['disable_description'], 'demo-awesome' ) );
 									} else {
-										$premium_plugin = sprintf( '<a class="button button-proceed" target="_blank" href="' . get_admin_url() . 'plugin-install.php?s=%s&tab=search&type=term">%s</a>', $plugin['keyword'], __( 'Install', 'demo-awesome' ) );
+										$premium_plugin = sprintf( '<a class="button button-proceed" target="_blank" href="' . get_admin_url() . 'plugin-install.php?s=%s&tab=search&type=term">%s</a>', $plugin['keyword'], esc_html__( 'Install', 'demo-awesome' ) );
 									}
 								}
 								?>
