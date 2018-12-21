@@ -51,6 +51,7 @@ if ( ! function_exists( 'demo_awesome_deactivate' ) ) {
 register_activation_hook( __FILE__, 'demo_awesome_activate' );
 register_deactivation_hook( __FILE__, 'demo_awesome_deactivate' );
 
+
 /**
  * The class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks

@@ -31,7 +31,7 @@ class Demo_Awesome_Customizer_Importer {
 
 		// Data checks.
 		if ( ! is_array( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
-			return new WP_Error( 'demo_awesome_customizer_import_data_error', __( 'The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'demo-awesome' ) );
+			return new WP_Error( 'demo_awesome_customizer_import_data_error', esc_html__( 'The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'demo-awesome' ) );
 		}
 
 		// Import Images.

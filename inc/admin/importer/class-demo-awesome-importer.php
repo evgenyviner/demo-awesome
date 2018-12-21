@@ -121,8 +121,8 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 		 */
 		function import_start( $file ) {
 			if ( ! is_file( $file ) ) {
-				echo '<p><strong>' . __( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
-				echo __( 'The file does not exist, please try again.', 'demo-awesome' ) . '</p>';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
+				echo esc_html__( 'The file does not exist, please try again.', 'demo-awesome' ) . '</p>';
 				$this->footer();
 				die();
 			}
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			$import_data = $this->parse( $file );
 
 			if ( is_wp_error( $import_data ) ) {
-				echo '<p><strong>' . __( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
 				echo esc_html( $import_data->get_error_message() ) . '</p>';
 				$this->footer();
 				die();
@@ -164,8 +164,8 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			wp_defer_term_counting( false );
 			wp_defer_comment_counting( false );
 
-			echo '<p>' . __( 'All done.', 'demo-awesome' ) . ' <a href="' . admin_url() . '">' . __( 'Have fun!', 'demo-awesome' ) . '</a>' . '</p>';
-			echo '<p>' . __( 'Remember to update the passwords and roles of imported users.', 'demo-awesome' ) . '</p>';
+			echo '<p>' . esc_html__( 'All done.', 'demo-awesome' ) . ' <a href="' . admin_url() . '">' . esc_html__( 'Have fun!', 'demo-awesome' ) . '</a>' . '</p>';
+			echo '<p>' . esc_html__( 'Remember to update the passwords and roles of imported users.', 'demo-awesome' ) . '</p>';
 
 			do_action( 'import_end' );
 		}
@@ -180,13 +180,13 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			$file = wp_import_handle_upload();
 
 			if ( isset( $file['error'] ) ) {
-				echo '<p><strong>' . __( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
 				echo esc_html( $file['error'] ) . '</p>';
 
 				return false;
 			} else if ( ! file_exists( $file['file'] ) ) {
-				echo '<p><strong>' . __( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
-				printf( __( 'The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'demo-awesome' ), esc_html( $file['file'] ) );
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
+				printf( esc_html__( 'The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'demo-awesome' ), esc_html( $file['file'] ) );
 				echo '</p>';
 
 				return false;
@@ -195,7 +195,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			$this->id    = (int) $file['id'];
 			$import_data = $this->parse( $file['file'] );
 			if ( is_wp_error( $import_data ) ) {
-				echo '<p><strong>' . __( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'demo-awesome' ) . '</strong><br />';
 				echo esc_html( $import_data->get_error_message() ) . '</p>';
 
 				return false;
@@ -204,7 +204,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			$this->version = $import_data['version'];
 			if ( $this->version > $this->max_wxr_version ) {
 				echo '<div class="error"><p><strong>';
-				printf( __( 'This WXR file (version %s) may not be supported by this version of the importer. Please consider updating.', 'demo-awesome' ), esc_html( $import_data['version'] ) );
+				printf( esc_html__( 'This WXR file (version %s) may not be supported by this version of the importer. Please consider updating.', 'demo-awesome' ), esc_html( $import_data['version'] ) );
 				echo '</strong></p></div>';
 			}
 
@@ -229,7 +229,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 				foreach ( $import_data['posts'] as $post ) {
 					$login = sanitize_user( $post['post_author'], true );
 					if ( empty( $login ) ) {
-						printf( __( 'Failed to import author %s. Their posts will be attributed to the current user.', 'demo-awesome' ), esc_html( $post['post_author'] ) );
+						printf( esc_html__( 'Failed to import author %s. Their posts will be attributed to the current user.', 'demo-awesome' ), esc_html( $post['post_author'] ) );
 						echo '<br />';
 						continue;
 					}
@@ -259,7 +259,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
                     <h3><?php _e( 'Assign Authors', 'demo-awesome' ); ?></h3>
                     <p><?php _e( 'To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries.', 'demo-awesome' ); ?></p>
 					<?php if ( $this->allow_create_users() ) : ?>
-                        <p><?php printf( __( 'If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'demo-awesome' ), esc_html( get_option( 'default_role' ) ) ); ?></p>
+                        <p><?php printf( esc_html__( 'If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'demo-awesome' ), esc_html( get_option( 'default_role' ) ) ); ?></p>
 					<?php endif; ?>
                     <ol id="authors">
 						<?php foreach ( $this->authors as $author ) : ?>
@@ -322,7 +322,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			wp_dropdown_users( array(
 				'name'            => "user_map[$n]",
 				'multi'           => true,
-				'show_option_all' => __( '- Select -', 'demo-awesome' )
+				'show_option_all' => esc_html__( '- Select -', 'demo-awesome' )
 			) );
 			echo '<input type="hidden" name="imported_authors[' . $n . ']" value="' . esc_attr( $author['author_login'] ) . '" />';
 
@@ -377,7 +377,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 						}
 						$this->author_mapping[ $santized_old_login ] = $user_id;
 					} else {
-						printf( __( 'Failed to create new user for %s. Their posts will be attributed to the current user.', 'demo-awesome' ), esc_html( $this->authors[ $old_login ]['author_display_name'] ) );
+						printf( esc_html__( 'Failed to create new user for %s. Their posts will be attributed to the current user.', 'demo-awesome' ), esc_html( $this->authors[ $old_login ]['author_display_name'] ) );
 						if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
 							echo ' ' . $user_id->get_error_message();
 						}
@@ -436,7 +436,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 						$this->processed_terms[ intval( $cat['term_id'] ) ] = $id;
 					}
 				} else {
-					printf( __( 'Failed to import category %s', 'demo-awesome' ), esc_html( $cat['category_nicename'] ) );
+					printf( esc_html__( 'Failed to import category %s', 'demo-awesome' ), esc_html( $cat['category_nicename'] ) );
 					if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
 						echo ': ' . $id->get_error_message();
 					}
@@ -485,7 +485,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 						$this->processed_terms[ intval( $tag['term_id'] ) ] = $id['term_id'];
 					}
 				} else {
-					printf( __( 'Failed to import post tag %s', 'demo-awesome' ), esc_html( $tag['tag_name'] ) );
+					printf( esc_html__( 'Failed to import post tag %s', 'demo-awesome' ), esc_html( $tag['tag_name'] ) );
 					if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
 						echo ': ' . $id->get_error_message();
 					}
@@ -546,7 +546,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 						$this->processed_terms[ intval( $term['term_id'] ) ] = $id['term_id'];
 					}
 				} else {
-					printf( __( 'Failed to import %s %s', 'demo-awesome' ), esc_html( $term['term_taxonomy'] ), esc_html( $term['term_name'] ) );
+					printf( esc_html__( 'Failed to import %s %s', 'demo-awesome' ), esc_html( $term['term_taxonomy'] ), esc_html( $term['term_name'] ) );
 					if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
 						echo ': ' . $id->get_error_message();
 					}
@@ -636,7 +636,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 				$post = apply_filters( 'wp_import_post_data_raw', $post );
 
 				if ( ! post_type_exists( $post['post_type'] ) ) {
-					printf( __( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'demo-awesome' ),
+					printf( esc_html__( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'demo-awesome' ),
 						esc_html( $post['post_title'] ), esc_html( $post['post_type'] ) );
 					echo '<br />';
 					do_action( 'wp_import_post_exists', $post );
@@ -675,7 +675,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 				$post_exists = apply_filters( 'wp_import_existing_post', $post_exists, $post );
 
 				if ( $post_exists && get_post_type( $post_exists ) == $post['post_type'] ) {
-					printf( __( '%s &#8220;%s&#8221; already exists.', 'demo-awesome' ), $post_type_object->labels->singular_name, esc_html( $post['post_title'] ) );
+					printf( esc_html__( '%s &#8220;%s&#8221; already exists.', 'demo-awesome' ), $post_type_object->labels->singular_name, esc_html( $post['post_title'] ) );
 					echo '<br />';
 					$comment_post_ID                                     = $post_id = $post_exists;
 					$this->processed_posts[ intval( $post['post_id'] ) ] = intval( $post_exists );
@@ -748,7 +748,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 					}
 
 					if ( is_wp_error( $post_id ) ) {
-						printf( __( 'Failed to import %s &#8220;%s&#8221;', 'demo-awesome' ),
+						printf( esc_html__( 'Failed to import %s &#8220;%s&#8221;', 'demo-awesome' ),
 							$post_type_object->labels->singular_name, esc_html( $post['post_title'] ) );
 						if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
 							echo ': ' . $post_id->get_error_message();
@@ -785,7 +785,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 								$term_id = $t['term_id'];
 								do_action( 'wp_import_insert_term', $t, $term, $post_id, $post );
 							} else {
-								printf( __( 'Failed to import %s %s', 'demo-awesome' ), esc_html( $taxonomy ), esc_html( $term['name'] ) );
+								printf( esc_html__( 'Failed to import %s %s', 'demo-awesome' ), esc_html( $taxonomy ), esc_html( $term['name'] ) );
 								if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
 									echo ': ' . $t->get_error_message();
 								}
@@ -934,7 +934,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 
 			$menu_id = term_exists( $menu_slug, 'nav_menu' );
 			if ( ! $menu_id ) {
-				printf( __( 'Menu item skipped due to invalid menu slug: %s', 'demo-awesome' ), esc_html( $menu_slug ) );
+				printf( esc_html__( 'Menu item skipped due to invalid menu slug: %s', 'demo-awesome' ), esc_html( $menu_slug ) );
 				echo '<br />';
 
 				return;
@@ -1010,7 +1010,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 		function process_attachment( $post, $url ) {
 			if ( ! $this->fetch_attachments ) {
 				return new WP_Error( 'attachment_processing_error',
-					__( 'Fetching attachments is not enabled', 'demo-awesome' ) );
+					esc_html__( 'Fetching attachments is not enabled', 'demo-awesome' ) );
 			}
 
 			// if the URL is absolute, but does not contain address, then upload it assuming base_site_url
@@ -1026,7 +1026,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			if ( $info = wp_check_filetype( $upload['file'] ) ) {
 				$post['post_mime_type'] = $info['type'];
 			} else {
-				return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'demo-awesome' ) );
+				return new WP_Error( 'attachment_processing_error', esc_html__( 'Invalid file type', 'demo-awesome' ) );
 			}
 
 			$post['guid'] = $upload['url'];
@@ -1080,7 +1080,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			if ( ! $headers ) {
 				@unlink( $upload['file'] );
 
-				return new WP_Error( 'import_file_error', __( 'Remote server did not respond', 'demo-awesome' ) );
+				return new WP_Error( 'import_file_error', esc_html__( 'Remote server did not respond', 'demo-awesome' ) );
 			}
 
 			$remote_response_code = wp_remote_retrieve_response_code( $remote_response );
@@ -1089,7 +1089,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			if ( $remote_response_code != '200' ) {
 				@unlink( $upload['file'] );
 
-				return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'demo-awesome' ), esc_html( $remote_response_code ), get_status_header_desc( $remote_response_code ) ) );
+				return new WP_Error( 'import_file_error', sprintf( esc_html__( 'Remote server returned error response %1$d %2$s', 'demo-awesome' ), esc_html( $remote_response_code ), get_status_header_desc( $remote_response_code ) ) );
 			}
 
 			$filesize = filesize( $upload['file'] );
@@ -1097,20 +1097,20 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
 				@unlink( $upload['file'] );
 
-				return new WP_Error( 'import_file_error', __( 'Remote file is incorrect size', 'demo-awesome' ) );
+				return new WP_Error( 'import_file_error', esc_html__( 'Remote file is incorrect size', 'demo-awesome' ) );
 			}
 
 			if ( 0 == $filesize ) {
 				@unlink( $upload['file'] );
 
-				return new WP_Error( 'import_file_error', __( 'Zero size file downloaded', 'demo-awesome' ) );
+				return new WP_Error( 'import_file_error', esc_html__( 'Zero size file downloaded', 'demo-awesome' ) );
 			}
 
 			$max_size = (int) $this->max_attachment_size();
 			if ( ! empty( $max_size ) && $filesize > $max_size ) {
 				@unlink( $upload['file'] );
 
-				return new WP_Error( 'import_file_error', sprintf( __( 'Remote file is too large, limit is %s', 'demo-awesome' ), size_format( $max_size ) ) );
+				return new WP_Error( 'import_file_error', sprintf( esc_html__( 'Remote file is too large, limit is %s', 'demo-awesome' ), size_format( $max_size ) ) );
 			}
 
 			// keep track of the old and new urls so we can substitute them later
@@ -1220,14 +1220,14 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 		// Display import page title
 		function header() {
 			echo '<div class="wrap">';
-			echo '<h2>' . __( 'Import WordPress', 'demo-awesome' ) . '</h2>';
+			echo '<h2>' . esc_html__( 'Import WordPress', 'demo-awesome' ) . '</h2>';
 
 			$updates  = get_plugin_updates();
 			$basename = plugin_basename( __FILE__ );
 			if ( isset( $updates[ $basename ] ) ) {
 				$update = $updates[ $basename ];
 				echo '<div class="error"><p><strong>';
-				printf( __( 'A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files.', 'demo-awesome' ), $update->update->new_version );
+				printf( esc_html__( 'A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files.', 'demo-awesome' ), $update->update->new_version );
 				echo '</strong></p></div>';
 			}
 		}
@@ -1242,8 +1242,8 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 		 */
 		function greet() {
 			echo '<div class="narrow">';
-			echo '<p>' . __( 'Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'demo-awesome' ) . '</p>';
-			echo '<p>' . __( 'Choose a WXR (.xml) file to upload, then click Upload file and import.', 'demo-awesome' ) . '</p>';
+			echo '<p>' . esc_html__( 'Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'demo-awesome' ) . '</p>';
+			echo '<p>' . esc_html__( 'Choose a WXR (.xml) file to upload, then click Upload file and import.', 'demo-awesome' ) . '</p>';
 			wp_import_upload_form( 'admin.php?import=wordpress&amp;step=1' );
 			echo '</div>';
 		}
