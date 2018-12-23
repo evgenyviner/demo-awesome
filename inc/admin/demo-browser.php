@@ -221,9 +221,9 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 							if ( Demo_Awesome_Admin::is_free_theme() ) { ?>
                                 <p class="alert alert-info required-premium-text"><span
                                             class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><span><?php echo sprintf( esc_html__( 'This demo requires the %1$sPremium%2$s version of the theme', 'demo-awesome' ), '<strong>', '</strong>' ); ?></span>
-                                    <a class="button button-primary"
+                                    <a class="button button-primary demo-name-link-1"
                                        target="_blank"
-                                       href="<?php echo Demo_Awesome_Admin::premium_url(1) ?>"><?php esc_html_e( 'More', 'demo-awesome' ); ?>
+                                       href=""><?php esc_html_e( 'More', 'demo-awesome' ); ?>
                                     </a>
                                 </p>
 							<?php }
@@ -310,9 +310,9 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 							if ( Demo_Awesome_Admin::is_free_theme() ) { ?>
                                 <p class="alert alert-info required-premium-text"><span
                                             class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><span><?php echo sprintf( esc_html__( 'This demo requires the %1$sPremium%2$s version of the theme', 'demo-awesome' ), '<strong>', '</strong>' ); ?></span>
-                                    <a class="button button-primary"
+                                    <a class="button button-primary demo-name-link-2"
                                        target="_blank"
-                                       href="<?php echo Demo_Awesome_Admin::premium_url(2) ?>"><?php esc_html_e( 'More', 'demo-awesome' ); ?>
+                                       href=""><?php esc_html_e( 'More', 'demo-awesome' ); ?>
                                     </a>
                                 </p>
 							<?php }

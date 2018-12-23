@@ -1602,6 +1602,8 @@ jQuery(function ($) {
         $('.demo-awesome-container.demo-info-row').attr('data-demo-show', data_demo_show);
         data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
+        var url_1 = 'https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-detail-modal&utm_medium=detail-link-' + data_demo.name + '&utm_campaign=modal-popup';
+        var url_2 = 'https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-live-preview-modal&utm_medium=live-preview-link-' + data_demo.name + '&utm_campaign=modal-popup';
         $('.demo-preview-container iframe').attr('src', data_demo.preview_url);
         // console.log(data_demo);
         if (data_demo.required_plugins) {
@@ -1612,6 +1614,8 @@ jQuery(function ($) {
         }
         $('.demo-screenshot-container img').attr('src', image_url);
         $('.modal-header h5 span').text(data_demo.name);
+        $('.demo-name-link-1').attr('href', url_1);
+        $('.demo-name-link-2').attr('href', url_2);
         if (demo_awesome_js_local_vars.is_theme4press_theme) {
             if (data_demo.premium_demo) {
                 $('.modal .demo-awesome-premium-badge').show();

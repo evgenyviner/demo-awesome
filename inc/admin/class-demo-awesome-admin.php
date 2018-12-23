@@ -249,34 +249,34 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function update_galleries_data( $data_demo, $template_name = 'blog' ) {
-			if ( ! empty( $data_demo['update_galleries'] ) && ! empty( $data_demo['update_galleries']['pages'] )) {
+			if ( ! empty( $data_demo['update_galleries'] ) && ! empty( $data_demo['update_galleries']['pages'] ) ) {
 				foreach ( $data_demo['update_galleries']['pages'] as $data_value ) {
-					if(! empty($data_value['title'])){
+					if ( ! empty( $data_value['title'] ) ) {
 						$page = get_page_by_title( $data_value['title'] );
 						if ( is_object( $page ) && $page->ID ) {
 							foreach ( $data_value['items'] as $shortcode_values ) {
-								$names = explode(',', $shortcode_values['names']);
-								$ids = explode(',', $shortcode_values['ids']);
+								$names   = explode( ',', $shortcode_values['names'] );
+								$ids     = explode( ',', $shortcode_values['ids'] );
 								$new_ids = array();
-								foreach($ids as $id_key => $id){
-									$attach = get_page_by_title( $names[$id_key], OBJECT, 'attachment' );
+								foreach ( $ids as $id_key => $id ) {
+									$attach = get_page_by_title( $names[ $id_key ], OBJECT, 'attachment' );
 									if ( is_object( $attach ) && $attach->ID ) {
 										$new_ids[] = $attach->ID;
 									}
 								}
-								if($new_ids){
-									$new_ids_string = implode(',', $new_ids);
-									$post_content_new = str_replace('ids="'.$shortcode_values['ids'], 'ids="'.$new_ids_string, $page->post_content);
-								 	$my_post = array(
-								      'ID'           => $page->ID,
-								      'post_content'   => $post_content_new,
-								  	);								  
+								if ( $new_ids ) {
+									$new_ids_string   = implode( ',', $new_ids );
+									$post_content_new = str_replace( 'ids="' . $shortcode_values['ids'], 'ids="' . $new_ids_string, $page->post_content );
+									$my_post          = array(
+										'ID'           => $page->ID,
+										'post_content' => $post_content_new,
+									);
 									// Update the post into the database
-								  	wp_update_post( $my_post );
-								}							
+									wp_update_post( $my_post );
+								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -628,20 +628,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$svg .= '</svg>';
 
 			return $svg;
-		}
-
-
-		/**
-		 * @since    1.0.0
-		 */
-		public static function premium_url( $type ) {
-			if ( $type == 1 ) {
-				$premium_url = esc_url( "https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-detail-modal&utm_medium=detail-link&utm_campaign=modal-popup" );
-			} elseif ( $type == 2 ) {
-				$premium_url = esc_url( "https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-live-preview-modal&utm_medium=live-preview-link&utm_campaign=modal-popup" );
-			}
-
-			return $premium_url;
 		}
 
 		/**
