@@ -950,7 +950,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			}
 
 			if ( 'taxonomy' == $_menu_item_type && isset( $this->processed_terms[ intval( $_menu_item_object_id ) ] ) ) {
-				$_menu_item_object_id = $this->processed_terms[ intval( $_menu_item_object_id ) ];
+				$_menu_item_object_id = $this->processed_terms[ intval( $_menu_item_object_id ) ];	
 			} else if ( 'post_type' == $_menu_item_type && isset( $this->processed_posts[ intval( $_menu_item_object_id ) ] ) ) {
 				$_menu_item_object_id = $this->processed_posts[ intval( $_menu_item_object_id ) ];
 			} else if ( 'custom' != $_menu_item_type ) {
@@ -993,7 +993,9 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 			if ( $id && ! is_wp_error( $id ) ) {
 				//fix to update mega menu data
 				foreach ( $item['postmeta'] as $meta ) {
-					update_post_meta($id, $meta['key'], $meta['value']);
+					if (strpos($meta['key'],'evolve_mega') !== false) {
+						update_post_meta($id, $meta['key'], maybe_unserialize($meta['value']));
+					}
 				}
 				$this->processed_menu_items[ intval( $item['post_id'] ) ] = (int) $id;
 			}
