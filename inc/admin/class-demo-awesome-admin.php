@@ -633,6 +633,47 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		public static function is_plugin_installed( $plugin ) {
+
+			if ( ! function_exists( 'get_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			$all_plugins = get_plugins();
+
+			foreach ( $all_plugins as $single_plugin ) {
+				if ( isset( $single_plugin['Name'] ) && $single_plugin['Name'] == $plugin ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		public static function is_plugin_activated( $plugin ) {
+
+			if ( ! function_exists( 'get_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			$all_plugins    = get_plugins();
+			$active_plugins = get_option( 'active_plugins' );
+
+			foreach ( $active_plugins as $item ) {
+				if ( isset( $all_plugins[ $item ]['Name'] ) && $all_plugins[ $item ]['Name'] == $plugin ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		function importer_page() {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
@@ -670,6 +711,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
 			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'css/admin.css' );
 
+
 		}
 
 		/**
@@ -681,6 +723,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				return;
 			}
 
+			add_thickbox();
 			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'js/admin.js' );
 
 			$local_variables = array(
