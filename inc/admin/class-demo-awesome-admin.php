@@ -40,7 +40,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			add_action( 'load-plugins.php', array( $this, 'admin_notice' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
-			add_action( 'demo_awesome_remove_all_of_old_posts_pages', array( $this, 'demo_awesome_remove_all_of_old_posts_pages' ) );
+			add_action( 'remove_old_posts_pages', array( $this, 'remove_old_posts_pages' ) );
 			add_action( 'wp_loaded', array( $this, 'hide_notice' ) );
 			add_filter( 'customizer_demo_import_settings', array(
 				$this,
@@ -162,14 +162,14 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function demo_awesome_remove_all_of_old_posts_pages(){
-			$list_posts_pages = get_posts(array(
-				'posts_per_page' => -1,
-				'post_type' => array('post', 'page', 'product')
-			));
-			if($list_posts_pages){
-				foreach($list_posts_pages as $post_item){
-					wp_delete_post($post_item->ID, true);
+		function remove_old_posts_pages() {
+			$list_posts_pages = get_posts( array(
+				'posts_per_page' => - 1,
+				'post_type'      => array( 'post', 'page', 'product' )
+			) );
+			if ( $list_posts_pages ) {
+				foreach ( $list_posts_pages as $post_item ) {
+					wp_delete_post( $post_item->ID, true );
 				}
 			}
 		}
@@ -186,28 +186,28 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			delete_option( 'theme_mods_evolve-plus' );
 			delete_option( 'theme_mods_evolve' );
 
-			//remove all of old nav menus
-			$list_menus = get_posts(array(
-				'post_type' => 'nav_menu_item',
-				'posts_per_page' => -1
-			));
-			if($list_menus){
-				foreach($list_menus as $menu){
-					wp_delete_post($menu->ID, true);
+			// remove all of old nav menus
+			$list_menus = get_posts( array(
+				'post_type'      => 'nav_menu_item',
+				'posts_per_page' => - 1
+			) );
+			if ( $list_menus ) {
+				foreach ( $list_menus as $menu ) {
+					wp_delete_post( $menu->ID, true );
 				}
 			}
 
-			//remove all widgets data
+			// remove all widgets data
 			$list_widgets = wp_load_alloptions();
-			if($list_widgets){
-				delete_option('sidebars_widgets');
+			if ( $list_widgets ) {
+				delete_option( 'sidebars_widgets' );
 				foreach ( $list_widgets as $option => $value ) {
-				    if ( strpos( $option, 'widget_' ) === 0 ) {
-				        delete_option( $option );
-				    }
+					if ( strpos( $option, 'widget_' ) === 0 ) {
+						delete_option( $option );
+					}
 				}
 			}
-			do_action('demo_awesome_remove_all_of_old_posts_pages');
+			do_action( 'remove_old_posts_pages' );
 
 			if ( Demo_Awesome_Admin::is_premium_theme() == true && ! $data_demo['premium_demo'] ) {
 				update_option( 'check_updated_to_new_bootstrap_slider_data_', false );
@@ -224,17 +224,17 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				) );
 				wp_die();
 			}
-			//import content data
+			// import content data
 			$this->import_content_theme( $data_demo, $template_name );
-			//import widget
+			// import widget
 			$this->import_widget_settings( $data_demo, $template_name );
-			//import customizer
+			// import customizer
 			$this->import_customizer_data( $data_demo, $template_name );
-			//fix menu
+			// fix menu
 			$this->update_nav_menu_items( $data_demo, $template_name );
-			//fix option
+			// fix option
 			$this->update_option_data( $data_demo, $template_name );
-			//fix galleries data
+			// fix galleries data
 			$this->update_galleries_data( $data_demo, $template_name );
 
 

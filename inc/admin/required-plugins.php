@@ -22,7 +22,7 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
             <div class="alert required-plugins-text<?php if ( ! $has_required ) {
 				echo ' hide';
 			} ?>" role="alert">
-				<?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
+                <span class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'warning' ); ?></span><?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
                 <button class="button button-primary refresh-required"><span
                             class="mr-1"
                             name="refresh-required"><?php echo Demo_Awesome_Admin::get_svg( 'refresh' ); ?></span><?php _e( 'Refresh', 'demo-awesome' ); ?>

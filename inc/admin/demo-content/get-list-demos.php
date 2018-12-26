@@ -25,15 +25,12 @@ $list_demos = array(
 					'folder_path'            => 'app/1',
 					'customizer_data_update' => array(
 						'nav_menu_locations' => array(
-							'primary-menu'      => 'Main menu',
-							'sticky_navigation' => 'Main menu',
+							'primary-menu' => 'Main menu',
 						)
 					),
-					'option_update'         => array(
-						'blogname' 			=> 'BRAND NEW APP',
-						'blogdescription' 	=> 'Nullam semper leo a tortor mattis',
-						'show_on_front' 	=> 'page',
-						'update_pages'  	=> array(
+					'option_update'          => array(
+						'show_on_front' => 'page',
+						'update_pages'  => array(
 							'page_on_front' => 'Home',
 						)
 					)
@@ -188,7 +185,7 @@ $list_demos = array(
 						'enable_description'  => '',
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
-					'LayerSlider WP'          => array(
+					'LayerSlider WP'       => array(
 						'name'                => 'LayerSlider',
 						'keyword'             => 'LayerSlider',
 						'follow_download'     => true,
@@ -199,8 +196,7 @@ $list_demos = array(
 				'folder_path'            => 'business/4',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						'primary-menu'      => 'Main menu',
-						'sticky_navigation' => 'Main menu',
+						'primary-menu' => 'Main menu'
 					)
 				),
 				'option_update'          => array(
@@ -232,8 +228,7 @@ $list_demos = array(
 				'folder_path'            => 'eshop/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						'primary-menu'      => 'Main menu',
-						'sticky_navigation' => 'Main menu',
+						'primary-menu' => 'Main menu',
 					)
 				),
 				'option_update'          => array(
@@ -263,6 +258,12 @@ $list_demos = array(
 					'nav_menu_locations' => array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
+					)
+				),
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front' => 'Home',
 					)
 				)
 			),
@@ -307,8 +308,7 @@ $list_demos = array(
 				'folder_path'            => 'personal/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						'primary-menu'      => 'Main menu',
-						'sticky_navigation' => 'Main menu',
+						'primary-menu' => 'Main menu',
 					)
 				),
 				'option_update'          => array(
@@ -347,9 +347,11 @@ $list_demos = array(
 				'option_update'          => array(
 					'show_on_front' => 'page',
 					'update_pages'  => array(
-						'page_on_front' => 'Home'
+						'page_on_front'  => 'Home',
+						'page_for_posts' => 'Blog',
 					)
 				),
+				'posts_per_page'         => 3
 			),
 		),
 	),

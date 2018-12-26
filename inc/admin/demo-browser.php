@@ -116,10 +116,10 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
                     <div class="wizard-step">
                         <div class="alert" role="alert">
-							<?php echo sprintf( ( '%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s%9$s%10$s%11$s%12$s%13$s' ), esc_html__( 'The demo import may overwrite/remove many website options', 'demo-awesome' ), '<br /><br />- ', esc_html__( 'customizer settings', 'demo-awesome' ), '<br />- ', esc_html__( 'menus', 'demo-awesome' ), '<br />- ', esc_html__( 'widgets', 'demo-awesome' ), '<br />- ', esc_html__( 'posts/pages', 'demo-awesome' ), '<br />- ', esc_html__( 'set new front page', 'demo-awesome' ), '<br /><br />', esc_html__( 'Some demos can take few minutes to complete the import, depending on the complexity of the demo content.', 'demo-awesome' ) ); ?>
+                            <span class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'warning' ); ?></span><?php echo sprintf( ( '%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s%9$s%10$s%11$s%12$s%13$s' ), esc_html__( 'The demo import may overwrite/remove many website options', 'demo-awesome' ), '<br /><br />- ', esc_html__( 'customizer settings', 'demo-awesome' ), '<br />- ', esc_html__( 'menus', 'demo-awesome' ), '<br />- ', esc_html__( 'widgets', 'demo-awesome' ), '<br />- ', esc_html__( 'posts/pages', 'demo-awesome' ), '<br />- ', esc_html__( 'set new front page', 'demo-awesome' ), '<br /><br />', esc_html__( 'Some demos can take few minutes to complete the import, depending on the complexity of the demo content.', 'demo-awesome' ) ); ?>
                         </div>
 
-                        <p><?php echo sprintf( esc_html__( 'Please proceed with a caution. The demo import is recommended for new websites and it will replicate the demo website which you can see in the preview mode. %1$sThe import process that has been launched multiple times will result in duplicate content on the website.%2$s', 'demo-awesome' ), '<strong>', '</strong>' ); ?></p>
+                        <p><?php echo esc_html__( 'Please proceed with a caution. The demo import is recommended for new websites and it will replicate the demo website which you can see in the preview mode.', 'demo-awesome' ); ?></p>
 
                         <p><strong><?php esc_html_e( 'Step 2 of 2', 'demo-awesome' ); ?></strong></p>
 
@@ -150,7 +150,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                 <div class="modal-body">
 
                     <div class="alert hide-content" role="alert">
-						<?php esc_html_e( 'Please don\'t leave/refresh the page while importing. Some demos can take few minutes to complete the import, depending on the complexity of the demo content', 'demo-awesome' ); ?>
+                        <span class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'warning' ); ?></span><?php esc_html_e( 'Please don\'t leave/refresh the page while importing. Some demos can take few minutes to complete the import, depending on the complexity of the demo content', 'demo-awesome' ); ?>
                     </div>
 
                     <h3 class="hide-content"><?php echo '<span class="svg-spin mr-1">' . Demo_Awesome_Admin::get_svg( 'loader' ) . '</span>';
