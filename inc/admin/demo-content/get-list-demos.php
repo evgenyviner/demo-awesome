@@ -14,7 +14,7 @@ $list_demos = array(
 					'premium_demo'           => true,
 					'required_plugins'       => true,
 					'plugins'                => array(
-						'Componentz' => array(
+						'Component Shortcodes' => array(
 							'name'                => 'Component Shortcodes',
 							'keyword'             => 'Component Shortcodes',
 							'follow_download'     => true,
@@ -29,9 +29,11 @@ $list_demos = array(
 							'sticky_navigation' => 'Main Menu',
 						)
 					),
-					'option_update'          => array(
-						'show_on_front' => 'page',
-						'update_pages'  => array(
+					'option_update'         => array(
+						'blogname' 			=> 'BRAND NEW APP',
+						'blogdescription' 	=> 'Nullam semper leo a tortor mattis',
+						'show_on_front' 	=> 'page',
+						'update_pages'  	=> array(
 							'page_on_front' => 'Home',
 						)
 					)
@@ -48,7 +50,7 @@ $list_demos = array(
 				'premium_demo'           => true,
 				'required_plugins'       => true,
 				'plugins'                => array(
-					'RevSlider' => array(
+					'Slider Revolution' => array(
 						'name'                => 'Slider Revolution',
 						'keyword'             => 'Slider Revolution',
 						'follow_download'     => true,
@@ -62,6 +64,13 @@ $list_demos = array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
+				),
+				'option_update'          => array(
+					'show_on_front'  => 'page',
+					'update_pages'   => array(
+						'page_for_posts' => 'Home',
+					),
+					'posts_per_page' => 9
 				)
 			),
 		),
@@ -84,13 +93,13 @@ $list_demos = array(
 				'option_update'          => array(
 					'posts_per_page' => 3
 				),
-				'update_galleries' => array(
+				'update_galleries'       => array(
 					'pages' => array(
 						array(
-							'title' =>  'Our Team',
+							'title' => 'Our Team',
 							'items' => array(
 								array(
-									'ids' => '11,10',
+									'ids'   => '11,10',
 									'names' => 'testimonial-2,testimonial-1'
 								)
 							)
@@ -105,7 +114,7 @@ $list_demos = array(
 				'premium_demo'           => true,
 				'required_plugins'       => true,
 				'plugins'                => array(
-					'Componentz' => array(
+					'Component Shortcodes' => array(
 						'name'                => 'Component Shortcodes',
 						'keyword'             => 'Component Shortcodes',
 						'follow_download'     => true,
@@ -119,41 +128,33 @@ $list_demos = array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
-				)
+				),
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front' => 'Home',
+					)
+				),
 			),
 			array(
 				'name'                   => 'Business 3',
-				'preview_url'            => 'https://demo.theme4press.com/evolve/',
+				'preview_url'            => 'https://demo.theme4press.com/evolve-plus-default/',
 				'require_ver_premium'    => '2.9.1',
 				'premium_demo'           => true,
 				'required_plugins'       => true,
 				'plugins'                => array(
-					'Componentz'   => array(
+					'Component Shortcodes' => array(
 						'name'                => 'Component Shortcodes',
 						'keyword'             => 'Component Shortcodes',
 						'follow_download'     => true,
 						'enable_description'  => '',
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
-					'WooCommerce'  => array(
+					'WooCommerce'          => array(
 						'name'                => 'WooCommerce',
 						'keyword'             => 'WooCommerce',
 						'enable_description'  => '',
 						'disable_description' => '',
-					),
-					'RevSlider'    => array(
-						'name'                => 'Slider Revolution',
-						'keyword'             => 'Slider Revolution',
-						'follow_download'     => true,
-						'enable_description'  => '',
-						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
-					),
-					'LS_Shortcode' => array(
-						'name'                => 'LayerSlider',
-						'keyword'             => 'LayerSlider',
-						'follow_download'     => true,
-						'enable_description'  => '',
-						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
 				'folder_path'            => 'business/3',
@@ -162,7 +163,16 @@ $list_demos = array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
-				)
+				),
+				'option_update'          => array(
+					'show_on_front'  => 'page',
+					'update_pages'   => array(
+						'page_on_front'            => 'Home',
+						'page_for_posts'           => 'Blog',
+						'woocommerce_shop_page_id' => 'Shop'
+					),
+					'posts_per_page' => 9
+				),
 			),
 			array(
 				'name'                   => 'Business 4',
@@ -171,14 +181,14 @@ $list_demos = array(
 				'premium_demo'           => true,
 				'required_plugins'       => true,
 				'plugins'                => array(
-					'Componentz'   => array(
+					'Component Shortcodes' => array(
 						'name'                => 'Component Shortcodes',
 						'keyword'             => 'Component Shortcodes',
 						'follow_download'     => true,
 						'enable_description'  => '',
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
-					'LS_Shortcode' => array(
+					'LayerSlider WP'          => array(
 						'name'                => 'LayerSlider',
 						'keyword'             => 'LayerSlider',
 						'follow_download'     => true,
@@ -192,7 +202,13 @@ $list_demos = array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
-				)
+				),
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front' => 'Home',
+					)
+				),
 			),
 		),
 	),
@@ -280,7 +296,7 @@ $list_demos = array(
 				'premium_demo'           => true,
 				'required_plugins'       => true,
 				'plugins'                => array(
-					'Componentz' => array(
+					'Component Shortcodes' => array(
 						'name'                => 'Component Shortcodes',
 						'keyword'             => 'Component Shortcodes',
 						'follow_download'     => true,
@@ -314,7 +330,7 @@ $list_demos = array(
 				'premium_demo'           => true,
 				'required_plugins'       => true,
 				'plugins'                => array(
-					'RevSlider' => array(
+					'Slider Revolution' => array(
 						'name'                => 'Slider Revolution',
 						'keyword'             => 'Slider Revolution',
 						'follow_download'     => true,
@@ -325,10 +341,15 @@ $list_demos = array(
 				'folder_path'            => 'photography/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
-						'primary-menu'      => 'Main menu',
-						'sticky_navigation' => 'Main menu',
+						'primary-menu' => 'Main menu'
 					)
-				)
+				),
+				'option_update'          => array(
+					'show_on_front' => 'page',
+					'update_pages'  => array(
+						'page_on_front' => 'Home'
+					)
+				),
 			),
 		),
 	),
