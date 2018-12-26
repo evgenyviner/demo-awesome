@@ -40,6 +40,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			add_action( 'load-plugins.php', array( $this, 'admin_notice' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
+			add_action( 'demo_awesome_remove_all_of_old_posts_pages', array( $this, 'demo_awesome_remove_all_of_old_posts_pages' ) );
 			add_action( 'wp_loaded', array( $this, 'hide_notice' ) );
 			add_filter( 'customizer_demo_import_settings', array(
 				$this,
@@ -53,6 +54,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			if ( get_option( 'demo_awesome_no_theme4press_theme_notice', 1 ) ) {
 				add_action( 'admin_notices', array( $this, 'no_theme4press_theme_notice' ) );
 			}
+
 		}
 
 		/**
@@ -160,6 +162,21 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
+		function demo_awesome_remove_all_of_old_posts_pages(){
+			$list_posts_pages = get_posts(array(
+				'posts_per_page' => -1,
+				'post_type' => array('post', 'page', 'product')
+			));
+			if($list_posts_pages){
+				foreach($list_posts_pages as $post_item){
+					wp_delete_post($post_item->ID, true);
+				}
+			}
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
 		function call_import_function_from_ajax() {
 
 			$data_demo = isset( $_REQUEST['data_demo'] ) ? $_REQUEST['data_demo'] : array();
@@ -183,12 +200,14 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			//remove all widgets data
 			$list_widgets = wp_load_alloptions();
 			if($list_widgets){
+				delete_option('sidebars_widgets');
 				foreach ( $list_widgets as $option => $value ) {
 				    if ( strpos( $option, 'widget_' ) === 0 ) {
 				        delete_option( $option );
 				    }
 				}
 			}
+			do_action('demo_awesome_remove_all_of_old_posts_pages');
 
 			if ( Demo_Awesome_Admin::is_premium_theme() == true && ! $data_demo['premium_demo'] ) {
 				update_option( 'check_updated_to_new_bootstrap_slider_data_', false );
