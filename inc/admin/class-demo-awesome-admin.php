@@ -169,6 +169,17 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			delete_option( 'theme_mods_evolve-plus' );
 			delete_option( 'theme_mods_evolve' );
 
+			//remove all of old nav menus
+			$list_menus = get_posts(array(
+				'post_type' => 'nav_menu_item',
+				'posts_per_page' => -1
+			));
+			if($list_menus){
+				foreach($list_menus as $menu){
+					wp_delete_post($menu->ID, true);
+				}
+			}
+
 			if ( Demo_Awesome_Admin::is_premium_theme() == true && ! $data_demo['premium_demo'] ) {
 				update_option( 'check_updated_to_new_bootstrap_slider_data_', false );
 				update_option( 'check_updated_to_new_parallax_slider_data_', false );
