@@ -40,17 +40,17 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 			if ( isset( $demo_awesome_item['items'] ) && $demo_awesome_item['items'] ) {
 				foreach ( $demo_awesome_item['items'] as $demo_awesome_item_key_2 => $demo_awesome_item_2 ) {
 					$demo_awesome_index_temp_demo ++;
-					$premium_demo = ( isset( $demo_awesome_item_2['premium_demo'] ) && $demo_awesome_item_2['premium_demo'] ) ? true : false;
+					$demo_awesome_premium_demo = ( isset( $demo_awesome_item_2['premium_demo'] ) && $demo_awesome_item_2['premium_demo'] ) ? true : false;
 					?>
                     <div class="demo demo-awesome-container filter-all <?php echo esc_attr( $demo_awesome_item_key ); ?>"
                          tabindex="0"
                          aria-describedby="demo-action demo-name"
                          data-demo-show="<?php echo esc_attr( json_encode( $demo_awesome_item_2 ) ); ?>">
-						<?php if ( $premium_demo && Demo_Awesome_Admin::is_free_theme() ) { ?>
+						<?php if ( $demo_awesome_premium_demo && Demo_Awesome_Admin::is_free_theme() ) { ?>
                             <div class="badge badge-demo"><?php esc_html_e( 'PREMIUM', 'demo-awesome' ); ?></div><?php } ?>
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
-                            <img src="<?php echo "https://demo.theme4press.com/demo-import/" . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
+                            <img src="<?php echo DEMO_AWESOME_IMPORTER_SOURCE_URL . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
                                  alt=""/>
                             <span class="more-details" id="demo-action"></span>
                         </div>
@@ -61,7 +61,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
                             <div class="demo-actions"
                                  data-index="<?php echo esc_attr( $demo_awesome_index_temp_demo ); ?>">
-								<?php if ( Demo_Awesome_Admin::is_premium_theme() || ! $premium_demo && Demo_Awesome_Admin::is_free_theme() ) { ?>
+								<?php if ( Demo_Awesome_Admin::is_premium_theme() || ! $demo_awesome_premium_demo && Demo_Awesome_Admin::is_free_theme() ) { ?>
                                     <a href="#"
                                        role="button"
                                        class="button import call-import-demo-function"
@@ -104,7 +104,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
 						<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
                                 class="theme-required-version"></span><br/>
-                        <h3><?php esc_html_e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                        <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] ); ?></h3>
 
 						<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) {
 							demo_awesome_required_plugins();
@@ -174,7 +174,6 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                     <a role="button" class="button button-primary"
                        data-dismiss="modal" href="#"
                        aria-label="<?php esc_html_e( 'Close', 'demo-awesome' ); ?>"><?php esc_html_e( 'Close', 'demo-awesome' ); ?></a>
-                    </a>
                 </div>
             </div>
         </div>
@@ -203,16 +202,14 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 							<?php if ( Demo_Awesome_Admin::is_free_theme() ) { ?>
                                 <div class="badge badge-demo demo-awesome-premium-badge"><?php esc_html_e( 'PREMIUM', 'demo-awesome' ); ?></div>
 							<?php } ?>
-                            <img src="<?php echo "https://demo.theme4press.com/demo-import/business/1/screenshot.png"; ?>"
-                                 alt=""/>
+                            <img src="" alt=""/>
                         </div>
 
                         <div class="demo-info-col">
                             <div class="required-theme-version">
 								<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?>
-                                <span
-                                        class="theme-required-version"></span><br/>
-                                <h3><?php esc_html_e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                                <span class="theme-required-version"></span><br/>
+                                <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] ); ?></h3>
                             </div>
 
 							<?php if ( Demo_Awesome_Admin::is_premium_theme() || Demo_Awesome_Admin::is_free_theme() ) {
@@ -237,7 +234,6 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                                 <a href="#" role="button" class="button proceed close-premium"
                                    data-dismiss="modal"
                                    aria-label="<?php esc_html_e( 'Close', 'demo-awesome' ); ?>"><?php esc_html_e( 'Close', 'demo-awesome' ); ?></a>
-                                </a>
 								<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
                                     <a href="#"
                                        role="button"
@@ -299,9 +295,8 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                         <div class="demo-info-col demo-required-plugins demo-required-plugins-preview">
                             <div class="required-theme-version">
 								<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?>
-                                <span
-                                        class="theme-required-version"></span><br/>
-                                <h3><?php esc_html_e( 'Installed theme version: ' . $demo_awesome_my_theme['Version'], 'demo-awesome' ); ?></h3>
+                                <span class="theme-required-version"></span><br/>
+                                <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] ); ?></h3>
                             </div>
 
 							<?php if ( Demo_Awesome_Admin::is_premium_theme() || Demo_Awesome_Admin::is_free_theme() ) {
@@ -340,4 +335,5 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
             </div>
         </div>
     </div>
+
 </div>

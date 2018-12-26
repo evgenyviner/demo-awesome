@@ -22,10 +22,10 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
             <div class="alert required-plugins-text<?php if ( ! $has_required ) {
 				echo ' hide';
 			} ?>" role="alert">
-                <span class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'warning' ); ?></span><?php _e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
+                <span class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'warning' ); ?></span><?php esc_html_e( 'This demo import requires additional plugins', 'demo-awesome' ); ?>
                 <button class="button button-primary refresh-required"><span
                             class="mr-1"
-                            name="refresh-required"><?php echo Demo_Awesome_Admin::get_svg( 'refresh' ); ?></span><?php _e( 'Refresh', 'demo-awesome' ); ?>
+                            name="refresh-required"><?php echo Demo_Awesome_Admin::get_svg( 'refresh' ); ?></span><?php esc_html_e( 'Refresh', 'demo-awesome' ); ?>
                 </button>
             </div>
 
@@ -50,15 +50,16 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
 									if ( isset( $plugin['follow_download'] ) && $plugin['follow_download'] ) {
 										$premium_plugin = sprintf( '<div class="badge badge-premium">%s</div>', $plugin['disable_description'] );
 									} else {
-										$premium_plugin = sprintf( '<a class="button button-proceed thickbox" href="' . get_admin_url() . 'plugin-install.php?tab=plugin-information&plugin=%s&TB_iframe=true&width=640&height=500">%s</a>', $plugin['keyword'], esc_html__( 'Install', 'demo-awesome' ) );
+										$premium_plugin = sprintf( '<a class="button button-proceed" target="_blank" href="' . self_admin_url( 'plugin-install.php?tab=plugin-information&amp;plugin=%s">%s</a>' ), $plugin['keyword'], esc_html__( 'Install', 'demo-awesome' ) );
 									}
 									$show_required_description = true;
 								}
-
 								?>
                                 <li>
                                     <strong><?php
-										echo $plugin['name'] . '<br />' . $required_plugin; ?></strong><?php echo $premium_plugin; ?>
+										echo $plugin['name'] . '<br />' . $required_plugin; ?></strong><?php if ( current_user_can( 'install_plugins' ) || current_user_can( 'update_plugins' ) ) {
+										echo $premium_plugin;
+									} ?>
                                 </li>
 								<?php
 							}
@@ -66,7 +67,7 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
                     </ul>
 					<?php if ( $show_required_description ) { ?>
                         <p class="alert alert-info required-description-text"><span
-                                    class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php _e( 'You can install/activate the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout', 'demo-awesome' ); ?>
+                                    class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php esc_html_e( 'You can install/activate the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout', 'demo-awesome' ); ?>
                         </p>
 					<?php }
 				} ?>

@@ -1,11 +1,13 @@
 <?php
 /**
- * Customizer importer - import customizer settings.
+ * Demo Awesome importer based on WordPress importer core
  *
  * Code adapted from the "Customizer Export/Import" plugin.
  *
- * @package Demo_Awesome_Customizer_Importer/Classes
- * @version 1.0.0
+ * @link       https://theme4press.com/demo-awesome-the-data-importer/
+ * @since      1.0.0
+ * @package    Demo Awesome
+ * @author     Theme4Press
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,6 +24,7 @@ class Demo_Awesome_Customizer_Importer {
 	 * Update: WP core customize_save actions were removed, because of some errors.
 	 *
 	 * @param  string $import_file Path to the import file.
+	 *
 	 * @return void|WP_Error
 	 */
 	public static function import( $import_file, $data_demo ) {
@@ -81,6 +84,7 @@ class Demo_Awesome_Customizer_Importer {
 	 * Imports images for settings saved as mods.
 	 *
 	 * @param  array $mods An array of customizer mods.
+	 *
 	 * @return array The mods array with any new import data.
 	 */
 	private static function import_customizer_images( $mods ) {
@@ -106,6 +110,7 @@ class Demo_Awesome_Customizer_Importer {
 	 * Checks to see whether a url is an image url or not.
 	 *
 	 * @param  string $url The url to check.
+	 *
 	 * @return bool Whether the url is an image url or not.
 	 */
 	private static function is_image_url( $url ) {
@@ -121,6 +126,7 @@ class Demo_Awesome_Customizer_Importer {
 	 * modified to return an array of data instead of html.
 	 *
 	 * @param  string $file The image file path.
+	 *
 	 * @return array An array of image data.
 	 */
 	private static function media_handle_sideload( $file ) {
@@ -135,7 +141,7 @@ class Demo_Awesome_Customizer_Importer {
 		if ( ! empty( $file ) ) {
 			// Set variables for storage, fix file filename for query strings.
 			preg_match( '/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file, $matches );
-			$file_array = array();
+			$file_array         = array();
 			$file_array['name'] = basename( $matches[0] );
 
 			// Download file to temp location.
@@ -152,6 +158,7 @@ class Demo_Awesome_Customizer_Importer {
 			// If error storing permanently, unlink.
 			if ( is_wp_error( $id ) ) {
 				@unlink( $file_array['tmp_name'] );
+
 				return $id;
 			}
 
@@ -167,4 +174,3 @@ class Demo_Awesome_Customizer_Importer {
 		return $data;
 	}
 }
-

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin core class definition
  *

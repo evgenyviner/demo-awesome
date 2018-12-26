@@ -1,11 +1,13 @@
 <?php
 /**
- * Widget importer - import widget settings.
+ * Demo Awesome importer based on WordPress importer core
  *
  * Code adapted from the "Widget Importer & Exporter" plugin.
  *
- * @package Demo_Awesome_Widget_Importer/Classes
- * @version 1.0.0
+ * @link       https://theme4press.com/demo-awesome-the-data-importer/
+ * @since      1.0.0
+ * @package    Demo Awesome
+ * @author     Theme4Press
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -19,7 +21,9 @@ class Demo_Awesome_Widget_Importer {
 	 * Import widget JSON data.
 	 *
 	 * @global array $wp_registered_sidebars
+	 *
 	 * @param  string $import_file Path to the import file.
+	 *
 	 * @return WP_Error|array WP_Error on failure, $results on success.
 	 */
 	public static function import( $import_file, $data_demo ) {
@@ -29,7 +33,7 @@ class Demo_Awesome_Widget_Importer {
 
 		// Have valid data? If no data or could not decode.
 		if ( empty( $data ) || ! is_object( $data ) ) {
-			return new WP_Error( 'demo_awesome_widget_import_data_error',	esc_html__( 'Widget import data could not be read. Please try a different file.', 'demo-awesome' ) );
+			return new WP_Error( 'demo_awesome_widget_import_data_error', esc_html__( 'Widget import data could not be read. Please try a different file.', 'demo-awesome' ) );
 		}
 
 		// Hook before import.
@@ -145,7 +149,7 @@ class Demo_Awesome_Widget_Importer {
 					// If key is 0, make it 1.
 					// When 0, an issue can occur where adding a widget causes data from other widget to load, and the widget doesn't stick (reload wipes it).
 					if ( '0' === strval( $new_instance_id_number ) ) {
-						$new_instance_id_number = 1;
+						$new_instance_id_number                             = 1;
 						$single_widget_instances[ $new_instance_id_number ] = $single_widget_instances[0];
 						unset( $single_widget_instances[0] );
 					}
@@ -161,8 +165,8 @@ class Demo_Awesome_Widget_Importer {
 					update_option( 'widget_' . $id_base, $single_widget_instances );
 
 					// Assign widget instance to sidebar.
-					$sidebars_widgets = get_option( 'sidebars_widgets' ); // Which sidebars have which widgets, get fresh every time.
-					$new_instance_id = $id_base . '-' . $new_instance_id_number; // Use ID number from new widget instance.
+					$sidebars_widgets                      = get_option( 'sidebars_widgets' ); // Which sidebars have which widgets, get fresh every time.
+					$new_instance_id                       = $id_base . '-' . $new_instance_id_number; // Use ID number from new widget instance.
 					$sidebars_widgets[ $use_sidebar_id ][] = $new_instance_id; // Add new instance to sidebar.
 					update_option( 'sidebars_widgets', $sidebars_widgets ); // Save the amended data.
 

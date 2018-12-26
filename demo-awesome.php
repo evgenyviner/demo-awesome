@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @link              https://theme4press.com/demo-awesome-the-data-importer/
  * @since             1.0.0
  * @package           Demo Awesome
+ * @author            Theme4Press
  *
  * @wordpress-plugin
  * Plugin Name:       Demo Awesome
@@ -24,33 +24,9 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Current plugin version
+ * @since    1.0.0
  */
 define( 'DEMO_AWESOME_VERSION', '1.0.0' );
-
-/**
- * The class that runs during plugin activation
- */
-if ( ! function_exists( 'demo_awesome_activate' ) ) {
-	function demo_awesome_activate() {
-		require_once plugin_dir_path( __FILE__ ) . 'inc/class-demo-awesome-activator.php';
-		Demo_Awesome_Activator::activate();
-	}
-}
-
-/**
- * The class that runs during plugin deactivation
- */
-if ( ! function_exists( 'demo_awesome_deactivate' ) ) {
-	function demo_awesome_deactivate() {
-		require_once plugin_dir_path( __FILE__ ) . 'inc/class-demo-awesome-deactivator.php';
-		Demo_Awesome_Deactivator::deactivate();
-	}
-}
-
-register_activation_hook( __FILE__, 'demo_awesome_activate' );
-register_deactivation_hook( __FILE__, 'demo_awesome_deactivate' );
-
 
 /**
  * The class that is used to define internationalization,
@@ -59,7 +35,7 @@ register_deactivation_hook( __FILE__, 'demo_awesome_deactivate' );
 require plugin_dir_path( __FILE__ ) . 'inc/class-demo-awesome.php';
 
 /**
- * Begins execution of the plugin
+ * @since    1.0.0
  */
 if ( ! function_exists( 'demo_awesome_run' ) ) {
 	function demo_awesome_run() {

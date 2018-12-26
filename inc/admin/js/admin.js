@@ -1602,8 +1602,8 @@ jQuery(function ($) {
         $('.demo-awesome-container.demo-info-row').attr('data-demo-show', data_demo_show);
         data_demo = JSON.parse(parent_div.attr('data-demo-show'));
         var image_url = parent_div.find('.demo-screenshot img').attr("src");
-        var url_1 = 'https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-detail-modal&utm_medium=detail-link-' + data_demo.name + '&utm_campaign=modal-popup';
-        var url_2 = 'https://theme4press.com/evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-live-preview-modal&utm_medium=live-preview-link-' + data_demo.name + '&utm_campaign=modal-popup';
+        var url_1 = demo_awesome_js_local_vars.plugin_home_url + 'evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-detail-modal&utm_medium=detail-link-' + data_demo.name + '&utm_campaign=modal-popup';
+        var url_2 = demo_awesome_js_local_vars.plugin_home_url + 'evolve-multipurpose-wordpress-theme/?utm_source=demo-awesome-live-preview-modal&utm_medium=live-preview-link-' + data_demo.name + '&utm_campaign=modal-popup';
         $('.demo-preview-container iframe').attr('src', data_demo.preview_url);
         // console.log(data_demo);
         if (data_demo.required_plugins) {

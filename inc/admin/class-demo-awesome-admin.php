@@ -12,7 +12,7 @@ if ( ! defined( 'DEMO_AWESOME_IMPORTER_DIRECTORY' ) ) {
 	define( 'DEMO_AWESOME_IMPORTER_DIRECTORY', plugin_dir_path( __FILE__ ) );
 }
 if ( ! defined( 'DEMO_AWESOME_IMPORTER_SOURCE_URL' ) ) {
-	define( 'DEMO_AWESOME_IMPORTER_SOURCE_URL', 'https://demo.theme4press.com/demo-import/' );
+	define( 'DEMO_AWESOME_IMPORTER_SOURCE_URL', esc_url( 'https://demo.theme4press.com/demo-import/' ) );
 }
 
 if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
@@ -612,7 +612,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 
             <div class="notice demo-awesome-notice is-dismissible">
                 <p><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?><a
-                            href="<?php echo esc_url( add_query_arg( 'hide-notice', 'demo_awesome_no_theme4press_theme_notice' ) ); ?>"><?php _e( 'Dismiss', 'demo-awesome' ); ?></a>
+                            href="<?php echo esc_url( add_query_arg( 'hide-notice', 'demo_awesome_no_theme4press_theme_notice' ) ); ?>"><?php esc_html_e( 'Dismiss', 'demo-awesome' ); ?></a>
                 </p>
             </div>
 			<?php
@@ -750,8 +750,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			}
 
 			wp_enqueue_style( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'css/admin.css' );
-
-
 		}
 
 		/**
@@ -763,7 +761,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				return;
 			}
 
-			add_thickbox();
 			wp_enqueue_script( 'demo-awesome', plugin_dir_url( __FILE__ ) . 'js/admin.js' );
 
 			$local_variables = array(
@@ -774,13 +771,13 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				'plugin_url'           => plugin_dir_url( __FILE__ ),
 				'website_url'          => get_site_url(),
 				'admin_url'            => admin_url(),
+				'plugin_home_url'      => esc_url( 'https://theme4press.com/' ),
 				'is_premium_version'   => Demo_Awesome_Admin::is_premium_theme(),
 				'is_free_version'      => Demo_Awesome_Admin::is_free_theme(),
 				'is_theme4press_theme' => Demo_Awesome_Admin::is_theme4press_theme(),
 			);
 
 			wp_localize_script( 'demo-awesome', 'demo_awesome_js_local_vars', $local_variables );
-
 		}
 	}
 }

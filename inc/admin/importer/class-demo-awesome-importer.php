@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Demo Awesome importer based on WordPress importer core
  *
@@ -256,8 +255,8 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
                 <input type="hidden" name="import_id" value="<?php echo $this->id; ?>"/>
 
 				<?php if ( ! empty( $this->authors ) ) : ?>
-                    <h3><?php _e( 'Assign Authors', 'demo-awesome' ); ?></h3>
-                    <p><?php _e( 'To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries.', 'demo-awesome' ); ?></p>
+                    <h3><?php esc_html_e( 'Assign Authors', 'demo-awesome' ); ?></h3>
+                    <p><?php esc_html_e( 'To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries.', 'demo-awesome' ); ?></p>
 					<?php if ( $this->allow_create_users() ) : ?>
                         <p><?php printf( esc_html__( 'If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'demo-awesome' ), esc_html( get_option( 'default_role' ) ) ); ?></p>
 					<?php endif; ?>
@@ -269,10 +268,10 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 				<?php endif; ?>
 
 				<?php if ( $this->allow_fetch_attachments() ) : ?>
-                    <h3><?php _e( 'Import Attachments', 'demo-awesome' ); ?></h3>
+                    <h3><?php esc_html_e( 'Import Attachments', 'demo-awesome' ); ?></h3>
                     <p>
                         <input type="checkbox" value="1" name="fetch_attachments" id="import-attachments"/>
-                        <label for="import-attachments"><?php _e( 'Download and import file attachments', 'demo-awesome' ); ?></label>
+                        <label for="import-attachments"><?php esc_html_e( 'Download and import file attachments', 'demo-awesome' ); ?></label>
                     </p>
 				<?php endif; ?>
 

@@ -1,9 +1,13 @@
 <?php
 /**
- * Customize API: Demo_Awesome_Customize_Demo_Importer_Setting class
+ * Demo Awesome importer based on WordPress importer core
  *
- * @package Demo_Awesome_Importer/Classes
- * @version 1.0.0
+ * Code adapted from the "Widget Importer & Exporter" plugin.
+ *
+ * @link       https://theme4press.com/demo-awesome-the-data-importer/
+ * @since      1.0.0
+ * @package    Demo Awesome
+ * @author     Theme4Press
  */
 
 /**
@@ -14,6 +18,7 @@ final class Demo_Awesome_Customize_Demo_Importer_Setting extends WP_Customize_Se
 
 	/**
 	 * Import an option value for this setting.
+	 *
 	 * @param mixed $value The value to update.
 	 */
 	public function import( $value ) {

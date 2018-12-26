@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Demo Awesome parsers based on WordPress core parsers
  *
