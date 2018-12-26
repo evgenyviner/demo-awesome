@@ -180,6 +180,16 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				}
 			}
 
+			//remove all widgets data
+			$list_widgets = wp_load_alloptions();
+			if($list_widgets){
+				foreach ( $list_widgets as $option => $value ) {
+				    if ( strpos( $option, 'widget_' ) === 0 ) {
+				        delete_option( $option );
+				    }
+				}
+			}
+
 			if ( Demo_Awesome_Admin::is_premium_theme() == true && ! $data_demo['premium_demo'] ) {
 				update_option( 'check_updated_to_new_bootstrap_slider_data_', false );
 				update_option( 'check_updated_to_new_parallax_slider_data_', false );
