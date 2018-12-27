@@ -55,6 +55,7 @@ $list_demos = array(
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
+				'has_revolution_slider_data'  => true,
 				'folder_path'            => 'blog/1',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
@@ -119,6 +120,7 @@ $list_demos = array(
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
+				'has_theme4press_slider_data' => true,
 				'folder_path'            => 'business/2',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
