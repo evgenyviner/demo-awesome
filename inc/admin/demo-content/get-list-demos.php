@@ -349,9 +349,9 @@ $list_demos = array(
 					'update_pages'  => array(
 						'page_on_front'  => 'Home',
 						'page_for_posts' => 'Blog',
-					)
+					),
+					'posts_per_page'         => 3
 				),
-				'posts_per_page'         => 3
 			),
 		),
 	),
