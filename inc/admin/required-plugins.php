@@ -43,7 +43,7 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
 									$required_plugin = sprintf( '<span class="badge badge-success mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'check' ), esc_html__( 'Active', 'demo-awesome' ) );
 								} elseif ( Demo_Awesome_Admin::is_plugin_installed( $plugin_keyword ) == true && Demo_Awesome_Admin::is_plugin_activated( $plugin_keyword ) == false ) {
 									$required_plugin           = sprintf( '<span class="badge badge-error mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'error' ), esc_html__( 'Not active', 'demo-awesome' ) );
-									$premium_plugin            = sprintf( '<a class="button button-proceed" target="_blank" href="' . get_admin_url() . 'plugins.php">%s</a>', esc_html__( 'Activate', 'demo-awesome' ) );
+									$premium_plugin            = sprintf( '<a class="button button-proceed" target="_blank" href="' . get_admin_url() . 'plugins.php?s=%s">%s</a>', esc_attr( $plugin_keyword ), esc_html__( 'Activate', 'demo-awesome' ) );
 									$show_required_description = true;
 								} else {
 									$required_plugin = sprintf( '<span class="badge badge-error mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'error' ), esc_html__( 'Not installed', 'demo-awesome' ) );
