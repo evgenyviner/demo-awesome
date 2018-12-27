@@ -40,7 +40,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			add_action( 'load-plugins.php', array( $this, 'admin_notice' ) );
 			add_action( 'wp_ajax_call_import_function_from_ajax', array( $this, 'call_import_function_from_ajax' ) );
 			add_action( 'wp_ajax_required_plugins', array( $this, 'required_plugins' ) );
-			add_action( 'remove_old_posts_pages', array( $this, 'remove_old_posts_pages' ) );
+			add_action( 'demo_awesome_remove_old_posts_pages', array( $this, 'remove_old_posts_pages' ) );
 			add_action( 'wp_loaded', array( $this, 'hide_notice' ) );
 			add_filter( 'customizer_demo_import_settings', array(
 				$this,
@@ -165,7 +165,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function remove_old_posts_pages() {
 			$list_posts_pages = get_posts( array(
 				'posts_per_page' => - 1,
-				'post_type'      => array( 'post', 'page', 'product' )
+				'post_type'      => array( 'post', 'page', 'product', 'slide' )
 			) );
 			if ( $list_posts_pages ) {
 				foreach ( $list_posts_pages as $post_item ) {
@@ -182,6 +182,49 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			$data_demo = isset( $_REQUEST['data_demo'] ) ? $_REQUEST['data_demo'] : array();
 
 			$template_name = isset( $data_demo['folder_path'] ) ? $data_demo['folder_path'] : '';
+
+			$this->remove_old_datas( $data_demo, $template_name );
+
+			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
+				wp_send_json_success( array(
+					'success' => true,
+					'message' => sprintf( '<span>%s</span>', esc_html__( 'The premium demo requires the premium theme version', 'demo-awesome' ) )
+				) );
+				wp_die();
+			}
+			// import content data
+			$this->import_content_theme( $data_demo, $template_name );
+			// import customizer
+			$this->import_customizer_data( $data_demo, $template_name );
+			// fix menu
+			$this->update_nav_menu_items( $data_demo, $template_name );
+			// fix option
+			$this->update_option_data( $data_demo, $template_name );
+			// import widget
+			$this->import_widget_settings( $data_demo, $template_name );
+			// import theme4press slider
+			$this->import_theme4press_slider( $data_demo, $template_name );
+			// import revolution slider
+			$this->import_revolution_slider( $data_demo, $template_name );
+			// import layer slider
+			$this->import_layer_slider( $data_demo, $template_name );
+			// fix galleries data
+			$this->update_galleries_data( $data_demo, $template_name );
+
+			wp_send_json_success( array(
+				'success' => true,
+				'message' => sprintf( '<div>%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s</div>', '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), esc_html__( 'Import finished', 'demo-awesome' ), '</h3>', esc_html__( 'The demo has been imported successfully', 'demo-awesome' ) )
+			) );
+
+			wp_die(); // this is required to terminate immediately and return a proper response
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function remove_old_datas( $data_demo, $template_name ) {
+
+			do_action('demo_awesome_begin_remove_old_datas');
 
 			delete_option( 'theme_mods_evolve-plus' );
 			delete_option( 'theme_mods_evolve' );
@@ -207,8 +250,9 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 					}
 				}
 			}
-			do_action( 'remove_old_posts_pages' );
+			do_action( 'demo_awesome_remove_old_posts_pages' );
 
+			// fix data for premium theme version need to import free data demo version
 			if ( Demo_Awesome_Admin::is_premium_theme() == true && ! $data_demo['premium_demo'] ) {
 				update_option( 'check_updated_to_new_bootstrap_slider_data_', false );
 				update_option( 'check_updated_to_new_parallax_slider_data_', false );
@@ -217,33 +261,6 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				update_option( 'check_updated_to_new_counter_circle_data_', false );
 			}
 
-			if ( Demo_Awesome_Admin::is_premium_theme() == false && $data_demo['premium_demo'] ) {
-				wp_send_json_success( array(
-					'success' => true,
-					'message' => sprintf( '<span>%s</span>', esc_html__( 'The premium demo requires the premium theme version', 'demo-awesome' ) )
-				) );
-				wp_die();
-			}
-			// import content data
-			$this->import_content_theme( $data_demo, $template_name );
-			// import customizer
-			$this->import_customizer_data( $data_demo, $template_name );
-			// fix menu
-			$this->update_nav_menu_items( $data_demo, $template_name );
-			// fix option
-			$this->update_option_data( $data_demo, $template_name );
-			// import widget
-			$this->import_widget_settings( $data_demo, $template_name );
-			// fix galleries data
-			$this->update_galleries_data( $data_demo, $template_name );
-
-
-			wp_send_json_success( array(
-				'success' => true,
-				'message' => sprintf( '<div>%1$s<span class="mr-1">%2$s</span>%3$s%4$s%5$s</div>', '<h3>', Demo_Awesome_Admin::get_svg( 'check' ), esc_html__( 'Import finished', 'demo-awesome' ), '</h3>', esc_html__( 'The demo has been imported successfully', 'demo-awesome' ) )
-			) );
-
-			wp_die(); // this is required to terminate immediately and return a proper response
 		}
 
 		/**
@@ -355,6 +372,82 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			} else {
 				$status['errorMessage'] = esc_html__( 'The content data file (XML) is missing.', 'demo-awesome' );
 				wp_send_json_error( $status );
+			}
+
+			return true;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function import_theme4press_slider( $data_demo, $template_name = 'blog' ) {
+
+			if($data_demo['has_theme4press_slider_data']){
+				if ( class_exists( 'Theme4Press_Slider' ) ) {
+					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'theme4press_slider.zip' );
+
+					if ( is_file( $import_file ) ) {
+						$theme4press_slider = new Theme4Press_Slider();
+						$theme4press_slider->import_sliders( $import_file );
+					} else {
+						$status['errorMessage'] = esc_html__( 'The theme4press slider data file (zip) is missing.', 'demo-awesome' );
+						wp_send_json_error( $status );
+					}
+				}
+			}
+
+			return true;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function import_revolution_slider( $data_demo, $template_name = 'blog' ) {
+
+			if($data_demo['has_revolution_slider_data']){
+				if(Demo_Awesome_Admin::is_plugin_activated('Slider Revolution')){
+					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'slider_revolution.zip' );
+
+					if ( is_file( $import_file ) ) {
+
+						$_FILES["import_file"]["tmp_name"] = $import_file;
+						$slider = new RevSlider();
+						$results = $slider->importSliderFromPost();
+
+						if ( is_wp_error( $results ) ) {
+							return false;
+						}
+					} else {
+						$status['errorMessage'] = esc_html__( 'The revolution slider data file (zip) is missing.', 'demo-awesome' );
+						wp_send_json_error( $status );
+					}
+				}
+			}
+
+			return true;
+		}
+
+		/**
+		 * @since    1.0.0
+		 */
+		function import_layer_slider( $data_demo, $template_name = 'blog' ) {
+
+			if($data_demo['has_layer_slider_data']){
+				if(Demo_Awesome_Admin::is_plugin_activated('LayerSlider WP')){
+					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'layerslider.zip' );
+
+					if ( is_file( $import_file ) ) {
+						include_once LS_ROOT_PATH.'/classes/class.ls.importutil.php';
+						$results = new LS_ImportUtil($import_file, 'layerslider.zip');
+
+						if ( is_wp_error( $results ) ) {
+							return false;
+						}
+					} else {
+						$status['errorMessage'] = esc_html__( 'The layer slider data file (zip) is missing.', 'demo-awesome' );
+						wp_send_json_error( $status );
+					}
+				}
 			}
 
 			return true;
