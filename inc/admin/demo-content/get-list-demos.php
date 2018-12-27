@@ -198,6 +198,7 @@ $list_demos = array(
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
+				'has_layer_slider_data'  => true,
 				'folder_path'            => 'business/4',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
