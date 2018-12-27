@@ -168,7 +168,8 @@ $list_demos = array(
 						'page_for_posts'           => 'Blog',
 						'woocommerce_shop_page_id' => 'Shop'
 					),
-					'posts_per_page' => 9
+					'posts_per_page' => 9,
+					'sbg_sidebars' => 'a:2:{s:8:"Sidebar1";s:8:"Sidebar1";s:8:"Sidebar2";s:8:"Sidebar2";}'
 				),
 			),
 			array(
