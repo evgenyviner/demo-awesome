@@ -226,14 +226,14 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			}
 			// import content data
 			$this->import_content_theme( $data_demo, $template_name );
-			// import widget
-			$this->import_widget_settings( $data_demo, $template_name );
 			// import customizer
 			$this->import_customizer_data( $data_demo, $template_name );
 			// fix menu
 			$this->update_nav_menu_items( $data_demo, $template_name );
 			// fix option
 			$this->update_option_data( $data_demo, $template_name );
+			// import widget
+			$this->import_widget_settings( $data_demo, $template_name );
 			// fix galleries data
 			$this->update_galleries_data( $data_demo, $template_name );
 
