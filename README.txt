@@ -27,6 +27,10 @@ Demo Awesome - The Data Importer is a plugin designed specially for [Theme4Press
 
 The Demo Awesome plugin is designed only for themes by Theme4Press
 
+= What website niche I can import with this plugin? =
+
+The plugin with a free Theme4Press theme lets you to import demos for business website, magazine or an e-shop
+
 = Do demos require additional plugins? =
 
 Yes, some demos, for example e-shops require plugins. The importer will always show you the list of required plugins for the particular demo which you can install instantly

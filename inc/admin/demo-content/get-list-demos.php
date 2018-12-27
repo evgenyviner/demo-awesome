@@ -41,12 +41,12 @@ $list_demos = array(
 		'name'  => 'Blog',
 		'items' => array(
 			array(
-				'name'                   => 'Blog 1',
-				'preview_url'            => 'https://demo.theme4press.com/evolve-blog/',
-				'require_ver_premium'    => '2.9.1',
-				'premium_demo'           => true,
-				'required_plugins'       => true,
-				'plugins'                => array(
+				'name'                       => 'Blog 1',
+				'preview_url'                => 'https://demo.theme4press.com/evolve-blog/',
+				'require_ver_premium'        => '2.9.1',
+				'premium_demo'               => true,
+				'required_plugins'           => true,
+				'plugins'                    => array(
 					'Slider Revolution' => array(
 						'name'                => 'Slider Revolution',
 						'keyword'             => 'Slider Revolution',
@@ -55,15 +55,15 @@ $list_demos = array(
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
-				'has_revolution_slider_data'  => true,
-				'folder_path'            => 'blog/1',
-				'customizer_data_update' => array(
+				'has_slider_revolution_data' => true,
+				'folder_path'                => 'blog/1',
+				'customizer_data_update'     => array(
 					'nav_menu_locations' => array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
 				),
-				'option_update'          => array(
+				'option_update'              => array(
 					'show_on_front'  => 'page',
 					'update_pages'   => array(
 						'page_for_posts' => 'Home',
@@ -106,12 +106,12 @@ $list_demos = array(
 				)
 			),
 			array(
-				'name'                   => 'Business 2',
-				'preview_url'            => 'https://demo.theme4press.com/evolve-hot-spa/',
-				'require_ver_premium'    => '2.9.1',
-				'premium_demo'           => true,
-				'required_plugins'       => true,
-				'plugins'                => array(
+				'name'                        => 'Business 2',
+				'preview_url'                 => 'https://demo.theme4press.com/evolve-hot-spa/',
+				'require_ver_premium'         => '2.9.1',
+				'premium_demo'                => true,
+				'required_plugins'            => true,
+				'plugins'                     => array(
 					'Component Shortcodes' => array(
 						'name'                => 'Component Shortcodes',
 						'keyword'             => 'Component Shortcodes',
@@ -121,14 +121,14 @@ $list_demos = array(
 					),
 				),
 				'has_theme4press_slider_data' => true,
-				'folder_path'            => 'business/2',
-				'customizer_data_update' => array(
+				'folder_path'                 => 'business/2',
+				'customizer_data_update'      => array(
 					'nav_menu_locations' => array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
 				),
-				'option_update'          => array(
+				'option_update'               => array(
 					'show_on_front' => 'page',
 					'update_pages'  => array(
 						'page_on_front' => 'Home',
@@ -136,12 +136,12 @@ $list_demos = array(
 				),
 			),
 			array(
-				'name'                   => 'Business 3',
-				'preview_url'            => 'https://demo.theme4press.com/evolve-plus-default/',
-				'require_ver_premium'    => '2.9.1',
-				'premium_demo'           => true,
-				'required_plugins'       => true,
-				'plugins'                => array(
+				'name'                        => 'Business 3',
+				'preview_url'                 => 'https://demo.theme4press.com/evolve-plus-default/',
+				'require_ver_premium'         => '2.9.1',
+				'premium_demo'                => true,
+				'required_plugins'            => true,
+				'plugins'                     => array(
 					'Component Shortcodes' => array(
 						'name'                => 'Component Shortcodes',
 						'keyword'             => 'Component Shortcodes',
@@ -156,14 +156,15 @@ $list_demos = array(
 						'disable_description' => '',
 					),
 				),
-				'folder_path'            => 'business/3',
-				'customizer_data_update' => array(
+				'has_theme4press_slider_data' => true,
+				'folder_path'                 => 'business/3',
+				'customizer_data_update'      => array(
 					'nav_menu_locations' => array(
 						'primary-menu'      => 'Main menu',
 						'sticky_navigation' => 'Main menu',
 					)
 				),
-				'option_update'          => array(
+				'option_update'               => array(
 					'show_on_front'  => 'page',
 					'update_pages'   => array(
 						'page_on_front'            => 'Home',
@@ -171,7 +172,7 @@ $list_demos = array(
 						'woocommerce_shop_page_id' => 'Shop'
 					),
 					'posts_per_page' => 9,
-					'sbg_sidebars' => array(
+					'sbg_sidebars'   => array(
 						'Shop' => 'Shop'
 					)
 				),
@@ -330,12 +331,12 @@ $list_demos = array(
 		'name'  => 'Photography',
 		'items' => array(
 			array(
-				'name'                   => 'Photography 1',
-				'preview_url'            => 'https://demo.theme4press.com/evolve-photography/',
-				'require_ver_premium'    => '2.9.1',
-				'premium_demo'           => true,
-				'required_plugins'       => true,
-				'plugins'                => array(
+				'name'                       => 'Photography 1',
+				'preview_url'                => 'https://demo.theme4press.com/evolve-photography/',
+				'require_ver_premium'        => '2.9.1',
+				'premium_demo'               => true,
+				'required_plugins'           => true,
+				'plugins'                    => array(
 					'Slider Revolution' => array(
 						'name'                => 'Slider Revolution',
 						'keyword'             => 'Slider Revolution',
@@ -344,19 +345,20 @@ $list_demos = array(
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
-				'folder_path'            => 'photography/1',
-				'customizer_data_update' => array(
+				'has_slider_revolution_data' => true,
+				'folder_path'                => 'photography/1',
+				'customizer_data_update'     => array(
 					'nav_menu_locations' => array(
 						'primary-menu' => 'Main menu'
 					)
 				),
-				'option_update'          => array(
-					'show_on_front' => 'page',
-					'update_pages'  => array(
+				'option_update'              => array(
+					'show_on_front'  => 'page',
+					'update_pages'   => array(
 						'page_on_front'  => 'Home',
 						'page_for_posts' => 'Blog',
 					),
-					'posts_per_page'         => 3
+					'posts_per_page' => 3
 				),
 			),
 		),

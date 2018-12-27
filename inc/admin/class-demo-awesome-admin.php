@@ -205,7 +205,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 			// import theme4press slider
 			$this->import_theme4press_slider( $data_demo, $template_name );
 			// import revolution slider
-			$this->import_revolution_slider( $data_demo, $template_name );
+			$this->import_slider_revolution( $data_demo, $template_name );
 			// import layer slider
 			$this->import_layer_slider( $data_demo, $template_name );
 			// fix galleries data
@@ -402,9 +402,9 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function import_revolution_slider( $data_demo, $template_name = 'blog' ) {
+		function import_slider_revolution( $data_demo, $template_name = 'blog' ) {
 
-			if($data_demo['has_revolution_slider_data']){
+			if($data_demo['has_slider_revolution_data']){
 				if(Demo_Awesome_Admin::is_plugin_activated('Slider Revolution')){
 					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'slider_revolution.zip' );
 
