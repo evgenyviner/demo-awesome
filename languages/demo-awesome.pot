@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-28 16:36+0000\n"
+"POT-Creation-Date: 2018-12-28 19:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 msgid "The premium demo requires the premium theme version"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:219 inc/admin/demo-browser.php:162
+#: inc/admin/class-demo-awesome-admin.php:219 inc/admin/demo-browser.php:184
 msgid "Import finished"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:219 inc/admin/demo-browser.php:164
+#: inc/admin/class-demo-awesome-admin.php:219 inc/admin/demo-browser.php:186
 msgid "The demo has been imported successfully"
 msgstr ""
 
@@ -80,12 +80,12 @@ msgstr ""
 msgid "Demo Awesome"
 msgstr ""
 
-#: inc/admin/class-demo-awesome-admin.php:863 inc/admin/demo-browser.php:98
-#: inc/admin/demo-browser.php:146 inc/admin/demo-browser.php:176
-#: inc/admin/demo-browser.php:176 inc/admin/demo-browser.php:193
-#: inc/admin/demo-browser.php:236 inc/admin/demo-browser.php:236
-#: inc/admin/demo-browser.php:279 inc/admin/demo-browser.php:330
-#: inc/admin/demo-browser.php:330
+#: inc/admin/class-demo-awesome-admin.php:863 inc/admin/demo-browser.php:120
+#: inc/admin/demo-browser.php:168 inc/admin/demo-browser.php:198
+#: inc/admin/demo-browser.php:198 inc/admin/demo-browser.php:215
+#: inc/admin/demo-browser.php:258 inc/admin/demo-browser.php:258
+#: inc/admin/demo-browser.php:301 inc/admin/demo-browser.php:352
+#: inc/admin/demo-browser.php:352
 msgid "Close"
 msgstr ""
 
@@ -105,122 +105,122 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: inc/admin/demo-browser.php:50 inc/admin/demo-browser.php:203
+#: inc/admin/demo-browser.php:72 inc/admin/demo-browser.php:225
 msgid "PREMIUM"
 msgstr ""
 
-#: inc/admin/demo-browser.php:71 inc/admin/demo-browser.php:245
-#: inc/admin/demo-browser.php:245 inc/admin/demo-browser.php:327
-#: inc/admin/demo-browser.php:327
+#: inc/admin/demo-browser.php:93 inc/admin/demo-browser.php:267
+#: inc/admin/demo-browser.php:267 inc/admin/demo-browser.php:349
+#: inc/admin/demo-browser.php:349
 msgid "Import"
 msgstr ""
 
-#: inc/admin/demo-browser.php:76 inc/admin/demo-browser.php:251
-#: inc/admin/demo-browser.php:251
+#: inc/admin/demo-browser.php:98 inc/admin/demo-browser.php:273
+#: inc/admin/demo-browser.php:273
 msgid "Live Preview"
 msgstr ""
 
-#: inc/admin/demo-browser.php:95
+#: inc/admin/demo-browser.php:117
 msgid "Import Demo - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:105 inc/admin/demo-browser.php:210
-#: inc/admin/demo-browser.php:297
+#: inc/admin/demo-browser.php:127 inc/admin/demo-browser.php:232
+#: inc/admin/demo-browser.php:319
 msgid "Minimum recommended theme version for this demo: "
 msgstr ""
 
-#: inc/admin/demo-browser.php:107 inc/admin/demo-browser.php:212
-#: inc/admin/demo-browser.php:299
+#: inc/admin/demo-browser.php:129 inc/admin/demo-browser.php:234
+#: inc/admin/demo-browser.php:321
 #, php-format
 msgid "Installed theme version: %s"
 msgstr ""
 
-#: inc/admin/demo-browser.php:113
+#: inc/admin/demo-browser.php:135
 msgid "Step 1 of 2"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid "The demo import may overwrite/remove many website options"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid "customizer settings"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid "menus"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid "widgets"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid "posts/pages"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid "set new front page"
 msgstr ""
 
-#: inc/admin/demo-browser.php:119
+#: inc/admin/demo-browser.php:141
 msgid ""
 "Some demos can take few minutes to complete the import, depending on the "
 "complexity of the demo content."
 msgstr ""
 
-#: inc/admin/demo-browser.php:122
+#: inc/admin/demo-browser.php:144
 msgid ""
 "Please proceed with a caution. The demo import is recommended for new "
 "websites and it will replicate the demo website which you can see in the "
 "preview mode."
 msgstr ""
 
-#: inc/admin/demo-browser.php:124
+#: inc/admin/demo-browser.php:146
 msgid "Step 2 of 2"
 msgstr ""
 
-#: inc/admin/demo-browser.php:142
+#: inc/admin/demo-browser.php:164
 msgid "Importing Demo - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:153
+#: inc/admin/demo-browser.php:175
 msgid ""
 "Please don't leave/refresh the page while importing. Some demos can take few "
 "minutes to complete the import, depending on the complexity of the demo "
 "content"
 msgstr ""
 
-#: inc/admin/demo-browser.php:157
+#: inc/admin/demo-browser.php:179
 msgid "Importing the demo..."
 msgstr ""
 
-#: inc/admin/demo-browser.php:171
+#: inc/admin/demo-browser.php:193
 msgid "View Website"
 msgstr ""
 
-#: inc/admin/demo-browser.php:173
+#: inc/admin/demo-browser.php:195
 msgid "Customize"
 msgstr ""
 
-#: inc/admin/demo-browser.php:190
+#: inc/admin/demo-browser.php:212
 msgid "Demo Details - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:220 inc/admin/demo-browser.php:307
+#: inc/admin/demo-browser.php:242 inc/admin/demo-browser.php:329
 #, php-format
 msgid "This demo requires the %1$sPremium%2$s version of the theme"
 msgstr ""
 
-#: inc/admin/demo-browser.php:223 inc/admin/demo-browser.php:310
+#: inc/admin/demo-browser.php:245 inc/admin/demo-browser.php:332
 msgid "More"
 msgstr ""
 
-#: inc/admin/demo-browser.php:268
+#: inc/admin/demo-browser.php:290
 msgid "Live Preview - "
 msgstr ""
 
-#: inc/admin/demo-browser.php:271 inc/admin/demo-browser.php:274
+#: inc/admin/demo-browser.php:293 inc/admin/demo-browser.php:296
 msgid "Collapse Panel"
 msgstr ""
 

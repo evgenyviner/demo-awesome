@@ -195,23 +195,23 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				) );
 				wp_die();
 			}
-			// import content data
+			// Import content data
 			$this->import_content_theme( $data_demo, $template_name );
-			// import customizer
+			// Import customizer
 			$this->import_customizer_data( $data_demo, $template_name );
-			// fix menu
+			// Fix menu
 			$this->update_nav_menu_items( $data_demo, $template_name );
-			// fix option
+			// Fix option
 			$this->update_option_data( $data_demo, $template_name );
-			// import widget
+			// Import widget
 			$this->import_widget_settings( $data_demo, $template_name );
-			// import theme4press slider
+			// Import Theme4Press slider
 			$this->import_theme4press_slider( $data_demo, $template_name );
-			// import revolution slider
+			// Import Slider Revolution slider
 			$this->import_slider_revolution( $data_demo, $template_name );
-			// import layer slider
-			$this->import_layer_slider( $data_demo, $template_name );
-			// fix galleries data
+			// Import LayerSlider slider
+			$this->import_layerslider( $data_demo, $template_name );
+			// Fix galleries data
 			$this->update_galleries_data( $data_demo, $template_name );
 
 			wp_send_json_success( array(
@@ -433,7 +433,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		/**
 		 * @since    1.0.0
 		 */
-		function import_layer_slider( $data_demo, $template_name = 'blog' ) {
+		function import_layerslider( $data_demo, $template_name = 'blog' ) {
 
 			if ( $data_demo['has_layerslider_data'] ) {
 				if ( Demo_Awesome_Admin::is_plugin_activated( 'LayerSlider WP' ) ) {
