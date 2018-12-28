@@ -67,7 +67,7 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
                     </ul>
 					<?php if ( $show_required_description ) { ?>
                         <p class="alert alert-info required-description-text"><span
-                                    class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php esc_html_e( 'You can install/activate the required plugins before import or import the demo content now. Importing content without enabled required plugins may result in broken page layout', 'demo-awesome' ); ?>
+                                    class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php esc_html_e( 'You can install/activate the required plugin(s) before import or import the demo content now. Importing content without enabled required plugin(s) may result in broken page layout or not importing the data supported by the plugin(s).', 'demo-awesome' ); ?>
                         </p>
 					<?php }
 				} ?>

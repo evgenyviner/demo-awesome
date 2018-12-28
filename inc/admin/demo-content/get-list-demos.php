@@ -8,7 +8,7 @@ $list_demos = array(
 			'name'  => 'App',
 			'items' => array(
 				array(
-					'index'					 => '3',
+					'index'                  => '3',
 					'name'                   => 'App 1',
 					'preview_url'            => 'https://demo.theme4press.com/evolve-app/',
 					'require_ver_premium'    => '2.9.1',
@@ -42,7 +42,7 @@ $list_demos = array(
 		'name'  => 'Blog',
 		'items' => array(
 			array(
-				'index'					 	 => '4',
+				'index'                      => '4',
 				'name'                       => 'Blog 1',
 				'preview_url'                => 'https://demo.theme4press.com/evolve-blog/',
 				'require_ver_premium'        => '2.9.1',
@@ -79,7 +79,7 @@ $list_demos = array(
 		'name'  => 'Business',
 		'items' => array(
 			array(
-				'index'					 => '0',
+				'index'                  => '0',
 				'name'                   => 'Business 1',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-default/',
 				'require_ver_free'       => '4.0.2',
@@ -109,7 +109,7 @@ $list_demos = array(
 				)
 			),
 			array(
-				'index'					 	  => '5',
+				'index'                       => '5',
 				'name'                        => 'Business 2',
 				'preview_url'                 => 'https://demo.theme4press.com/evolve-hot-spa/',
 				'require_ver_premium'         => '2.9.1',
@@ -140,7 +140,7 @@ $list_demos = array(
 				),
 			),
 			array(
-				'index'					 	  => '6',
+				'index'                       => '6',
 				'name'                        => 'Business 3',
 				'preview_url'                 => 'https://demo.theme4press.com/evolve-plus-default/',
 				'require_ver_premium'         => '2.9.1',
@@ -183,7 +183,7 @@ $list_demos = array(
 				),
 			),
 			array(
-				'index'					 => '7',
+				'index'                  => '7',
 				'name'                   => 'Business 4',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-the-office/',
 				'require_ver_premium'    => '2.9.1',
@@ -205,7 +205,7 @@ $list_demos = array(
 						'disable_description' => 'Premium plugin - please visit your Theme4Press account to download it',
 					),
 				),
-				'has_layerslider_data'  => true,
+				'has_layerslider_data'   => true,
 				'folder_path'            => 'business/4',
 				'customizer_data_update' => array(
 					'nav_menu_locations' => array(
@@ -225,7 +225,7 @@ $list_demos = array(
 		'name'  => 'eShop',
 		'items' => array(
 			array(
-				'index'					 => '8',
+				'index'                  => '8',
 				'name'                   => 'eShop 1',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-eshop/',
 				'require_ver_premium'    => '2.9.1',
@@ -254,7 +254,7 @@ $list_demos = array(
 				)
 			),
 			array(
-				'index'					 => '1',
+				'index'                  => '1',
 				'name'                   => 'eShop 2',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-my-store/',
 				'require_ver_free'       => '4.0.2',
@@ -278,7 +278,8 @@ $list_demos = array(
 				'option_update'          => array(
 					'show_on_front' => 'page',
 					'update_pages'  => array(
-						'page_on_front' => 'Home',
+						'page_on_front'            => 'Home',
+						'woocommerce_shop_page_id' => 'Shop'
 					)
 				)
 			),
@@ -288,7 +289,7 @@ $list_demos = array(
 		'name'  => 'Magazine',
 		'items' => array(
 			array(
-				'index'					 => '2',
+				'index'                  => '2',
 				'name'                   => 'Magazine 1',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-magazine/',
 				'require_ver_free'       => '4.0.2',
@@ -307,7 +308,7 @@ $list_demos = array(
 		'name'  => 'Personal',
 		'items' => array(
 			array(
-				'index'					 => '9',
+				'index'                  => '9',
 				'name'                   => 'Personal 1',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-profile/',
 				'require_ver_premium'    => '2.9.1',
@@ -341,7 +342,7 @@ $list_demos = array(
 		'name'  => 'Photography',
 		'items' => array(
 			array(
-				'index'					 	 => '10',
+				'index'                      => '10',
 				'name'                       => 'Photography 1',
 				'preview_url'                => 'https://demo.theme4press.com/evolve-photography/',
 				'require_ver_premium'        => '2.9.1',
@@ -378,7 +379,7 @@ $list_demos = array(
 		'name'  => 'Portfolio',
 		'items' => array(
 			array(
-				'index'					 => '11',
+				'index'                  => '11',
 				'name'                   => 'Portfolio 1',
 				'preview_url'            => 'https://demo.theme4press.com/evolve-portfolio/',
 				'require_ver_premium'    => '2.9.1',

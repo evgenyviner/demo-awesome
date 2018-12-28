@@ -168,7 +168,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function remove_old_posts_pages() {
 			$list_posts_pages = get_posts( array(
 				'posts_per_page' => - 1,
-				'post_type'      => array( 'post', 'page', 'product', 'slide' )
+				'post_type'      => array( 'post', 'page', 'product', 'slide', 'evolve_portfolio' )
 			) );
 			if ( $list_posts_pages ) {
 				foreach ( $list_posts_pages as $post_item ) {
