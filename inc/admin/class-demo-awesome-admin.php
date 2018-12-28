@@ -8,8 +8,8 @@
  * @author     Theme4Press
  */
 
-if ( ! defined( 'DEMO_AWESOME_IMPORTER_DIRECTORY' ) ) {
-	define( 'DEMO_AWESOME_IMPORTER_DIRECTORY', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'DEMO_AWESOME_IMPORTER_FOLDER' ) ) {
+	define( 'DEMO_AWESOME_IMPORTER_FOLDER', '/demo-awesome-import/' );
 }
 if ( ! defined( 'DEMO_AWESOME_IMPORTER_SOURCE_URL' ) ) {
 	define( 'DEMO_AWESOME_IMPORTER_SOURCE_URL', esc_url( 'https://demo.theme4press.com/demo-import/' ) );
@@ -91,23 +91,26 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function get_list_demos() {
-			$demo_awesome_get_list_demos = $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . 'get-list-demos.json', 'get_list_demos' );
-
-			return $demo_awesome_get_list_demos;
+			return $this->get_demo_packages( DEMO_AWESOME_IMPORTER_SOURCE_URL . 'get-list-demos.json', 'get_list_demos' );
 		}
 
 		/**
 		 * @since    1.0.0
 		 */
-		function get_demo_packages( $url, $template_name = '' ) {
-			if ( true || false === ( $packages = get_transient( 'demo_awesome_importer_packages_' . $template_name ) ) ) {
+		function get_demo_packages( $url, $template_name = '', $save_cache = true ) {
+			$packages = '';
+			$decode_url = base64_encode( $url );
+			if ( false === ( $create_time = get_transient( 'demo_awesome_importer_packages_' . $decode_url ) ) ) {
 				$raw_packages = wp_safe_remote_get( $url );
 				if ( ! is_wp_error( $raw_packages ) ) {
 					$packages = wp_remote_retrieve_body( $raw_packages );
 					if ( $packages ) {
-						set_transient( 'demo_awesome_importer_packages_' . $template_name, $packages, HOUR_IN_SECONDS );
+						set_transient( 'demo_awesome_importer_packages_' . $decode_url, time(), HOUR_IN_SECONDS );
+						$this->write_file_to_local( $packages, $decode_url . '.txt' );
 					}
 				}
+			}else{
+				$packages = file_get_contents(wp_upload_dir()['basedir'] . DEMO_AWESOME_IMPORTER_FOLDER. $decode_url . '.txt' );
 			}
 
 			return $packages;
@@ -145,7 +148,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 				require_once wp_normalize_path( ABSPATH . '/wp-admin/includes/file.php' );
 				WP_Filesystem();
 			}
-			$upload_dir = wp_upload_dir()['basedir'] . '/demo-awesome-import/';
+			$upload_dir = wp_upload_dir()['basedir'] . DEMO_AWESOME_IMPORTER_FOLDER;
 			if ( ! is_dir( $upload_dir ) ) {
 				mkdir( $upload_dir, 0755 );
 			}
