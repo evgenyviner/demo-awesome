@@ -100,7 +100,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		function get_demo_packages( $url, $template_name = '', $save_cache = true ) {
 			$packages = '';
 			$decode_url = base64_encode( $url );
-			if ( false === ( $create_time = get_transient( 'demo_awesome_importer_packages_' . $decode_url ) ) ) {
+			if ( true || false === ( $create_time = get_transient( 'demo_awesome_importer_packages_' . $decode_url ) ) ) {
 				$raw_packages = wp_safe_remote_get( $url );
 				if ( ! is_wp_error( $raw_packages ) ) {
 					$packages = wp_remote_retrieve_body( $raw_packages );
