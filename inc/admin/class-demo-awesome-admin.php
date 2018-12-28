@@ -98,7 +98,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 * @since    1.0.0
 		 */
 		function get_demo_packages( $url, $template_name = '', $save_cache = true ) {
-			$packages = '';
+			$packages   = '';
 			$decode_url = base64_encode( $url );
 			if ( false === ( $create_time = get_transient( 'demo_awesome_importer_packages_' . $decode_url ) ) ) {
 				$raw_packages = wp_safe_remote_get( $url );
@@ -109,8 +109,8 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 						$this->write_file_to_local( $packages, $decode_url . '.txt' );
 					}
 				}
-			}else{
-				$packages = file_get_contents(wp_upload_dir()['basedir'] . DEMO_AWESOME_IMPORTER_FOLDER. $decode_url . '.txt' );
+			} else {
+				$packages = file_get_contents( wp_upload_dir()['basedir'] . DEMO_AWESOME_IMPORTER_FOLDER . $decode_url . '.txt' );
 			}
 
 			return $packages;
@@ -227,7 +227,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function remove_old_datas( $data_demo, $template_name ) {
 
-			do_action('demo_awesome_begin_remove_old_datas');
+			do_action( 'demo_awesome_begin_remove_old_datas' );
 
 			delete_option( 'theme_mods_evolve-plus' );
 			delete_option( 'theme_mods_evolve' );
@@ -385,7 +385,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function import_theme4press_slider( $data_demo, $template_name = 'blog' ) {
 
-			if($data_demo['has_theme4press_slider_data']){
+			if ( $data_demo['has_theme4press_slider_data'] ) {
 				if ( class_exists( 'Theme4Press_Slider' ) ) {
 					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'theme4press_slider.zip' );
 
@@ -393,7 +393,7 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 						$theme4press_slider = new Theme4Press_Slider();
 						$theme4press_slider->import_sliders( $import_file );
 					} else {
-						$status['errorMessage'] = esc_html__( 'The theme4press slider data file (zip) is missing.', 'demo-awesome' );
+						$status['errorMessage'] = esc_html__( 'The Theme4Press Slider data file (ZIP) is missing.', 'demo-awesome' );
 						wp_send_json_error( $status );
 					}
 				}
@@ -407,21 +407,21 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function import_slider_revolution( $data_demo, $template_name = 'blog' ) {
 
-			if($data_demo['has_slider_revolution_data']){
-				if(Demo_Awesome_Admin::is_plugin_activated('Slider Revolution')){
+			if ( $data_demo['has_slider_revolution_data'] ) {
+				if ( Demo_Awesome_Admin::is_plugin_activated( 'Slider Revolution' ) ) {
 					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'slider_revolution.zip' );
 
 					if ( is_file( $import_file ) ) {
 
 						$_FILES["import_file"]["tmp_name"] = $import_file;
-						$slider = new RevSlider();
-						$results = $slider->importSliderFromPost();
+						$slider                            = new RevSlider();
+						$results                           = $slider->importSliderFromPost();
 
 						if ( is_wp_error( $results ) ) {
 							return false;
 						}
 					} else {
-						$status['errorMessage'] = esc_html__( 'The revolution slider data file (zip) is missing.', 'demo-awesome' );
+						$status['errorMessage'] = esc_html__( 'The Slider Revolution data file (ZIP) is missing.', 'demo-awesome' );
 						wp_send_json_error( $status );
 					}
 				}
@@ -435,19 +435,19 @@ if ( ! class_exists( 'Demo_Awesome_Admin' ) ) {
 		 */
 		function import_layer_slider( $data_demo, $template_name = 'blog' ) {
 
-			if($data_demo['has_layer_slider_data']){
-				if(Demo_Awesome_Admin::is_plugin_activated('LayerSlider WP')){
+			if ( $data_demo['has_layerslider_data'] ) {
+				if ( Demo_Awesome_Admin::is_plugin_activated( 'LayerSlider WP' ) ) {
 					$import_file = $this->get_import_file_path_from_live_demo( $template_name, 'layerslider.zip' );
 
 					if ( is_file( $import_file ) ) {
-						include_once LS_ROOT_PATH.'/classes/class.ls.importutil.php';
-						$results = new LS_ImportUtil($import_file, 'layerslider.zip');
+						include_once LS_ROOT_PATH . '/classes/class.ls.importutil.php';
+						$results = new LS_ImportUtil( $import_file, 'layerslider.zip' );
 
 						if ( is_wp_error( $results ) ) {
 							return false;
 						}
 					} else {
-						$status['errorMessage'] = esc_html__( 'The layer slider data file (zip) is missing.', 'demo-awesome' );
+						$status['errorMessage'] = esc_html__( 'The LayerSlider data file (ZIP) is missing.', 'demo-awesome' );
 						wp_send_json_error( $status );
 					}
 				}
