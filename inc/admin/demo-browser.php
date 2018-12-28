@@ -36,9 +36,31 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 	<?php
 	$demo_awesome_index_temp_demo = 0;
 	if ( $demo_awesome_get_list_demos ) {
+        $list_demos                 = array();
+        $list_demos_sorted          = array();
+        $list_demos_sorted_keys     = array();
+        if(Demo_Awesome_Admin::is_free_theme()){
+            foreach ( $demo_awesome_get_list_demos as $demo_awesome_item_key => $demo_awesome_item ) {
+                if ( isset( $demo_awesome_item['items'] ) && $demo_awesome_item['items'] ) {
+                    foreach ( $demo_awesome_item['items'] as $demo_awesome_item_key_2 => $demo_awesome_item_2 ) {
+                        $demo_awesome_item_2['fillter_key'] = $demo_awesome_item_key;
+                        $list_demos[$demo_awesome_item_2['index']] = $demo_awesome_item_2;
+                    }
+                }
+            }
+            $number_demos = count($list_demos);
+            for($i=0; $i< $number_demos; $i++){
+                $list_demos_sorted[] = $list_demos[$i];
+            }
+        }
+
 		foreach ( $demo_awesome_get_list_demos as $demo_awesome_item_key => $demo_awesome_item ) {
 			if ( isset( $demo_awesome_item['items'] ) && $demo_awesome_item['items'] ) {
 				foreach ( $demo_awesome_item['items'] as $demo_awesome_item_key_2 => $demo_awesome_item_2 ) {
+                    if($list_demos_sorted && count($list_demos_sorted)){
+                        $demo_awesome_item_2 = $list_demos_sorted[$demo_awesome_index_temp_demo];
+                        $demo_awesome_item_key = $list_demos_sorted[$demo_awesome_index_temp_demo]['fillter_key'];
+                    }
 					$demo_awesome_index_temp_demo ++;
 					$demo_awesome_premium_demo = ( isset( $demo_awesome_item_2['premium_demo'] ) && $demo_awesome_item_2['premium_demo'] ) ? true : false;
 					?>
