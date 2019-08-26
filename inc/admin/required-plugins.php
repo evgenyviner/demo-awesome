@@ -38,6 +38,7 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
 						if ( $has_required ) {
 							foreach ( $data_demo['plugins'] as $plugin_keyword => $plugin ) {
 
+                                $plugin_keyword = isset($plugin['name']) ? $plugin['name'] : '';
 								$premium_plugin = '';
 								if ( Demo_Awesome_Admin::is_plugin_activated( $plugin_keyword ) == true ) {
 									$required_plugin = sprintf( '<span class="badge badge-success mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'check' ), esc_html__( 'Active', 'demo-awesome' ) );
