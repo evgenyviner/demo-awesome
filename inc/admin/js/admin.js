@@ -1679,6 +1679,42 @@ jQuery(function ($) {
             }
         });
     });
+
+    $(document).on('click', ".evole-install-plugin", function (e) {
+        e.preventDefault();
+       // $('.refresh-container').hide().html('<p class="spinner-loader"></p>').fadeIn('slow');
+
+        var plugin = $(this).data('plugin');
+        var $thisli =  $(this).closest('li');
+        html = $thisli.html();
+        $thisli.hide().html('<p class="spinner-loader"></p>').fadeIn('slow');
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                action: 'evole_install_plugin',
+                plugin: plugin,
+                html: html,
+            },
+            success: function (data) {
+                $thisli.html(data);
+                $.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    data: {
+                        action: 'evole_activate_plugin',
+                        plugin: plugin,
+                        html: html,
+                    },
+                    success: function (data) {
+                        $thisli.html(data);
+                        jQuery('.demo-awesome-icon-refresh').click();
+                    }
+                });
+                jQuery('.demo-awesome-icon-refresh').click();
+            }
+        });
+    });
 });
 
 /*

@@ -50,12 +50,15 @@ if ( ! function_exists( 'demo_awesome_required_plugins' ) ) {
 									$required_plugin = sprintf( '<span class="badge badge-error mr-1"><span class="mr-1">%1$s</span>%2$s</span>', Demo_Awesome_Admin::get_svg( 'error' ), esc_html__( 'Not installed', 'demo-awesome' ) );
 									if ( isset( $plugin['follow_download'] ) && $plugin['follow_download'] ) {
 										$premium_plugin = sprintf( '<div class="badge badge-premium">%s</div>', $plugin['disable_description'] );
-									} else {
+                                        $premium_plugin = sprintf( '<a class="button evole-install-plugin button-proceed" target="_blank"
+                                 data-plugin="'. $plugin['slug'] .'" href="' . self_admin_url( '#%s">%s</a>' ), $plugin['keyword'], esc_html__( 'Install', 'demo-awesome' ) );
+                                    } else {
 										$premium_plugin = sprintf( '<a class="button button-proceed" target="_blank" href="' . self_admin_url( 'plugin-install.php?tab=plugin-information&amp;plugin=%s">%s</a>' ), $plugin['keyword'], esc_html__( 'Install', 'demo-awesome' ) );
 									}
 									$show_required_description = true;
 								}
-								?>
+
+                                ?>
                                 <li>
                                     <strong><?php
 										echo $plugin['name'] . '<br />' . $required_plugin; ?></strong><?php if ( current_user_can( 'install_plugins' ) || current_user_can( 'update_plugins' ) ) {
