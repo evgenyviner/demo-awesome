@@ -126,6 +126,8 @@ if (!function_exists('demo_awesome_required_plugins')) {
                                             '<div class="badge badge-premium">%s</div>',
                                             $plugin['disable_description']
                                         );
+                                     //   var_dump($plugin);
+	                                    $plugin['slug'] =  isset( $plugin['slug']{1} ) ? $plugin['slug'] : $plugin['keyword'];
                                         $premium_plugin = sprintf(
                                             '<a class="button evole-install-plugin button-proceed" target="_blank"
                                  data-plugin="'.$plugin['slug'].'" href="'.self_admin_url('#%s">%s</a>'),

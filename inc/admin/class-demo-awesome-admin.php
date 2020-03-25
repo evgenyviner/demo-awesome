@@ -370,6 +370,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 }
 
             }
+
             $all_plugins = apply_filters('all_plugins', get_plugins());
 
             foreach ($all_plugins as $k => $item) {
