@@ -218,7 +218,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 else {
                     $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
                 }
-            }
+           
           //  $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
 
 
@@ -339,7 +339,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 else {
                     $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
                 }
-            }
+            
            // $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             demo_awesome_required_plugins($data_demo);
             wp_die(); // this is required to terminate immediately and return a proper response
