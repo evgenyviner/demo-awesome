@@ -212,7 +212,6 @@ if (!class_exists('Demo_Awesome_Admin')) {
 
             if (is_array($data_demo_raw)) {
                 foreach($data_demo_raw as $key => $item) {
-                 //   $data_demo[$key] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
                     $data_demo[$key] = esc_attr($item);
                 }
             }
@@ -220,8 +219,6 @@ if (!class_exists('Demo_Awesome_Admin')) {
                     $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
                 }
            
-          //  $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
-
 
             $template_name = isset($data_demo['folder_path']) ? $data_demo['folder_path'] : '';
 
@@ -334,7 +331,6 @@ if (!class_exists('Demo_Awesome_Admin')) {
 
             if (is_array($data_demo_raw)) {
                 foreach($data_demo_raw as $key => $item) {
-                  //  $data_demo[$key] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
                     $data_demo[$key] = esc_attr($item);
                 }
             }
@@ -342,7 +338,6 @@ if (!class_exists('Demo_Awesome_Admin')) {
                     $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
                 }
             
-           // $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             demo_awesome_required_plugins($data_demo);
             wp_die(); // this is required to terminate immediately and return a proper response
         }
