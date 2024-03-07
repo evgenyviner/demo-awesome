@@ -211,8 +211,8 @@ if (!class_exists('Demo_Awesome_Admin')) {
             $data_demo = array();
 
             if (is_array($data_demo_raw)) {
-                foreach($data_demo_raw as $item) {
-                    $data_demo[] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
+                foreach($data_demo_raw as $key => $item) {
+                    $data_demo[$key] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
                 }
             }
                 else {
@@ -332,8 +332,8 @@ if (!class_exists('Demo_Awesome_Admin')) {
             $data_demo = array();
 
             if (is_array($data_demo_raw)) {
-                foreach($data_demo_raw as $item) {
-                    $data_demo[] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
+                foreach($data_demo_raw as $key => $item) {
+                    $data_demo[$key] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
                 }
             }
                 else {
