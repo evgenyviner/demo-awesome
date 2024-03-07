@@ -207,8 +207,20 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function call_import_function_from_ajax()
         {
+            $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
+            $data_demo = array();
 
-            $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
+            if (is_array($data_demo_raw)) {
+                foreach($data_demo_raw as $item) {
+                    $data_demo[] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
+                }
+            }
+                else {
+                    $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
+                }
+            }
+          //  $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
+
 
             $template_name = isset($data_demo['folder_path']) ? $data_demo['folder_path'] : '';
 
@@ -316,7 +328,19 @@ if (!class_exists('Demo_Awesome_Admin')) {
         {
             // Include the required plugins list
             require dirname(__FILE__).'/required-plugins.php';
-            $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
+            $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
+            $data_demo = array();
+
+            if (is_array($data_demo_raw)) {
+                foreach($data_demo_raw as $item) {
+                    $data_demo[] = htmlspecialchars((string)$item, ENT_QUOTES, 'UTF-8');
+                }
+            }
+                else {
+                    $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
+                }
+            }
+           // $data_demo = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             demo_awesome_required_plugins($data_demo);
             wp_die(); // this is required to terminate immediately and return a proper response
         }
