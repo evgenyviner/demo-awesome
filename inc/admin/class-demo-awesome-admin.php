@@ -208,6 +208,9 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function call_import_function_from_ajax()
         {
+            if ( !current_user_can('manage_options') ) {
+                wp_die('You do not have sufficient permissions to access this feature.');
+            }        
             $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             $data_demo = array();
 
