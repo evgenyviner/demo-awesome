@@ -2,7 +2,7 @@
 Contributors: evgenyviner
 Tags: theme4press, data importer, one-click demo import, theme demo, demos, importer, theme4press demo
 Requires at least: 4.7
-Tested up to: 6.3
+Tested up to: 6.4.3
 Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2 or later
@@ -47,6 +47,9 @@ We strongly recommend using these demos for newly created websites, development 
 4. Once the import is finished, you can start to customize
 
 == Changelog ==
+
+= 1.0.2 =
+* Fixed some security vulnerablities
 
 = 1.0.1 =
 * Corrected a bug, which caused the message "Missing plugins" to appear, when all required plugins are actually installed.
