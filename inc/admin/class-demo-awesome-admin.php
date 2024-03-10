@@ -201,6 +201,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 }
             }
         }
+       
 
         /**
          * @since    1.0.0
@@ -210,15 +211,26 @@ if (!class_exists('Demo_Awesome_Admin')) {
             $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             $data_demo = array();
 
+            //TODO (EvgenyViner): Look for a more elegant way to sanitize the data
+
             if (is_array($data_demo_raw)) {
                 foreach($data_demo_raw as $key => $item) {
-                    $data_demo[$key] = esc_attr($item);
+                    if(is_array($data_demo_raw[$key])) {
+                        foreach($data_demo_raw[$key] as $key2 => $item2) {
+                            if(is_array($data_demo_raw[$key][$key2])) {
+                                foreach($data_demo_raw[$key][$key2] as $key3 => $item3) {
+                                    $data_demo[$key][$key2][$key3] = esc_attr($item3);
+                                }
+                            }
+                            else $data_demo[$key][$key2] = esc_attr($item2);
+                        }
+                    }
+                    else $data_demo[$key] = esc_attr($item);
                 }
             }
                 else {
                     $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
                 }
-           
 
             $template_name = isset($data_demo['folder_path']) ? $data_demo['folder_path'] : '';
 
@@ -328,10 +340,22 @@ if (!class_exists('Demo_Awesome_Admin')) {
             require dirname(__FILE__).'/required-plugins.php';
             $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             $data_demo = array();
+           
+            //TODO (EvgenyViner): Look for a more elegant way to sanitize the data
 
             if (is_array($data_demo_raw)) {
                 foreach($data_demo_raw as $key => $item) {
-                    $data_demo[$key] = esc_attr($item);
+                    if(is_array($data_demo_raw[$key])) {
+                        foreach($data_demo_raw[$key] as $key2 => $item2) {
+                            if(is_array($data_demo_raw[$key][$key2])) {
+                                foreach($data_demo_raw[$key][$key2] as $key3 => $item3) {
+                                    $data_demo[$key][$key2][$key3] = esc_attr($item3);
+                                }
+                            }
+                            else $data_demo[$key][$key2] = esc_attr($item2);
+                        }
+                    }
+                    else $data_demo[$key] = esc_attr($item);
                 }
             }
                 else {
