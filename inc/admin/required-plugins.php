@@ -149,12 +149,9 @@ if (!function_exists('demo_awesome_required_plugins')) {
                                 ?>
                                 <li>
                                     <strong><?php
-                                        echo $plugin['name'].'<br />'.$required_plugin; ?></strong><?php if (current_user_can(
-                                                                                                                 'install_plugins'
-                                                                                                             ) || current_user_can(
-                                                                                                                 'update_plugins'
-                                                                                                             )) {
-                                        echo $premium_plugin;
+                                        echo wp_kses_post($plugin['name'].'<br />'.$required_plugin); ?></strong>
+                                    <?php if (current_user_can(  'install_plugins' ) || current_user_can( 'update_plugins' )) {
+                                        echo wp_kses_post($premium_plugin);
                                     } ?>
                                 </li>
                                 <?php

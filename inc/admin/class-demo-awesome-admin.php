@@ -395,7 +395,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 }
             }
 
-            echo  $html;
+            echo  wp_kses_post($html);
 
             die();
 
@@ -429,7 +429,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
             }
             $html = str_replace('Not installed', 'Not active', stripslashes($_POST['html']));
 
-            echo $html;
+            echo wp_kses_post($html);
 
 
             wp_die(); // this is required to terminate immediately and return a proper response
