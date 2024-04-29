@@ -72,7 +72,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                             <div class="badge badge-demo"><?php esc_html_e( 'PREMIUM', 'demo-awesome' ); ?></div><?php } ?>
                         <div class="demo-screenshot" data-toggle="modal" data-backdrop="static"
                              data-target="#details-modal">
-                            <img src="<?php echo DEMO_AWESOME_IMPORTER_SOURCE_URL . $demo_awesome_item_2['folder_path'] . "/screenshot.png"; ?>"
+                            <img src="<?php echo esc_url(DEMO_AWESOME_IMPORTER_SOURCE_URL . $demo_awesome_item_2['folder_path'] . "/screenshot.png"); ?>"
                                  alt=""/>
                             <span class="more-details" id="demo-action"></span>
                         </div>
@@ -126,7 +126,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
 						<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
                                 class="theme-required-version"></span><br/>
-                        <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] ); ?></h3>
+                        <h3><?php echo  esc_html( sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] )); ?></h3>
 
 						<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) {
 							demo_awesome_required_plugins();
@@ -248,7 +248,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 							<?php }
 							if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
                                 <p class="alert alert-info required-premium-text"><span
-                                            class="mr-1"><?php Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?>
+                                            class="mr-1"><?php echo Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?>
                                 </p>
 							<?php } ?>
 
@@ -335,7 +335,8 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 							<?php }
 							if ( ! Demo_Awesome_Admin::is_theme4press_theme() ) { ?>
                                 <p class="alert alert-info required-premium-text"><span
-                                            class="mr-1"><?php Demo_Awesome_Admin::get_svg( 'info' ); ?></span><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?>
+                                            class="mr-1"><?php echo wp_kses_post( Demo_Awesome_Admin::get_svg( 'info' )); ?></span>
+                                    <?php echo wp_kses_post(Demo_Awesome_Admin::is_theme4press_theme_message()); ?>
                                 </p>
 							<?php } ?>
 

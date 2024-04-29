@@ -250,7 +250,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 		function import_options() {
 			$j = 0;
 			?>
-            <form action="<?php echo admin_url( 'admin.php?import=wordpress&amp;step=2' ); ?>" method="post">
+            <form action="<?php echo esc_url(admin_url( 'admin.php?import=wordpress&amp;step=2' )); ?>" method="post">
 				<?php wp_nonce_field( 'import-wordpress' ); ?>
                 <input type="hidden" name="import_id" value="<?php echo  esc_attr($this->id); ?>"/>
 
@@ -289,7 +289,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 		 * @param array $author Author information, e.g. login, display name, email
 		 */
 		function author_select( $n, $author ) {
-			_e( 'Import author:', 'demo-awesome' );
+            esc_html_e( 'Import author:', 'demo-awesome' );
 			echo ' <strong>' . esc_html( $author['author_display_name'] );
 			if ( $this->version != '1.0' ) {
 				echo ' (' . esc_html( $author['author_login'] ) . ')';
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 					} else {
 						printf( esc_html__( 'Failed to create new user for %s. Their posts will be attributed to the current user.', 'demo-awesome' ), esc_html( $this->authors[ $old_login ]['author_display_name'] ) );
 						if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
-							echo ' ' . $user_id->get_error_message();
+							echo ' ' . esc_html($user_id->get_error_message());
 						}
 						echo '<br />';
 					}
@@ -437,7 +437,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 				} else {
 					printf( esc_html__( 'Failed to import category %s', 'demo-awesome' ), esc_html( $cat['category_nicename'] ) );
 					if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
-						echo ': ' . $id->get_error_message();
+						echo ': ' .  esc_html($id->get_error_message());
 					}
 					echo '<br />';
 					continue;
@@ -486,7 +486,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 				} else {
 					printf( esc_html__( 'Failed to import post tag %s', 'demo-awesome' ), esc_html( $tag['tag_name'] ) );
 					if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
-						echo ': ' . $id->get_error_message();
+						echo ': ' . esc_html($id->get_error_message());
 					}
 					echo '<br />';
 					continue;
@@ -750,7 +750,7 @@ if ( ! class_exists( 'Demo_Awesome_Importer' ) ) {
 						printf( esc_html__( 'Failed to import %s &#8220;%s&#8221;', 'demo-awesome' ),
 							$post_type_object->labels->singular_name, esc_html( $post['post_title'] ) );
 						if ( defined( 'IMPORT_DEBUG' ) && IMPORT_DEBUG ) {
-							echo ': ' . $post_id->get_error_message();
+							echo ': ' . esc_html( $post_id->get_error_message());
 						}
 						echo '<br />';
 						continue;

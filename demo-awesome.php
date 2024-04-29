@@ -43,5 +43,27 @@ if ( ! function_exists( 'demo_awesome_run' ) ) {
 		$plugin->run();
 	}
 }
+// Allow SVG in wp_kses_post()
+function demo_awesome_allow_svg_in_wp_kses_post( $allowed_post_tags ) {
+    $allowed_post_tags['svg'] = array(
+        'xmlns' => true,
+        'width' => true,
+        'height' => true,
+        'viewBox' => true,
+        'fill' => true,
+        'class' => true,
+        'aria-hidden' => true,
+        'role' => true,
+        'focusable' => true,
+        'style' => true,
+    );
+    $allowed_post_tags['path'] = array(
+        'd' => true,
+        'fill' => true,
+    );
+    return $allowed_post_tags;
+}
+add_filter( 'wp_kses_allowed_html', 'demo_awesome_allow_svg_in_wp_kses_post', 10, 1 );
+
 
 demo_awesome_run();

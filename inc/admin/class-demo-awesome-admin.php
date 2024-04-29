@@ -201,7 +201,19 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 }
             }
         }
-       
+
+        function sanitize_nested_array($array)
+        {
+            $sanitized_array = array();
+            foreach ($array as $key => $value) {
+                if (is_array($value)) {
+                    $sanitized_array[$key] = $this->sanitize_nested_array($value);
+                } else {
+                    $sanitized_array[$key] = esc_attr($value);
+                }
+            }
+            return $sanitized_array;
+        }
 
         /**
          * @since    1.0.0
@@ -214,26 +226,12 @@ if (!class_exists('Demo_Awesome_Admin')) {
             $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             $data_demo = array();
 
-            //TODO (EvgenyViner): Look for a more elegant way to sanitize the data
-
+            // Sanitize the data
             if (is_array($data_demo_raw)) {
-                foreach($data_demo_raw as $key => $item) {
-                    if(is_array($data_demo_raw[$key])) {
-                        foreach($data_demo_raw[$key] as $key2 => $item2) {
-                            if(is_array($data_demo_raw[$key][$key2])) {
-                                foreach($data_demo_raw[$key][$key2] as $key3 => $item3) {
-                                    $data_demo[$key][$key2][$key3] = esc_attr($item3);
-                                }
-                            }
-                            else $data_demo[$key][$key2] = esc_attr($item2);
-                        }
-                    }
-                    else $data_demo[$key] = esc_attr($item);
-                }
+                $data_demo = $this->sanitize_nested_array($data_demo_raw);
+            } else {
+                $data_demo = esc_attr($data_demo_raw);
             }
-                else {
-                    $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
-                }
 
             $template_name = isset($data_demo['folder_path']) ? $data_demo['folder_path'] : '';
 
@@ -886,7 +884,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
 
             <div class="notice demo-awesome-notice is-dismissible">
                 <p>
-                    <img src="<?php echo plugin_dir_url(__FILE__) ?>images/logo.png"/><?php echo sprintf(
+                    <img src="<?php echo esc_url(plugin_dir_url(__FILE__)); ?>images/logo.png"/><?php echo sprintf(
                         esc_html__(
                             'Thank you for installing %1$sDemo Awesome%2$s plugin by Theme4Press. To start importing a demo content please visit the importer page',
                             'evolve'
@@ -925,7 +923,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
             wp_enqueue_style('demo-awesome-notice', plugin_dir_url(__FILE__).'css/notice.css'); ?>
 
             <div class="notice demo-awesome-notice is-dismissible">
-                <p><?php echo Demo_Awesome_Admin::is_theme4press_theme_message(); ?><a
+                <p><?php echo wp_kses_post( Demo_Awesome_Admin::is_theme4press_theme_message()); ?><a
                             href="<?php echo esc_url(
                                 add_query_arg('hide-notice', 'demo_awesome_no_theme4press_theme_notice')
                             ); ?>"><?php esc_html_e('Dismiss', 'demo-awesome'); ?></a>
@@ -997,13 +995,14 @@ if (!class_exists('Demo_Awesome_Admin')) {
         {
 
             if (empty($icon)) {
-                return;
+                return '';
             }
 
-            $svg = '<svg class="demo-awesome-icon-'.esc_attr($icon).'" aria-hidden="true" role="img">';
-            $svg .= ' <use xlink:href="'.plugin_dir_url(__FILE__).('/images/icons.svg#demo-awesome-icon-').esc_html(
-                    $icon
-                ).'"></use> ';
+            $icon = esc_attr($icon);
+
+            // Constructing the SVG element
+            $svg = '<svg class="demo-awesome-icon-' . $icon . '" aria-hidden="true" role="img">';
+            $svg .= '<use xlink:href="' . esc_url(plugin_dir_url(__FILE__) . '/images/icons.svg#demo-awesome-icon-' . $icon) . '"></use>';
             $svg .= '</svg>';
 
             return $svg;
