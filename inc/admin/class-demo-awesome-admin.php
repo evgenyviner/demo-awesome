@@ -209,7 +209,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 if (is_array($value)) {
                     $sanitized_array[$key] = $this->sanitize_nested_array($value);
                 } else {
-                    $sanitized_array[$key] = esc_attr($value);
+                    $sanitized_array[$key] = sanitize_text_field($value);
                 }
             }
             return $sanitized_array;
@@ -220,6 +220,11 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function call_import_function_from_ajax()
         {
+            if ( !wp_verify_nonce( $_POST['nonce'] ?? '', 'demo-awesome' ) ) {
+                wp_send_json_error( 'Invalid nonce' );
+                wp_die();
+            }
+
             if ( !current_user_can('manage_options') ) {
                 wp_die('You do not have sufficient permissions to access this feature.');
             }        
@@ -1128,6 +1133,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 'is_premium_version' => Demo_Awesome_Admin::is_premium_theme(),
                 'is_free_version' => Demo_Awesome_Admin::is_free_theme(),
                 'is_theme4press_theme' => Demo_Awesome_Admin::is_theme4press_theme(),
+                'nonce'    => wp_create_nonce('demo-awesome')
             );
 
             wp_localize_script('demo-awesome', 'demo_awesome_js_local_vars', $local_variables);

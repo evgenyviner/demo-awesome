@@ -1582,7 +1582,8 @@ jQuery(function ($) {
 
         var data = {
             'action': 'call_import_function_from_ajax',
-            'data_demo': data_demo
+            'data_demo': data_demo,
+            'nonce': demo_awesome_js_local_vars.nonce
         };
         jQuery.post(ajaxurl, data, function (response) {
             $(".hide-content").fadeOut(1500);

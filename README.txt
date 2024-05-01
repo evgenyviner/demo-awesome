@@ -2,7 +2,7 @@
 Contributors: evgenyviner
 Tags: theme4press, data importer, one-click demo import, theme demo, demos, importer, theme4press demo
 Requires at least: 4.7
-Tested up to: 6.4.3
+Tested up to: 6.5.2
 Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2 or later
