@@ -126,7 +126,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
 
 						<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?><span
                                 class="theme-required-version"></span><br/>
-                        <h3><?php echo  esc_html( sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] )); ?></h3>
+                        <h3><?php echo  esc_html( sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme->get('Version') )); ?></h3>
 
 						<?php if ( Demo_Awesome_Admin::is_theme4press_theme() ) {
 							demo_awesome_required_plugins();
@@ -231,7 +231,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                             <div class="required-theme-version">
 								<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?>
                                 <span class="theme-required-version"></span><br/>
-                                <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] ); ?></h3>
+                                <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme->get('Version')); ?></h3>
                             </div>
 
 							<?php if ( Demo_Awesome_Admin::is_premium_theme() || Demo_Awesome_Admin::is_free_theme() ) {
@@ -318,7 +318,7 @@ require dirname( __FILE__ ) . '/required-plugins.php'; ?>
                             <div class="required-theme-version">
 								<?php esc_html_e( 'Minimum recommended theme version for this demo: ', 'demo-awesome' ); ?>
                                 <span class="theme-required-version"></span><br/>
-                                <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme['Version'] ); ?></h3>
+                                <h3><?php echo sprintf( esc_html__( 'Installed theme version: %s', 'demo-awesome' ), $demo_awesome_my_theme->get('Version') ); ?></h3>
                             </div>
 
 							<?php if ( Demo_Awesome_Admin::is_premium_theme() || Demo_Awesome_Admin::is_free_theme() ) {

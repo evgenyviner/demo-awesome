@@ -1582,8 +1582,8 @@ jQuery(function ($) {
 
         var data = {
             'action': 'call_import_function_from_ajax',
-            'data_demo': data_demo,
-            'nonce': demo_awesome_js_local_vars.nonce
+            'data_demo': data_demo, action: 'required_plugins',
+            '_nonce': demo_awesome_js_local_vars._nonce
         };
         jQuery.post(ajaxurl, data, function (response) {
             $(".hide-content").fadeOut(1500);
@@ -1673,7 +1673,8 @@ jQuery(function ($) {
             url: ajaxurl,
             data: {
                 action: 'required_plugins',
-                data_demo: data_demo
+                data_demo: data_demo,
+                 '_nonce': demo_awesome_js_local_vars._nonce
             },
             success: function (data) {
                 $('.refresh-container-box').html(data);
@@ -1696,6 +1697,7 @@ jQuery(function ($) {
                 action: 'evole_install_plugin',
                 plugin: plugin,
                 html: html,
+                '_nonce': demo_awesome_js_local_vars._nonce
             },
             success: function (data) {
                 $thisli.html(data);
@@ -1706,6 +1708,7 @@ jQuery(function ($) {
                         action: 'evole_activate_plugin',
                         plugin: plugin,
                         html: html,
+                        '_nonce': demo_awesome_js_local_vars._nonce
                     },
                     success: function (data) {
                         $thisli.html(data);

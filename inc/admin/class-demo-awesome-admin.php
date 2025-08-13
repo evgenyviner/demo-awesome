@@ -111,6 +111,13 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function get_demo_packages($url, $template_name = '', $save_cache = true)
         {
+                $allowed_hosts = ['demo.theme4press.com'];
+                $parsed_url = parse_url($url);
+                
+                if (!isset($parsed_url['host']) || !in_array($parsed_url['host'], $allowed_hosts)) {
+                    return false;
+                }
+
             $packages = '';
             $decode_url = base64_encode($url);
             if (true || false === ($create_time = get_transient('demo_awesome_importer_packages_'.$decode_url))) {
@@ -163,6 +170,12 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function write_file_to_local($file_content, $file_name = 'content.xml')
         {
+            
+                // Validate filename to prevent path traversal
+            $file_name = basename($file_name);
+            if (empty($file_name) || strpos($file_name, '..') !== false) {
+                return false;
+            }
 
             global $wp_filesystem;
             // Initialize the WP filesystem, no more using 'file-put-contents' function
@@ -220,7 +233,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function call_import_function_from_ajax()
         {
-            if ( !wp_verify_nonce( $_POST['nonce'] ?? '', 'demo-awesome' ) ) {
+            if ( !wp_verify_nonce( $_POST['_nonce'] ?? '', 'demo-awesome' ) ) {
                 wp_send_json_error( 'Invalid nonce' );
                 wp_die();
             }
@@ -342,31 +355,48 @@ if (!class_exists('Demo_Awesome_Admin')) {
          */
         function required_plugins()
         {
+            
+                        // Add security checks
+            if (!wp_verify_nonce($_POST['_nonce'] ?? '', 'demo-awesome')) {
+                wp_die(__('Security check failed.', 'demo-awesome'));
+            }
+            
+            if (!current_user_can('manage_options')) {
+                wp_die(__('You do not have sufficient permissions.', 'demo-awesome'));
+            }
+
+            
             // Include the required plugins list
             require dirname(__FILE__).'/required-plugins.php';
             $data_demo_raw = isset($_REQUEST['data_demo']) ? $_REQUEST['data_demo'] : array();
             $data_demo = array();
            
-            //TODO (EvgenyViner): Look for a more elegant way to sanitize the data
 
-            if (is_array($data_demo_raw)) {
-                foreach($data_demo_raw as $key => $item) {
-                    if(is_array($data_demo_raw[$key])) {
-                        foreach($data_demo_raw[$key] as $key2 => $item2) {
-                            if(is_array($data_demo_raw[$key][$key2])) {
-                                foreach($data_demo_raw[$key][$key2] as $key3 => $item3) {
-                                    $data_demo[$key][$key2][$key3] = esc_attr($item3);
-                                }
-                            }
-                            else $data_demo[$key][$key2] = esc_attr($item2);
-                        }
+            // if (is_array($data_demo_raw)) {
+            //     foreach($data_demo_raw as $key => $item) {
+            //         if(is_array($data_demo_raw[$key])) {
+            //             foreach($data_demo_raw[$key] as $key2 => $item2) {
+            //                 if(is_array($data_demo_raw[$key][$key2])) {
+            //                     foreach($data_demo_raw[$key][$key2] as $key3 => $item3) {
+            //                         $data_demo[$key][$key2][$key3] = esc_attr($item3);
+            //                     }
+            //                 }
+            //                 else $data_demo[$key][$key2] = esc_attr($item2);
+            //             }
+            //         }
+            //         else $data_demo[$key] = esc_attr($item);
+            //     }
+            // }
+            //     else {
+            //         $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
+            //     }
+
+                    if (is_array($data_demo_raw)) {
+                        $data_demo = $this->sanitize_nested_array($data_demo_raw);
+                    } else {
+                        $data_demo = sanitize_text_field($data_demo_raw);
                     }
-                    else $data_demo[$key] = esc_attr($item);
-                }
-            }
-                else {
-                    $data_demo = htmlspecialchars((string)$data_demo_raw, ENT_QUOTES, 'UTF-8');
-                }
+
             
             demo_awesome_required_plugins($data_demo);
             wp_die(); // this is required to terminate immediately and return a proper response
@@ -374,7 +404,15 @@ if (!class_exists('Demo_Awesome_Admin')) {
 
         function evole_activate_plugin()
         {
-            $plugin = $_POST['plugin'];
+             if (!wp_verify_nonce($_POST['_nonce'] ?? '', 'demo-awesome')) {
+                 wp_die(__('Security check failed.', 'demo-awesome'));
+              }
+    
+            if (!current_user_can('activate_plugins')) {
+                wp_die(__('Sorry, you are not allowed to activate plugins on this site.', 'demo-awesome'));
+              }
+            
+            $plugin = sanitize_text_field($_POST['plugin']);
             $activate = isset($_POST['activate']) ? true : false;
 
             if ($activate == false) {
@@ -405,8 +443,18 @@ if (!class_exists('Demo_Awesome_Admin')) {
         }
 
         function install_plugin()
-        {
-            $plugin = $_POST['plugin'];
+        {   
+            
+            if (!wp_verify_nonce($_POST['_nonce'] ?? '', 'demo-awesome')) {
+                wp_die(__('Security check failed.', 'demo-awesome'));
+         }
+
+            if (!current_user_can('install_plugins')) {
+                wp_die(__('Sorry, you are not allowed to install plugins on this site.', 'demo-awesome'));
+         }
+
+         
+            $plugin = sanitize_text_field($_POST['plugin']);
             $activate = isset($_POST['activate']) ? true : false;
 
             if ($activate == false) {
@@ -1120,7 +1168,8 @@ if (!class_exists('Demo_Awesome_Admin')) {
             }
 
             wp_enqueue_script('demo-awesome', plugin_dir_url(__FILE__).'js/admin.js');
-
+          
+          
             $local_variables = array(
                 'close_button' => esc_html__('Close', 'demo-awesome'),
                 'back_button' => esc_html__('Back', 'demo-awesome'),
@@ -1133,7 +1182,7 @@ if (!class_exists('Demo_Awesome_Admin')) {
                 'is_premium_version' => Demo_Awesome_Admin::is_premium_theme(),
                 'is_free_version' => Demo_Awesome_Admin::is_free_theme(),
                 'is_theme4press_theme' => Demo_Awesome_Admin::is_theme4press_theme(),
-                'nonce'    => wp_create_nonce('demo-awesome')
+                '_nonce'    => wp_create_nonce('demo-awesome')
             );
 
             wp_localize_script('demo-awesome', 'demo_awesome_js_local_vars', $local_variables);

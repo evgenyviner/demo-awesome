@@ -123,16 +123,27 @@ if (!function_exists('demo_awesome_required_plugins')) {
                                     if (isset($plugin['follow_download']) && $plugin['follow_download']) {
                                         $premium_plugin = sprintf(
                                             '<div class="badge badge-premium">%s</div>',
-                                            $plugin['disable_description']
+                                           esc_html($plugin['disable_description'])
                                         );
                                      //   var_dump($plugin);
-	                                    $plugin['slug'] =  isset( $plugin['slug']{1} ) ? $plugin['slug'] : $plugin['keyword'];
-                                        $premium_plugin = sprintf(
-                                            '<a class="button evole-install-plugin button-proceed" target="_blank"
-                                 data-plugin="'.$plugin['slug'].'" href="'.self_admin_url('#%s">%s</a>'),
-                                            $plugin['keyword'],
-                                            esc_html__('Install', 'demo-awesome')
-                                        );
+	                                    $plugin['slug'] =  isset( $plugin['slug'][1] ) ? $plugin['slug'] : $plugin['keyword'];
+
+                                //         $premium_plugin = sprintf(
+                                //             '<a class="button evole-install-plugin button-proceed" target="_blank"
+                                //  data-plugin="'.$plugin['slug'].'" href="'.self_admin_url('#%s">%s</a>'),
+                                //             $plugin['keyword'],
+                                //             esc_html__('Install', 'demo-awesome')
+                                //         );
+                                $install_url = self_admin_url( sprintf( '#%s', rawurlencode( $plugin['keyword'] ) ) );
+
+                                $premium_plugin = sprintf(
+                                    '<a class="button evole-install-plugin button-proceed" target="_blank" data-plugin="%1$s" href="%2$s">%3$s</a>',
+                                    esc_attr( $plugin['slug'] ),
+                                    esc_url( $install_url ),
+                                    esc_html__( 'Install', 'demo-awesome' )
+                                );
+
+
                                     } else {
                                         $premium_plugin = sprintf(
                                             '<a class="button button-proceed" target="_blank" href="'.self_admin_url(
