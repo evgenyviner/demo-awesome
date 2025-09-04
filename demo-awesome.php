@@ -9,7 +9,7 @@
  * Plugin Name:       Demo Awesome
  * Plugin URI:        https://theme4press.com/demo-awesome-the-data-importer/
  * Description:       Import the Theme4Press theme demo content including theme settings, menus, widgets, sliders, and much more with just one click. Awesome!
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Theme4Press
  * Author URI:        https://theme4press.com
  * License:           GPL-2.0+
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * @since    1.0.0
  */
-define( 'DEMO_AWESOME_VERSION', '1.0.0' );
+define( 'DEMO_AWESOME_VERSION', '1.0.4' );
 
 /**
  * The class that is used to define internationalization,
@@ -43,27 +43,9 @@ if ( ! function_exists( 'demo_awesome_run' ) ) {
 		$plugin->run();
 	}
 }
-// Allow SVG in wp_kses_post()
-function demo_awesome_allow_svg_in_wp_kses_post( $allowed_post_tags ) {
-    $allowed_post_tags['svg'] = array(
-        'xmlns' => true,
-        'width' => true,
-        'height' => true,
-        'viewBox' => true,
-        'fill' => true,
-        'class' => true,
-        'aria-hidden' => true,
-        'role' => true,
-        'focusable' => true,
-        'style' => true,
-    );
-    $allowed_post_tags['path'] = array(
-        'd' => true,
-        'fill' => true,
-    );
-    return $allowed_post_tags;
-}
-add_filter( 'wp_kses_allowed_html', 'demo_awesome_allow_svg_in_wp_kses_post', 10, 1 );
+// Security: SVG support removed due to XSS vulnerability
+// SVG files can contain malicious JavaScript and are not safe for upload
+// Use PNG, JPG, or other safe image formats instead
 
 
 demo_awesome_run();

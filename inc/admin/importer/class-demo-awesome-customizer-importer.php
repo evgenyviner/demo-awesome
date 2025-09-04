@@ -31,7 +31,22 @@ if ( ! class_exists( 'Demo_Awesome_Customizer_Importer' ) ) {
 		public static function import( $import_file, $data_demo ) {
 			global $wp_customize;
 
-			$data = maybe_unserialize( file_get_contents( $import_file ) );
+			// Security: Validate file path and content
+			if (!self::validate_import_file($import_file)) {
+				return new WP_Error( 'demo_awesome_customizer_import_file_error', esc_html__( 'Invalid import file.', 'demo-awesome' ) );
+			}
+
+			$file_content = file_get_contents( $import_file );
+			if ($file_content === false) {
+				return new WP_Error( 'demo_awesome_customizer_import_file_error', esc_html__( 'Could not read import file.', 'demo-awesome' ) );
+			}
+
+			// Security: Validate file content
+			if (!self::validate_file_content($file_content)) {
+				return new WP_Error( 'demo_awesome_customizer_import_content_error', esc_html__( 'Invalid file content detected.', 'demo-awesome' ) );
+			}
+
+			$data = maybe_unserialize( $file_content );
 
 			// Data checks.
 			if ( ! is_array( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
@@ -173,6 +188,59 @@ if ( ! class_exists( 'Demo_Awesome_Customizer_Importer' ) ) {
 			}
 
 			return $data;
+		}
+
+		/**
+		 * Validate import file path and permissions
+		 * @since 1.0.3
+		 */
+		private static function validate_import_file($file_path) {
+			// Check if file exists
+			if (!file_exists($file_path)) {
+				return false;
+			}
+
+			// Check if file is readable
+			if (!is_readable($file_path)) {
+				return false;
+			}
+
+			// Check file extension
+			$allowed_extensions = array('dat');
+			$file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
+			if (!in_array($file_extension, $allowed_extensions)) {
+				return false;
+			}
+
+			// Check file size (prevent DoS)
+			if (filesize($file_path) > 10 * 1024 * 1024) { // 10MB limit
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+		 * Validate file content for security
+		 * @since 1.0.3
+		 */
+		private static function validate_file_content($content) {
+			// Check for empty content
+			if (empty($content)) {
+				return false;
+			}
+
+			// Check content length
+			if (strlen($content) > 10 * 1024 * 1024) { // 10MB limit
+				return false;
+			}
+
+			// Check for malicious content
+			if (preg_match('/<\?php|<\?=|<script[^>]*>|javascript:|data:/i', $content)) {
+				return false;
+			}
+
+			return true;
 		}
 	}
 }
